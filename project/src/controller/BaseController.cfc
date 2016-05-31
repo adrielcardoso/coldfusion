@@ -1,33 +1,33 @@
 component
 	accessors = true
-    output = 'false'
     displayname = 'BaseController'
+    extends = 'ComponentConfiguration'
 {
 
-	property String stEvent;
-    property String stAction; 
-    property boolean blPermission;
+    property HTTPRequest bindRequest;
 
-    public boolean function parseRequest()
+    public boolean function init()
     {
-    	/* validate and set query string  */
-    	parseQueryString(); 
 
-    	/* instaced off object  */
         try{
-            mContext = createObjectByName(getStEvent() ?: 'main', 'controller');
-        }catch(any exception){
-            writeDump(exception);
+
+            /* validate and set query string  */
+            setBindRequest(CreateObject("component", 'src.controller.HTTPRequest').bindRequest()); 
+
+    	   /* instaced off object  */
+            var mContext = createObjectByName(getBindRequest().getStEvent() , 'controller');
+
+            /* default method access */
+            invoke(mContext, (getBindRequest().getStAction() == 'init' ? 'init' : 'action#parseNameDir(getBindRequest().getStAction())#'), {'bindRequest' = getBindRequest()});
+
+            /* type return if success */
+            return true;
+
+        }catch(Any exception){
+
+            CreateObject('component', 'ErrorController').error(exception.message, 500);
         }
-
-        writeDump(mContext);
         
-
-        /* default method access */
-        invoke(mContext, (getStAction() == 'init' ? 'init' : 'action#getStAction()#'));
-
-        /* type return if success */
-        return true;
     }
 
 	public BaseController function createObjectByName(String stName, String stDirObject = 'controller')
@@ -36,27 +36,11 @@ component
        return CreateObject("component","src."&LCase(stDirObject)&"."&this.parseNameDir(stName)&this.parseNameDir(stDirObject));
     }
 
-    public String function findEvent(String queryString)
-    {
-    	/* return element in queryString or return empty */
-    	return (IsDefined("URL.#queryString#") ? evaluate("URL.#queryString#") : '');
-    }
-
     public String function parseNameDir(String parseString)
     {
     	/* parse camelcase in string to validation of name file */
-        temp = LCase(parseString);
+        var temp = LCase(parseString);
         return uCase(left(temp,1)) & right(temp,len(temp)-1);
-    }
-
-    public void function parseQueryString()
-    {
-    	/* set objectos in query string */
-    	setStEvent((findEvent('event') == '' ? 'main' : findEvent('event')));
-        setStAction((findEvent('action') == '' ? 'init' : findEvent('action')));
-
-        /* permission off access to user */
-        setBlPermission(false);
     }
 
 } 

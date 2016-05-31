@@ -4,14 +4,17 @@ component
     extends = 'BaseController'
 {
 
-    public void function init()
+    public void function init(HTTPRequest bindRequest)
     {
-        writeDump('objecto do tipo pessoa');
+        // bindRequest.isRequest('POST')
+        
+        writeDump(this.view("saasd"));
+
         abort;
     }
 
 
-    public String function actionFindAll()
+    public String function actionFindall(HTTPRequest bindRequest)
     {
     	writeDump('objecto do tipo pessoa, findall');
         abort;

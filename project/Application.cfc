@@ -4,13 +4,14 @@ component
 	{
 
 	this.baseDirectory = getDirectoryFromPath(getCurrentTemplatePath());
-	this.name = hash(this.baseDirectory);
+	this.name = hash(this.baseDirectory&2525);
 	this.applicationTimeout = createTimeSpan(0,1,0,0);
 	this.sessionManagement = true;
 	this.sessionTimeout = createTimeSpan(0,0,10,0);
 
 	this.mappings[ "/src" ] = (this.baseDirectory & "src/");
 	this.mappings[ "/config" ] = (this.baseDirectory & "config/");
+	this.mappings[ "/component" ] = (this.baseDirectory & "component/");
 	
 	
 	function onApplicationStart()

@@ -6,8 +6,14 @@ component
 
     public void function init()
     {
-        this.stRoute = "temp test";
-        this.location = 'PessoaController';
+        writeDump('objecto do tipo user');
+        abort;
+    }
+
+    public void function actionCreate(HTTPRequest bindRequest)
+    {
+    	writeDump('objecto do tipo create user');
+        abort;
     }
 
 } 
