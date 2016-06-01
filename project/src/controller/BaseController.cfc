@@ -1,27 +1,41 @@
+
+import config.HTTPRequest;
+import config.HTTPResponse;
+// import config.ManifestConfig;
+
 component
 	accessors = true
     displayname = 'BaseController'
-    extends = 'ComponentConfiguration'
+    extends = 'config.ManifestConfig'
 {
 
     property HTTPRequest bindRequest;
-
-    public boolean function init()
+    property HTTPResponse httpResponse;
+    property String container;
+    
+    public void function init()
     {
 
         try{
 
-            /* validate and set query string  */
-            setBindRequest(CreateObject("component", 'src.controller.HTTPRequest').bindRequest()); 
+            // setContainer('container');
 
-    	   /* instaced off object  */
+            // abort;
+            /* validate and set query string  */
+            setBindRequest(CreateObject("component", 'HTTPRequest').bindRequest()); 
+
+
+           /* instaced off object  */
             var mContext = createObjectByName(getBindRequest().getStEvent() , 'controller');
 
-            /* default method access */
-            invoke(mContext, (getBindRequest().getStAction() == 'init' ? 'init' : 'action#parseNameDir(getBindRequest().getStAction())#'), {'bindRequest' = getBindRequest()});
+            /* object of response to request */
+            httpResponse= createObject("component", 'HTTPResponse').init(mContext, LCase(getBindRequest().getStEvent()));
 
-            /* type return if success */
-            return true;
+            /* default method access */
+            invoke(mContext, (getBindRequest().getStAction() == 'init' ? 'init' : 'action#parseNameDir(getBindRequest().getStAction())#'), {
+                        'req' = getBindRequest(), 
+                        'res' = httpResponse
+            });
 
         }catch(Any exception){
 

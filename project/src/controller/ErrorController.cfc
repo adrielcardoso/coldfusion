@@ -1,3 +1,6 @@
+import config.HTTPRequest;
+import config.HTTPResponse;
+
 component
     displayname = 'ErrorController'
     extends = 'BaseController'

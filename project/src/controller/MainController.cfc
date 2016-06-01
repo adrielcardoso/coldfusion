@@ -1,16 +1,16 @@
+import config.HTTPRequest;
+import config.HTTPResponse;
+
 component
     displayname = 'MainController'
     extends = 'BaseController'
 {
 
-	public void function init()
+	public void function init(HTTPRequest req, HTTPResponse res)
     {
-        writeDump('objecto do tipo Main, default');
-        abort;
+        // bindRequest.isRequest('POST')
+        res.view("index", res);
     }
-
-    public String function parseDefault(){
-    	return '';
-    }
+    
 } 
 

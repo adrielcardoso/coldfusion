@@ -1,6 +1,9 @@
+import config.ManifestConfig;
+
 component
     accessors = true
     displayname = 'HTTPRequest'
+    extends = 'ManifestConfig'
 {
 
     property String stEvent;
@@ -18,13 +21,10 @@ component
     public HTTPRequest function bindRequest()
     {
 
-        // writeDump(getPost());
-        // abort;
-        
         /* set objectos in query string */
-        setStEvent((findEvent('event') == '' ? 'main' : findEvent('event')));
-        setStAction((findEvent('action') == '' ? 'init' : findEvent('action')));
-        setArgs(URL);
+        setStEvent((getKey('event') == '' ? 'main' : getKey('event')));
+        setStAction((getKey('action') == '' ? 'init' : getKey('action')));
+        // setArgs(URL);
         setMethod(CGI.REQUEST_METHOD);
 
         /* permission off access to user */
@@ -33,20 +33,20 @@ component
         return this;
     }
 
-    public String function findEvent(String queryString)
+    public String function getKey(String queryString)
     {
         /* return element in queryString or return empty */
         return (IsDefined("URL.#queryString#") ? evaluate("URL.#queryString#") : '');
     }
 
-    public String function getKey(String key)
-    {
-       try{
-            return getArgs()[key];
-       }catch(Any e){
-            return '';
-       }
-    }
+    // public String function getKey(String key)
+    // {
+    //    try{
+    //         return getArgs()[key];
+    //    }catch(Any e){
+    //         return '';
+    //    }
+    // }
 
     public boolean function isRequest(String typeRequest)
     {

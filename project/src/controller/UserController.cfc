@@ -1,19 +1,16 @@
+import config.HTTPRequest;
+import config.HTTPResponse;
+
 component
     output = 'false'
     displayname = 'PessoaController'
     extends = 'BaseController'
 {
 
-    public void function init()
+    public void function init(HTTPRequest req, HTTPResponse res)
     {
-        writeDump('objecto do tipo user');
-        abort;
-    }
-
-    public void function actionCreate(HTTPRequest bindRequest)
-    {
-    	writeDump('objecto do tipo create user');
-        abort;
+        // bindRequest.isRequest('POST')
+        res.view("index", res);
     }
 
 } 

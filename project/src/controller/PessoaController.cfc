@@ -1,24 +1,19 @@
+import config.HTTPRequest;
+import config.HTTPResponse;
+
 component
-    output = 'false'
     displayname = 'PessoaController'
     extends = 'BaseController'
 {
 
-    public void function init(HTTPRequest bindRequest)
+    public void function init(HTTPRequest req, HTTPResponse res)
     {
-        // bindRequest.isRequest('POST')
-        
-        writeDump(this.view("saasd"));
 
-        abort;
-    }
+    	writeDump(getContainer());
+    	abort;
 
-
-    public String function actionFindall(HTTPRequest bindRequest)
-    {
-    	writeDump('objecto do tipo pessoa, findall');
-        abort;
+        // bindRequest.isRequest('POST');
+        res.view("index", res);
     }
 
 } 
-
