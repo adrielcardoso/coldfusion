@@ -7,28 +7,19 @@ component
 	property String bundleDefault;
 	property String bundleRequestMain;
 
+
     public Routing function main(HTTPRequest bindRequest)
     {
 
     	/*
     		definition values to return this object
     	*/
-    	setDir('/src'); 
-    	setBundleDefault(getDir() & '/CFSiteBundle/');
-
-
-    	var routingBundle = {};
-
-    	/* 
-				Manegement controller of Bundle
-    	*/
-         StructInsert(routingBundle, 'main', getDir() & '/CFSiteBundle/'); 
-         StructInsert(routingBundle, 'user', getDir() & '/CFUserBundle/'); 
-
+    	setDir('/src');
+    	
     	/*
 			set registrars
     	*/
-    	setRoutingBundle(routingBundle);
+    	setRoutingBundle(this.bundle());
 
 
     	/*
@@ -41,6 +32,25 @@ component
         );
 
     	return this;
+    }
+
+    public struct function bundle()
+    {
+
+        /*
+            this is registre of main bundle
+        */
+        setBundleDefault(getDir() & '/CFSiteBundle/');
+
+        var routingBundle = {};
+
+        /* 
+                Manegement controllers of Bundles
+        */
+         StructInsert(routingBundle, 'main', getDir() & '/CFSiteBundle/'); 
+         StructInsert(routingBundle, 'user', getDir() & '/CFUserBundle/'); 
+
+         return routingBundle;
     }
 
     public boolean function parseExistAliasBundle(String name, struct bundles)

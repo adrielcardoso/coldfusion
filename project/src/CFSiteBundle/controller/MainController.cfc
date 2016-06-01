@@ -8,7 +8,14 @@ component
 
 	public void function init(HTTPRequest req, HTTPResponse res)
     {
-        // bindRequest.isRequest('POST')
+        // req.isRequest('POST')
+
+        // WriteDump(getContainer(req).getBundle('user').getService('user'));
+
+        // writeDump(getContainer(req).getService('user'));
+
+        // abort;
+
         res.view("index", res);
     }
     

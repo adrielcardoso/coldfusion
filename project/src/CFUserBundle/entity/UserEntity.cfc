@@ -1,7 +1,6 @@
 component
-    output = 'false'
     displayname = 'UserEntity'
-    extends = 'BaseEntity'
+    extends = 'config.Entity'
 {   
 
     property String stFirstName;
