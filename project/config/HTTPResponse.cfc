@@ -1,5 +1,5 @@
 import config.ManifestConfig;
-import controller.BaseController;
+import config.BaseController;
 
 component
 	accessors = true
@@ -10,17 +10,20 @@ component
 	property HTTPResponse httpResponse;
 	property threadMain;
     property stThreadName;
+    property Routing routing;
 	
-	public HTTPResponse function init(BaseController mContext, String stThreadName)
+	public HTTPResponse function init(BaseController mContext, String stThreadName, Routing routing)
 	{
 		setThreadMain(mContext);
 		setStThreadName(stThreadName);
+		setRouting(routing);
+
 		return this;
 	}
 
     public void function view(String fileName, HTTPResponse res)
     {
-    	include  "/view/#getStThreadName()#/#fileName#.cfm";
+    	include  getRouting().getBundleRequestMain() & 'view/#getStThreadName()#/#fileName#.cfm';
     }
 
 } 

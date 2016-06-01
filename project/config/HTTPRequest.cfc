@@ -6,6 +6,7 @@ component
     extends = 'ManifestConfig'
 {
 
+    property String stBundle;
     property String stEvent;
     property String stAction; 
     property boolean blPermission;
@@ -22,6 +23,7 @@ component
     {
 
         /* set objectos in query string */
+        setStBundle(getKey('bundle'));
         setStEvent((getKey('event') == '' ? 'main' : getKey('event')));
         setStAction((getKey('action') == '' ? 'init' : getKey('action')));
         // setArgs(URL);
