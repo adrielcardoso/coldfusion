@@ -7,12 +7,7 @@ component
 	public function validationForm()
 	{
 
-
-		$rules = [
-
-
-		];
-
+		$rules = {};
 
 	}
 
