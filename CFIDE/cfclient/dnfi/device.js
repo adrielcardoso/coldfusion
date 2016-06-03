@@ -1,1 +1,0 @@
-var WDevice=function(){var self=this;this.successObject=new DnfiStatus("device",dnfi.SUCCESS.code,dnfi.SUCCESS.message);this.getProperty=function(context,prop){var property;if(prop=="connection")property=navigator.network.connection.type;else property=eval("device."+prop);runCallBacks(context.cb,self.successObject,property)}};

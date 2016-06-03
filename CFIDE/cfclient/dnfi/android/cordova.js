@@ -1,1 +1,0 @@
-//This is just a dummy cordova.js to prevent error which occurs as we include cordova.js in script src 
