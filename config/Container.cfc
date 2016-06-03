@@ -38,7 +38,7 @@ component
 		*/
 		return CreateObject("component",  (
 
-			    getStreamBundleName() == false ? getRouting().getBundleDefault() : getRouting().getRoutingBundle()[getStreamBundleName()]
+			    getStreamBundleName() == false ? getRouting().getBundleRequestMain() : getRouting().getRoutingBundle()[getStreamBundleName()]
 
 			) & 'service.' & this.parseNameDir(serviceName)  & this.parseNameDir(label));
 	}
@@ -52,7 +52,7 @@ component
 		*/
 		return CreateObject("component",  (
 
-			    getStreamBundleName() == false ? getRouting().getBundleDefault() : getRouting().getRoutingBundle()[getStreamBundleName()]
+			    getStreamBundleName() == false ? getRouting().getBundleRequestMain() : getRouting().getRoutingBundle()[getStreamBundleName()]
 
 			) & 'entity.' & this.parseNameDir(entityName)  & this.parseNameDir(label));
 	}

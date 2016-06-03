@@ -11,7 +11,8 @@ component
 
 	property Routing routing;
 
-	public ErrorController function init(Routing routing){
+	public ErrorController function init(Routing routing)
+    {
 		setRouting(routing);
 
 		return this;

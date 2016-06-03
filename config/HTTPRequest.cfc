@@ -13,13 +13,6 @@ component
     property String method;
     property struct args;
 
-    property name = 'PROJECT' default = 'POST';
-
-    // property String POST;
-    // property name = 'get' default = 'POST';
-    // property name = 'put' default = 'POST';
-    // property name = 'delete' default = 'POST';
-
     public HTTPRequest function bindRequest()
     {
 
