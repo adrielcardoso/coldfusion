@@ -11,10 +11,12 @@ component
     {
 
         setTemplate('default.template');
+        // setTemplate('bootstrap.template');
+
         setBundleName(bundleName);
 
         return this;
     }
-    
-} 
+
+}
 

@@ -17,7 +17,7 @@ component
     	if(req.isRequest('POST')){
 
     		var userCreate = getContainer(req)
-    							.getService('user').createUser();
+    							.getEntity('user').findAll();
     	}
 
     	res.view("create", {});
@@ -29,7 +29,7 @@ component
     	if(req.isRequest('POST')){
 
     		var userCreate = getContainer(req)
-    							.getService('user').createUser();
+    							.getService('user').updateUser();
     	}
 
     	res.view("update", {});

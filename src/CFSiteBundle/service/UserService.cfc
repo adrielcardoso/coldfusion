@@ -11,12 +11,16 @@ component
 	}
 
 
-	public boolean function  createUser()
+	public boolean function  findByPk(int id)
 	{
 
-		writeDump('Analisando criacao de usuario');
-		abort;
+
+			user = getContainer().getEntity('user').findByPk(id);
+
+
+
 	}
+
 
 }
 

@@ -9,10 +9,10 @@ component
 	property Routing routing;
 
 	public Container function parseContainer(HTTPRequest req)
-	{	
+	{
 
 		/*
-			set registre of bundles to find services 
+			set registre of bundles to find services
 		*/
 
 		setRouting(CreateObject('component', 'config.Routing').main(req));
@@ -23,7 +23,7 @@ component
 
 	public Container function getBundle(String bundleName = false)
 	{
-			
+
 		setStreamBundleName(bundleName);
 
 		return this;
@@ -32,9 +32,9 @@ component
 	public Service function getService(String serviceName, String label = 'service')
 	{
 		/*
-				
+
 				aguardando controller de factory
-	
+
 		*/
 		return CreateObject("component",  (
 
@@ -46,9 +46,9 @@ component
 	public Entity function getEntity(String entityName, String label = 'entity')
 	{
 		/*
-				
+
 				aguardando controller de factory
-	
+
 		*/
 		return CreateObject("component",  (
 
@@ -59,9 +59,9 @@ component
 
 	public String function parseNameDir(String parseString)
     {
-    	
-    	/* 
-    		parse camelcase in string to validation of name file 
+
+    	/*
+    		parse camelcase in string to validation of name file
     	*/
 
         var temp = LCase(parseString);
@@ -70,9 +70,9 @@ component
 
 }
 
- 
 
 
-		 
+
+
 
 

@@ -8,7 +8,7 @@ component
 
     property String stBundle;
     property String stEvent;
-    property String stAction; 
+    property String stAction;
     property boolean blPermission;
     property String method;
     property struct args;
@@ -70,5 +70,5 @@ component
         location(url=host&"?bundle=#bundle#&event=#controller#" & (action != false ? '&action=#action#' : '') & args);
     }
 
-} 
+}
 

@@ -4,10 +4,10 @@ component
 {
 
 
-	public function validationForm()
+	public function findByPk(int id)
 	{
 
-		$rules = {};
+
 
 	}
 

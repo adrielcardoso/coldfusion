@@ -15,8 +15,8 @@ component
     public void function actionCreate(HTTPRequest req, HTTPResponse res)
     {
         // bindRequest.isRequest('POST')
-        res.view("index", {});
+        res.view("create", {});
     }
 
-} 
+}
 

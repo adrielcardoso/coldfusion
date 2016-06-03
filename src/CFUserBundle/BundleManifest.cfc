@@ -4,14 +4,19 @@ component
     extends = 'config.ManifestConfig'
 {
 
-    property template;
+    property String template;
+    property String bundleName;
 
-	public BundleManifest function init()
+	public BundleManifest function init(String bundleName)
     {
+
         setTemplate('default.template');
+        // setTemplate('bootstrap.template');
+
+        setBundleName(bundleName);
 
         return this;
     }
-    
-} 
+
+}
 
