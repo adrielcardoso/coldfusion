@@ -69,6 +69,12 @@ component
         return uCase(left(temp,1)) & right(temp,len(temp)-1);
     }
 
+
+    public ManifestConfig function getComponent(String nameComponent)
+    {
+    	return CreateObject('component', 'component/ManifestComponent').init().component(this.parseNameDir(nameComponent));
+    }
+
 }
 
 
