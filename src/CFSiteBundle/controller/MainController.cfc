@@ -16,8 +16,7 @@ component
 
         // abort;
 
-        // writeDump(getContainer(req).getComponent('user'));
-
+        writeDump(getContainer(req).getComponent('model'));
 
         res.view("index", {});
     }

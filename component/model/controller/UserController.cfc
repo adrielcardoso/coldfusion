@@ -1,0 +1,7 @@
+component
+    displayname = 'UserController'
+{
+
+
+}
+
