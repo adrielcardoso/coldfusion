@@ -16,9 +16,11 @@ component
 
         // abort;
 
-        writeDump(getContainer(req).getComponent('model'));
+        var container = getContainer(req);
 
-        res.view("index", {});
+        container.getComponent('yaml').parseFile();
+
+        // res.view("index", {});
     }
 
 }

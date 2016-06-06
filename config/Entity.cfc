@@ -1,4 +1,7 @@
-component {
+component
+	accessors = true
+    displayname = 'Entity'
+{
 
 	property name="meta";
 	property name="isNewRecord" type="boolean" default=true;
@@ -11,7 +14,7 @@ component {
 	string function getPrimaryKey(){
 		var key='';
 		for (prop in this.meta.properties) {
-			if(StructKeyExists(prop, "generator")) { 
+			if(StructKeyExists(prop, "generator")) {
 				key = prop.column;
 				break;
 			}

@@ -60,12 +60,12 @@ component
        return CreateObject("component",  bundle & LCase(stDirObject) &  "." &this.parseNameDir(stEvent)  &  this.parseNameDir(stDirObject)  );
     }
 
-    public String function parseNameDir(String parseString) // sera removido este medido e colocado no controler Container
-    {
-    	/* parse camelcase in string to validation of name file */
-        var temp = LCase(parseString);
-        return uCase(left(temp,1)) & right(temp,len(temp)-1);
-    }
+    // public String function parseNameDir(String parseString) // sera removido este medido e colocado no controler Container
+    // {
+    // 	parse camelcase in string to validation of name file
+    //     var temp = LCase(parseString);
+    //     return uCase(left(temp,1)) & right(temp,len(temp)-1);
+    // }
 
     public Container function getContainer(HTTPRequest req)
     {

@@ -1,6 +1,7 @@
 component
 	accessors = true
     displayname = 'Container'
+    extends = 'config.ManifestConfig'
 {
 
 	property struct memoryBundle;
@@ -17,6 +18,7 @@ component
 
 		setRouting(CreateObject('component', 'config.Routing').main(req));
 		setStreamBundleName(false);
+		setRequest(req);
 
 		return this;
 	}
@@ -58,21 +60,10 @@ component
 			) & 'entity.' & this.parseNameDir(entityName)  & this.parseNameDir(label));
 	}
 
-	public String function parseNameDir(String parseString)
-    {
-
-    	/*
-    		parse camelcase in string to validation of name file
-    	*/
-
-        var temp = LCase(parseString);
-        return uCase(left(temp,1)) & right(temp,len(temp)-1);
-    }
-
 
     public ManifestConfig function getComponent(String nameComponent)
     {
-    	return CreateObject('component', 'component/ManifestComponent').init().component(this.parseNameDir(nameComponent));
+    	return CreateObject('component', 'component/ManifestComponent').init(getRequest()).component(this.parseNameDir(nameComponent));
     }
 
 }
