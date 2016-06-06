@@ -3,7 +3,7 @@
 	* E-mail: cristian@millemultimedia.it
 	* Version: 1.0.0 Alpha
 	* Date: 6/9/2009 14:35:32
-	* FileName: index.cfm 
+	* FileName: index.cfm
 	--->
 
 <cfset o = createObject('component','it.millemultimedia.yaml.Yaml').init( expandPath( '/it/millemultimedia/yaml/lib/jyaml-1.3.jar' ) ) />
