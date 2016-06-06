@@ -36,6 +36,7 @@ component
 				aguardando controller de factory
 
 		*/
+		// return new src.CFSiteBundle.service.UserService();
 		return CreateObject("component",  (
 
 			    getStreamBundleName() == false ? getRouting().getBundleRequestMain() : getRouting().getRoutingBundle()[getStreamBundleName()]

@@ -47,7 +47,7 @@ component
                     response to controller of error
             */
             // CreateObject('component', 'ErrorController').init(getRouting()).error(exception.message, 500);
-            throw ;
+            rethrow;
         }
 
     }

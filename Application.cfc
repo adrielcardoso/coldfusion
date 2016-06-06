@@ -18,6 +18,9 @@ component
 
 	// this.mappings[ "/view" ] = (this.baseDirectory & "src/CFUserBundle/view/");
 	// this.mappings[ "/controller" ] = (this.baseDirectory & "src/CFUserBundle/controller");
+	
+	this.ormenabled = true;
+	this.datasource	= "devdsn";
 
 	function onApplicationStart()
 	{
