@@ -4,15 +4,15 @@ component
 {
 
 	public void function init()
-	{	
+	{
 		var base = CreateObject("component","config.BaseController").init();
 	}
 
 }
 
- 
 
 
-		 
+
+
 
 
