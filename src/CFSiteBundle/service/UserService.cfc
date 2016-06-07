@@ -1,7 +1,7 @@
 component
 	output = 'false'
     displayname = 'UserService'
-    extends = 'config.Service'
+    extends = 'app.Service'
 {
 
 	public void function init()

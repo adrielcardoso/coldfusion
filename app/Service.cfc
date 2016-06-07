@@ -1,5 +1,5 @@
 import component.orm.*;
-import config.*;
+import app.*;
 
 component
 {
@@ -16,7 +16,7 @@ component
 		catch(any e) {
 			rethrow;
 		}
-		
+
 		// writeDump(m);abort;
 		return m;
 	}
@@ -32,7 +32,7 @@ component
 		catch(any e) {
 			rethrow;
 		}
-		
+
 		return m;
 	}
 
@@ -42,7 +42,7 @@ component
 	private function afterFind(entity){
 		return arguments.entity;
 	}
-	
+
 	public DataProvider function search(Criteria criteria, Struct paginationOptions){
 		dataProvider = new DataProvider();
 		dataProvider.setCriteria(arguments.criteria);
@@ -73,9 +73,9 @@ component
 				// TODO: throw validation errors
 			}
 			return this;
-		} catch(any e) { 
+		} catch(any e) {
 			rethrow;
-		} 
+		}
 	}
 
 	private function beforeSave(model){
@@ -90,9 +90,9 @@ component
 	}
 }
 
- 
 
 
-		 
+
+
 
 

@@ -3,13 +3,14 @@ import component.ManifestComponent;
 component
 	accessors = true
     displayname = 'YamlManifest'
-    extends = 'config.Component'
+    extends = 'app.Component'
 {
 
 	property ManifestComponent context;
 
-	public config.ManifestConfig function init(ManifestComponent context)
+	public app.ManifestConfig function init(ManifestComponent context)
 	{
+
 		/*
 			set it request of will get containers
 		*/
@@ -18,38 +19,25 @@ component
 		return this;
 	}
 
-	public void function parseFile()
+	public struct function getGlobalConfig()
 	{
 
 		var container = getContainer(this);
 
 		var controller = container.getController('yaml').init(expandPath( '/component/yaml/lib/lib/jyaml-1.3.jar' ));
 
-		var obj = controller.load( expandPath('/config/config.yaml'));
+		return controller.load(expandPath('/config/config.yaml'));
 
-// <cfset obj = o.load( expandPath( 'test.yaml' ) ) />
+	}
 
-// <cfdump var="#obj#" label="Yaml to Object">
+	public struct function getConfig(required String nameConfig)
+	{
 
-// <cfset d = o.dump( obj ) />
+		var container = getContainer(this);
 
-// <cfset fileWrite( expandPath( 'Test2.yaml' ), d ) />
+		var controller = container.getController('yaml').init(expandPath( '/component/yaml/lib/lib/jyaml-1.3.jar' ));
 
-// <cfdump var="#d#" label="Object To Yaml">
-
-
-// <cfset obj = o.load( expandPath( 'test2.yaml' ) ) />
-
-// <cfdump var="#obj#" label="Test 2">
-
-
-
-		writeDump(obj);
-
-		abort;
-
-		// var o = createObject('component','/component/yaml/lib/Yaml').init( expandPath( '/component/yaml/lib/lib/jyaml-1.3.jar' ) );
-
+		return controller.load(expandPath(nameConfig));
 	}
 
 }

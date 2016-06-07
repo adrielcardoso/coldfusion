@@ -1,9 +1,9 @@
-import config.HTTPRequest;
+import app.HTTPRequest;
 
 component
 	accessors = true
     displayname = 'ManifestComponent'
-    extends = 'config.Component'
+    extends = 'app.Component'
 {
 
 	property dir;
@@ -22,7 +22,7 @@ component
     	return this;
     }
 
-    public config.ManifestConfig function component(String nameComponent)
+    public app.ManifestConfig function component(String nameComponent)
     {
 
         setComponentName(nameComponent);

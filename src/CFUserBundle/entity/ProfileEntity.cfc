@@ -1,5 +1,10 @@
 import component.orm.*;
-component extends = "config.Entity" accessors=true persistent=true table="profile" {
+
+component
+	extends = "app.Entity"
+	accessors=true
+	persistent=true
+	table="profile" {
 
 	property name="id" column="id" generator="increment";
 	property name="name" column="name";

@@ -1,5 +1,5 @@
-import config.HTTPRequest;
-import config.HTTPResponse;
+import app.HTTPRequest;
+import app.HTTPResponse;
 
 component
     displayname = 'UserForm'

@@ -1,7 +1,7 @@
 component
 	accessors = true
     displayname = 'Container'
-    extends = 'config.ManifestConfig'
+    extends = 'app.ManifestConfig'
 {
 
 	property struct memoryBundle;
@@ -16,7 +16,7 @@ component
 			set registre of bundles to find services
 		*/
 
-		setRouting(CreateObject('component', 'config.Routing').main(req));
+		setRouting(CreateObject('component', 'app.Routing').main(req));
 		setStreamBundleName(false);
 		setRequest(req);
 

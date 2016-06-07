@@ -1,9 +1,9 @@
 import component.orm.*;
 component
-    extends = 'config.Service'
+    extends = 'app.Service'
     accessors=true
 {
-	
+
 	property name="entityName" default="UserEntity";
 
 	public DataProvider function search(Criteria criteria, Struct paginationOptions){

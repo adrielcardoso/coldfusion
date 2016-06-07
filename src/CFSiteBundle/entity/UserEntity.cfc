@@ -1,7 +1,7 @@
 component
     output = 'false'
     displayname = 'UserEntity'
-    extends = 'config.Entity'
+    extends = 'app.Entity'
 {
 
 	property stFistName;

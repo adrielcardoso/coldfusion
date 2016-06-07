@@ -1,4 +1,4 @@
-import config.ManifestConfig;
+import app.ManifestConfig;
 
 component
     accessors = true

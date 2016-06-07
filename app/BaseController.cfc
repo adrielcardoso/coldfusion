@@ -1,13 +1,13 @@
 
-import config.HTTPRequest;
-import config.HTTPResponse;
-import config.Routing;
+import app.HTTPRequest;
+import app.HTTPResponse;
+import app.Routing;
 // import config.ManifestConfig;
 
 component
 	accessors = true
     displayname = 'BaseController'
-    extends = 'config.ManifestConfig'
+    extends = 'app.ManifestConfig'
 {
 
     property HTTPRequest bindRequest;
@@ -69,7 +69,7 @@ component
 
     public Container function getContainer(HTTPRequest req)
     {
-        return createObject("component", 'config.Container').parseContainer(req);
+        return createObject("component", 'app.Container').parseContainer(req);
     }
 
 }

@@ -13,6 +13,7 @@ component
 	this.sessionTimeout = createTimeSpan(0,0,10,0);
 
 	this.mappings[ "/src" ] = (this.baseDirectory & "src/");
+	this.mappings[ "/app" ] = (this.baseDirectory & "app/");
 	this.mappings[ "/config" ] = (this.baseDirectory & "config/");
 	this.mappings[ "/component" ] = (this.baseDirectory & "component/");
 

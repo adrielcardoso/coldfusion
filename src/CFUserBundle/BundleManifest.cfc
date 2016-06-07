@@ -1,7 +1,7 @@
 component
 	accessors = true
     displayname = 'BundleManifest'
-    extends = 'config.ManifestConfig'
+    extends = 'app.ManifestConfig'
 {
 
     property String template;

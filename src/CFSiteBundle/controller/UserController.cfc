@@ -1,9 +1,9 @@
-import config.HTTPRequest;
-import config.HTTPResponse;
+import app.HTTPRequest;
+import app.HTTPResponse;
 
 component
     displayname = 'PessoaController'
-    extends = 'config.BaseController'
+    extends = 'app.BaseController'
 {
 
     public void function actionInit(HTTPRequest req, HTTPResponse res)

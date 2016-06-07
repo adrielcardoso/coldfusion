@@ -1,7 +1,7 @@
 component
 	output="false"
     displayname = 'YamlController'
-    extends = 'config.Component'
+    extends = 'app.Component'
 {
 
 	public YamlController function init(String jar)

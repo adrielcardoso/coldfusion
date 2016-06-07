@@ -1,6 +1,6 @@
-import config.HTTPRequest;
-import config.HTTPResponse;
-import config.ManifestConfig;
+import app.HTTPRequest;
+import app.HTTPResponse;
+import app.ManifestConfig;
 
 component
 	accessors = true
@@ -23,7 +23,7 @@ component
 
     	data = {
     		'template' : '/component/template/error/#(!status ? 'error' : 'error#status#')#.cfm',
-    		'load' : createObject("component", 'config.TemplateInflate').init(getRouting())
+    		'load' : createObject("component", 'app.TemplateInflate').init(getRouting())
     	};
 
     	include '/component/template/#getRouting().getBundleManifest().getTemplate()#.cfm';

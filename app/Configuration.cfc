@@ -5,7 +5,7 @@ component
 
 	public void function init()
 	{
-		var base = CreateObject("component","config.BaseController").init();
+		var base = CreateObject("component","app.BaseController").init();
 	}
 
 }

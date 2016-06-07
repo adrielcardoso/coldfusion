@@ -1,7 +1,7 @@
 component
 	accessors = true
     displayname = 'Component'
-    extends = 'config.ManifestConfig'
+    extends = 'app.ManifestConfig'
 {
 
 	property Component mContext;

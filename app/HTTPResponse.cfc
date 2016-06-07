@@ -1,5 +1,5 @@
-import config.ManifestConfig;
-import config.BaseController;
+import app.ManifestConfig;
+import app.BaseController;
 
 component
 	accessors = true
