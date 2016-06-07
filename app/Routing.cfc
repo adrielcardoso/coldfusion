@@ -9,37 +9,6 @@ component
     property ManifestConfig bundleManifest;
 
 
-    public Routing function main(HTTPRequest bindRequest)
-    {
-
-    	/*
-    		definition values to return this object
-    	*/
-    	setDir('/src');
-    	
-    	/*
-			set registrars
-    	*/
-    	setRoutingBundle(this.bundle());
-
-
-    	/*
-			set bundle in thread main
-    	*/
-    	setBundleRequestMain(
-                (parseExistAliasBundle(bindRequest.getStBundle(), routingBundle) 
-                ? getRoutingBundle()[bindRequest.getStBundle()] 
-                : getBundleDefault())
-        );
-
-        /*  
-            register of manifest bundle 
-        */
-        setBundleManifest(this.loadConfigBundle(getBundleRequestMain()));
-
-    	return this;
-    }
-
     public struct function bundle()
     {
 
@@ -50,13 +19,44 @@ component
 
         var routingBundle = {};
 
-        /* 
+        /*
                 Manegement controllers of Bundles
         */
-         StructInsert(routingBundle, 'main', getDir() & '/CFSiteBundle/'); 
-         StructInsert(routingBundle, 'user', getDir() & '/CFUserBundle/'); 
+         StructInsert(routingBundle, 'main', getDir() & '/CFSiteBundle/');
+         StructInsert(routingBundle, 'user', getDir() & '/CFUserBundle/');
 
          return routingBundle;
+    }
+
+    public Routing function main(HTTPRequest bindRequest)
+    {
+
+    	/*
+    		definition values to return this object
+    	*/
+    	setDir('/src');
+
+    	/*
+			set registrars
+    	*/
+    	setRoutingBundle(this.bundle());
+
+
+    	/*
+			set bundle in thread main
+    	*/
+    	setBundleRequestMain(
+                (parseExistAliasBundle(bindRequest.getStBundle(), routingBundle)
+                ? getRoutingBundle()[bindRequest.getStBundle()]
+                : getBundleDefault())
+        );
+
+        /*
+            register of manifest bundle
+        */
+        setBundleManifest(this.loadConfigBundle(getBundleRequestMain()));
+
+    	return this;
     }
 
     public boolean function parseExistAliasBundle(String name, struct bundles)
@@ -69,5 +69,5 @@ component
         return createObject("component", bundleName & '/BundleManifest').init(bundleName);
     }
 
-} 
+}
 

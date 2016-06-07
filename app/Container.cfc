@@ -43,7 +43,7 @@ component
 
 			    getStreamBundleName() == false ? getRouting().getBundleRequestMain() : getRouting().getRoutingBundle()[getStreamBundleName()]
 
-			) & 'service.' & this.parseNameDir(serviceName)  & this.parseNameDir(label));
+			) & 'service.' & this.parseNameDir(serviceName)  & this.parseNameDir(label)).init(this);
 	}
 
 	public Entity function getEntity(String entityName, String label = 'entity')

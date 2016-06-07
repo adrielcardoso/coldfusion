@@ -1,0 +1,5 @@
+<cfoutput>
+
+	#status# : #message#
+
+</cfoutput>

@@ -1,0 +1,29 @@
+security:
+
+    bundle_alias: user
+    controller: credential
+
+    role_hierarchy:
+        - { ROLE_ANONYMOUS: IS_AUTHENTICATED_ANONYMOUSLY, balance: 0 }
+        - { ROLE_USER: ROLE_USER, balance: 1 }
+        - { ROLE_ADMIN: ROLE_ADMIN, balance: 2 }
+        - { ROLE_SUPER_ADMIN: ROLE_SUPER_ADMIN, balance: 3 }
+
+    providers:
+        cf_userbundle:
+            id: CFUserBundle
+            alias: user
+
+    firewalls:
+        anonymous:    false
+        route_main:   login
+
+
+    ## definition to access of requests
+
+    access_control_event:
+        - { event: main,     action: ActionInit,   role: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { event: credential,  action: actionLogin,   role: [IS_AUTHENTICATED_ANONYMOUSLY] }
+
+        - { event: credential,  action: login,   role: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        # - { event: credential,  action: login,   role: [IS_AUTHENTICATED_ANONYMOUSLY] }

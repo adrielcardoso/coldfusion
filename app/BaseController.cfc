@@ -12,7 +12,7 @@ component
 
     property HTTPRequest bindRequest;
     property HTTPResponse httpResponse;
-    property String container;
+    property Container mContainer;
     property Routing routing;
 
     public void function init()
@@ -26,19 +26,42 @@ component
             /* defination of routing to bundles */
             setRouting(createObject("component", 'Routing').main(getBindRequest()));
 
-            // setContainer('container');
+            /* set Container */
+            setMContainer(getContainer(getBindRequest()));
 
-           /* instaced off object  */
-            var mContext = createObjectByName(getBindRequest().getStEvent() , 'controller', getRouting().getBundleRequestMain());
+            /*
+                define controller access in request
+            */
+            getMContainer(getBindRequest()).getBundle('user').getService('security').autorizationRequest(this);
 
-            /* object of response to request */
-            httpResponse= createObject("component", 'HTTPResponse').init(mContext, LCase(getBindRequest().getStEvent()), getRouting());
+            /*
+                validate key security
+            */
+            if(getBindRequest().getBlPermission()){
 
-            /* default method access */
-            invoke(mContext, (getBindRequest().getStAction() == 'actionInit' ? 'actionInit' : 'action#parseNameDir(getBindRequest().getStAction())#'), {
-                        'req' = getBindRequest(),
-                        'res' = httpResponse
-            });
+               /* instaced off object  */
+                var mContext = createObjectByName(getBindRequest().getStEvent() , 'controller', getRouting().getBundleRequestMain());
+
+                /* object of response to request */
+                httpResponse= createObject("component", 'HTTPResponse').init(mContext, LCase(getBindRequest().getStEvent()), getRouting());
+
+                /* default method access */
+                invoke(mContext, (getBindRequest().getStAction() == 'actionInit' ? 'actionInit' : 'action#parseNameDir(getBindRequest().getStAction())#'), {
+                            'req' = getBindRequest(),
+                            'res' = httpResponse
+                });
+            }else{
+
+
+                /*
+                    exception no access permited
+                */
+
+                CreateObject('component', 'ErrorController').init(getRouting())
+                            .error('OHH VOCE NAO TEM AUTORIZACAO PARA FAZER ISSO', getBindRequest().getStatusCode());
+
+            }
+
 
         }catch(Any exception){
 

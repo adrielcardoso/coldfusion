@@ -12,6 +12,7 @@ component
     property boolean blPermission;
     property String method;
     property struct args;
+    property int statusCode;
 
     public HTTPRequest function bindRequest()
     {
@@ -25,6 +26,7 @@ component
 
         /* permission off access to user */
         setBlPermission(false);
+        setStatusCode(false);
 
         return this;
     }
@@ -60,7 +62,7 @@ component
             }
         }
 
-        location(url=host&"?bundle=#bundle#&event=#controller#" & (action != false ? '&action=#action#' : '') & args);
+        location('http://'&CGI.HTTP_HOST&"?bundle=#bundle#&event=#controller#" & (action != false ? '&action=#action#' : '') & args, false);
     }
 
 }

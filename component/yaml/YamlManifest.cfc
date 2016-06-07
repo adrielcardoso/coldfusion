@@ -37,7 +37,7 @@ component
 
 		var controller = container.getController('yaml').init(expandPath( '/component/yaml/lib/lib/jyaml-1.3.jar' ));
 
-		return controller.load(expandPath(nameConfig));
+		return controller.load(expandPath('config/#nameConfig#.yaml'));
 	}
 
 }

@@ -26,7 +26,7 @@ component
     // writeDump('#getRouting().getBundleRequestMain()#view/#getStThreadName()#/#fileName#.cfm');abort;
     	StructAppend(arguments.data, {
     		'template' : '#getRouting().getBundleRequestMain()#view/#getStThreadName()#/#fileName#.cfm',
-    		'load' : createObject("component", 'config.TemplateInflate').init(getRouting())
+    		'load' : createObject("component", 'app.TemplateInflate').init(getRouting())
     	});
 
         // writeDump(data.template);
