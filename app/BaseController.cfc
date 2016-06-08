@@ -32,11 +32,12 @@ component
             /*
                 define controller access in request
             */
-            getMContainer().getBundle('user').getService('security').autorizationRequest(this);
+            getMContainer().getBundle('user').getService('security').autorizationRequest(this).finish(getMContainer());
 
             /*
                 validate key security
             */
+            // getBindRequest().setBlPermission(true);
             if(getBindRequest().getBlPermission()){
 
                /* instaced off object  */
@@ -56,8 +57,12 @@ component
                             'req' = getBindRequest(),
                             'res' = httpResponse
                 });
-            }else{
 
+                /*
+                     last application in context life
+                */
+
+            }else{
 
                 /*
                     exception no access permited
@@ -67,6 +72,9 @@ component
                             .error(getBindRequest().getMessage(), getBindRequest().getStatusCode());
 
             }
+
+
+            getMContainer().parseAfter();
 
 
         }catch(Any exception){
@@ -83,18 +91,8 @@ component
 
 	public BaseController function createObjectByName(String stEvent, String stDirObject = 'controller', String bundle)
     {
-    	/*
-            find object in formated dynamic
-        */
        return CreateObject("component",  bundle & LCase(stDirObject) &  "." &this.parseNameDir(stEvent)  &  this.parseNameDir(stDirObject)  );
     }
-
-    // public String function parseNameDir(String parseString) // sera removido este medido e colocado no controler Container
-    // {
-    // 	parse camelcase in string to validation of name file
-    //     var temp = LCase(parseString);
-    //     return uCase(left(temp,1)) & right(temp,len(temp)-1);
-    // }
 
     public Container function getContainer(ManifestConfig manifestConfig)
     {
@@ -103,7 +101,14 @@ component
             return getMContainer();
         }
 
-        return createObject("component", 'app.Container').parseContainer(manifestConfig);
+        var generateContainer = createObject("component", 'app.Container');
+
+        /*
+            begin application, context before
+        */
+        generateContainer.parseBefore();
+
+        return generateContainer.parseContainer(manifestConfig);
     }
 
 }

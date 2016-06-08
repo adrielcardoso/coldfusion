@@ -3,7 +3,7 @@ import app.Form;
 
 component
 	accessors = true
-    displayname = 'UserForm'
+    displayname = 'PessoaForm'
     extends = 'app.Form'
 {
 

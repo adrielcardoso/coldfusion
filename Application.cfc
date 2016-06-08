@@ -6,8 +6,8 @@ component
 	// property baseDirectory;
 	this.baseDirectory = getDirectoryFromPath(getCurrentTemplatePath());
 
-	// this.name = hash(this.baseDirectory);
-	this.name = hash(getTickCount());
+	this.name = hash(this.baseDirectory);
+	// this.name = hash(getTickCount());
 	this.applicationTimeout = createTimeSpan(0,1,0,0);
 	this.sessionManagement = true;
 	this.sessionTimeout = createTimeSpan(0,0,10,0);

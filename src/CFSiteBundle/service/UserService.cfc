@@ -4,13 +4,6 @@ component
     extends = 'app.Service'
 {
 
-	public void function init()
-	{
-		writeDump('CFSiteBundle: service de user');
-		abort;
-	}
-
-
 	public boolean function  findByPk(int id)
 	{
 

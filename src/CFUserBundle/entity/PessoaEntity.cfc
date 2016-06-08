@@ -1,6 +1,6 @@
 component
     accessors = true
-    displayname = 'UserEntity'
+	displayname = 'PessoaEntity'
     extends = 'app.Entity'
 {
 
@@ -8,7 +8,7 @@ component
     property String stEmail;
     property String stPassw;
 
-    public Entity function userEntity(String stFullName, String stEmail, String stPassw)
+    public Entity function pessoaEntity(String stFullName, String stEmail, String stPassw)
     {
         setStFullName(stFullName);
         setStEmail(stEmail);

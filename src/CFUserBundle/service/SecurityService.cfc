@@ -9,7 +9,7 @@ component
 
 	property Any security;
 
-	public void function autorizationRequest(ManifestConfig mContext)
+	public Any function autorizationRequest(ManifestConfig mContext)
 	{
 
 		var userSession = getContainer().getService('UserSession').getUser();
@@ -23,6 +23,7 @@ component
 			mContext.getBindRequest().redirect(getBundleAlias(security), getBundleController(security), getRoutDefaultRedirect(security));
 		}
 
+		return this;
 	}
 
 	public boolean function validateRouteAccess(HTTPRequest mRequest, any userSession)

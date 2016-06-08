@@ -4,9 +4,22 @@ component
     extends = 'ManifestConfig'
 {
 
-	public any function getForm(Entity entity)
+	property ManifestConfig mContext;
+
+	public ManifestConfig function init(ManifestConfig context)
+	{
+
+		setMContext(context);
+
+		return this;
+	}
+
+	public app.Form function getForm()
     {
-    	writeDump(entity);abort;
+
+    	var entityName = getMContext().getStEntity();
+
+    	return getMContext().getForm(entityName);
     }
 
 }
