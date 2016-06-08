@@ -1,24 +1,12 @@
 component
 	accessors = true
     displayname = 'Entity'
+    extends = 'ManifestConfig'
 {
 
-	property name="meta";
-	property name="isNewRecord" type="boolean" default=true;
+	public any function getForm(Entity entity)
+    {
+    	writeDump(entity);abort;
+    }
 
-	public Entity function init(){
-		this.meta = getMetadata(this);
-		return this;
-	}
-
-	string function getPrimaryKey(){
-		var key='';
-		for (prop in this.meta.properties) {
-			if(StructKeyExists(prop, "generator")) {
-				key = prop.column;
-				break;
-			}
-		}
-		return key;
-	}
 }

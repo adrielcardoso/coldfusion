@@ -1,3 +1,5 @@
+import app.ManifestConfig;
+
 component
 	accessors = true
     displayname = 'Container'
@@ -8,17 +10,19 @@ component
 	property HTTPRequest request;
 	property String streamBundleName;
 	property Routing routing;
+	property ManifestConfig context;
 
-	public Container function parseContainer(HTTPRequest req)
+	public Container function parseContainer(ManifestConfig mContext)
 	{
 
 		/*
 			set registre of bundles to find services
 		*/
 
-		setRouting(CreateObject('component', 'app.Routing').main(req));
+		setRouting(CreateObject('component', 'app.Routing').main(mContext.getBindRequest()));
 		setStreamBundleName(false);
-		setRequest(req);
+		setRequest(mContext.getBindRequest());
+		setContext(mContext);
 
 		return this;
 	}

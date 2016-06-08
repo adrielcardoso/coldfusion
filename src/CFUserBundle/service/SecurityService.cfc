@@ -12,7 +12,7 @@ component
 	public void function autorizationRequest(ManifestConfig mContext)
 	{
 
-		var userSession = getContainer(mContext).getService('UserSession').getUser();
+		var userSession = getContainer().getService('UserSession').getUser();
 
 		var routeAccess = validateRouteAccess(mContext.getBindRequest(), userSession);
 
@@ -30,6 +30,11 @@ component
 
 		// load file yaml
 		var security = getMContext().getService('security').load(); setSecurity(security);
+
+		// if anonymous, permission acepted
+		if(getPermissionAnonymous(security) == true){
+			return true;
+		}
 
 		// buscar rule do usuario
 		var userRule = parseRuleByUser(userSession);
@@ -59,12 +64,13 @@ component
 	{
 
 		// validate evento access to user in router
-		var bundle = mRequest.getStEvent();
+		var bundle = mRequest.getStBundle();
+
+		var controller = mRequest.getStEvent();
 
 		var action = mRequest.getStAction();
 
-
-		return getAccessControlEvent(getSecurity(), bundle, action);
+		return getAccessControlEvent(getSecurity(), bundle, controller, action);
 
 	}
 
@@ -83,13 +89,13 @@ component
 		return user['rule'];
 	}
 
-	public array function getAccessControlEvent(struct security, String event, String action)
+	public array function getAccessControlEvent(struct security,String bundle, String event, String action)
 	{
 
 		for (single in security['security']['access_control_event']){
 
 
-			if(single['action'] == action and single['event'] == event){
+			if(single['bundle'] == bundle and single['event'] == event and single['action'] == action){
 				return single['role'];
 			}
 

@@ -11,9 +11,45 @@ component
     public void function actionLogin(HTTPRequest req, HTTPResponse res)
     {
 
-    	writeDump('fazendo login');
+        // abort;
 
-    	abort;
+        var container = getContainer();
+
+
+        writeDump(container.getEntity('user'));
+
+
+        abort;
+
+
+        // container.getEntity('user')
+
+    	// writeDump()
+
+    	if(req.isRequest('POST')){
+
+    		writeDump(FORM);
+    	}
+
+    	res.view('login', {});
+    }
+
+    public void function actionCreate(HTTPRequest req, HTTPResponse res)
+    {
+
+    	res.view('create', {});
+    }
+
+    public void function actionEdit(HTTPRequest req, HTTPResponse res)
+    {
+
+    	res.view('edit', {});
+    }
+
+    public void function actionInit(HTTPRequest req, HTTPResponse res)
+    {
+
+    	res.view('index', {});
     }
 
 }

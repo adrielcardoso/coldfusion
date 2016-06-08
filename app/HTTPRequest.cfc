@@ -13,20 +13,23 @@ component
     property String method;
     property struct args;
     property int statusCode;
+    property String message;
 
     public HTTPRequest function bindRequest()
     {
 
         /* set objectos in query string */
-        setStBundle(getKey('bundle'));
+        setStBundle(getKey('bundle') == '' ? 'main' : getKey('bundle'));
         setStEvent((getKey('event') == '' ? 'main' : getKey('event')));
         setStAction((getKey('action') == '' ? 'actionInit' : getKey('action')));
+
         // setArgs(URL);
         setMethod(CGI.REQUEST_METHOD);
 
-        /* permission off access to user */
+        /* permission off access to user and set default message to view*/
         setBlPermission(false);
         setStatusCode(false);
+        setMessage('ocorreu algum problema ao tentar acessar essa página, verifique com o administrador do sistema');
 
         return this;
     }

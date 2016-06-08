@@ -1,20 +1,22 @@
-import component.orm.*;
+
 component
-	extends = "app.Entity"
-	accessors=true
-	persistent=true
-	table="user" {
+    accessors = true
+	displayname = 'UserEntity'
+    extends = 'app.Entity'
+{
 
-	property name="id" column="id" generator="increment";
-	property name="name";
-	property name="username" column="username";
-	property name="pass" column="pass";
-	property name="type" column="type";
-	property name="birthdate" column="birthdate";
-	property name="profile" fieldtype="one-to-many" fkcolumn="user_id" cfc="ProfileEntity" missingRowIgnored=true  cascade="all-delete-orphan";
+    property String stFullName;
+    property String stEmail;
+    property String stPassw;
 
-	public UserEntity function init(){
-		super.init();
-		return this;
-	}
+    public Entity function userEntity(String stFullName, String stEmail, String stPassw)
+    {
+        setStFullName(stFullName);
+        setStEmail(stEmail);
+        setStPassw(stPassw);
+
+        return this;
+    }
+
 }
+

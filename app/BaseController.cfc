@@ -27,12 +27,12 @@ component
             setRouting(createObject("component", 'Routing').main(getBindRequest()));
 
             /* set Container */
-            setMContainer(getContainer(getBindRequest()));
+            setMContainer(getContainer(this));
 
             /*
                 define controller access in request
             */
-            getMContainer(getBindRequest()).getBundle('user').getService('security').autorizationRequest(this);
+            getMContainer().getBundle('user').getService('security').autorizationRequest(this);
 
             /*
                 validate key security
@@ -41,6 +41,12 @@ component
 
                /* instaced off object  */
                 var mContext = createObjectByName(getBindRequest().getStEvent() , 'controller', getRouting().getBundleRequestMain());
+
+                /*
+                    define object container to context invoked
+                */
+                mContext.setMContainer(getMContainer());
+
 
                 /* object of response to request */
                 httpResponse= createObject("component", 'HTTPResponse').init(mContext, LCase(getBindRequest().getStEvent()), getRouting());
@@ -58,7 +64,7 @@ component
                 */
 
                 CreateObject('component', 'ErrorController').init(getRouting())
-                            .error('OHH VOCE NAO TEM AUTORIZACAO PARA FAZER ISSO', getBindRequest().getStatusCode());
+                            .error(getBindRequest().getMessage(), getBindRequest().getStatusCode());
 
             }
 
@@ -90,9 +96,14 @@ component
     //     return uCase(left(temp,1)) & right(temp,len(temp)-1);
     // }
 
-    public Container function getContainer(HTTPRequest req)
+    public Container function getContainer(ManifestConfig manifestConfig)
     {
-        return createObject("component", 'app.Container').parseContainer(req);
+
+        if(!isDefined('manifestConfig')){
+            return getMContainer();
+        }
+
+        return createObject("component", 'app.Container').parseContainer(manifestConfig);
     }
 
 }
