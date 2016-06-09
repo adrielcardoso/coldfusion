@@ -40,20 +40,10 @@ component
         return (IsDefined("URL.#queryString#") ? evaluate("URL.#queryString#") : '');
     }
 
-    // public String function getKey(String key)
-    // {
-    //    try{
-    //         return getArgs()[key];
-    //    }catch(Any e){
-    //         return '';
-    //    }
-    // }
-
     public boolean function isRequest(String typeRequest)
     {
          return (typeRequest == getMethod() ? true : false);
     }
-
 
     public void function redirect(String bundle = 'main', String controller, String action = false, struct arg = {})
     {

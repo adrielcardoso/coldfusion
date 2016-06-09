@@ -9,8 +9,13 @@ component
     public void function actionLogin(HTTPRequest req, HTTPResponse res)
     {
 
+        var component = getContainer().getBundle('main')
+                                            .getEntity('user').getForm();
+
+
+        writeDump(component);abort;
+
         // abort;
-        var container = getContainer();
 
 
     	if(req.isRequest('POST')){

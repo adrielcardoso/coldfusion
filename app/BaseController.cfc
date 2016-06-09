@@ -32,7 +32,7 @@ component
             /*
                 define controller access in request
             */
-            getMContainer().getBundle('user').getService('security').autorizationRequest(this).finish(getMContainer());
+            getMContainer().getBundle('user').getService('security').autorizationRequest(this);
 
             /*
                 validate key security

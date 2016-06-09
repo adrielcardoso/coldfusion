@@ -12,7 +12,7 @@ component
 	public Any function autorizationRequest(ManifestConfig mContext)
 	{
 
-		var userSession = getContainer().getService('UserSession').getUser();
+		var userSession = getContainer().getBundle('user').getService('UserSession').getUser();
 
 		var routeAccess = validateRouteAccess(mContext.getBindRequest(), userSession);
 
@@ -30,7 +30,7 @@ component
 	{
 
 		// load file yaml
-		var security = getMContext().getService('security').load(); setSecurity(security);
+		var security = getContainer().getBundle('user').getService('security').load(); setSecurity(security);
 
 		// if anonymous, permission acepted
 		if(getPermissionAnonymous(security) == true){
