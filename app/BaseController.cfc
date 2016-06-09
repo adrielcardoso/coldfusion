@@ -97,7 +97,12 @@ component
     public Container function getContainer(ManifestConfig manifestConfig)
     {
 
+
         if(!isDefined('manifestConfig')){
+
+            // writeDump(); abort;
+            finish(getMContainer());
+
             return getMContainer();
         }
 

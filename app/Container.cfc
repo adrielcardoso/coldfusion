@@ -49,9 +49,6 @@ component
 
 			) & 'service.' & this.parseNameDir(serviceName)  & this.parseNameDir(label)).init(this);
 
-
-		finish(this);
-
 		return objectService;
 	}
 
@@ -66,8 +63,6 @@ component
 
 			) & 'entity.' & this.parseNameDir(entityName)  & this.parseNameDir(label)).init(this);
 
-		finish(this);
-
 		return objectEntity;
 	}
 
@@ -75,8 +70,6 @@ component
     public ManifestConfig function getComponent(String nameComponent)
     {
     	var objectComponent = CreateObject('component', 'component/ManifestComponent').init(getRequest()).component(this.parseNameDir(nameComponent));
-
-    	finish(this);
 
     	return objectComponent;
     }
@@ -89,8 +82,6 @@ component
 			    getStreamBundleName() == false ? getRouting().getBundleRequestMain() : getRouting().getRoutingBundle()[getStreamBundleName()]
 
 			) & 'form.' & this.parseNameDir(formName)  & this.parseNameDir(label)).init(this);
-
-    	finish(this);
 
     	return objectForm;
     }
