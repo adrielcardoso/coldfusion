@@ -3,7 +3,7 @@ import component.ManifestComponent;
 component
 	accessors = true
     displayname = 'ResponseManifest'
-    extends = 'config.Component'
+    extends = 'app.Component'
 {
 
 	property ManifestComponent context;

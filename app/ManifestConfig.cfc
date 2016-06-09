@@ -2,6 +2,17 @@ component
     displayname = 'ManifestConfig'
 {
 
+	/*
+		init application and manegement context
+	*/
+	public ManifestConfig function init(ManifestConfig context)
+	{
+
+		setMFormContext(context);
+
+		return this;
+	}
+
 	public any function parseBefore()
 	{
 		// writeDump('begin');

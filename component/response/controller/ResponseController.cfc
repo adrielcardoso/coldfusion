@@ -1,6 +1,6 @@
 component
     displayname = 'ResponseController'
-    extends = 'config.Component'
+    extends = 'app.Component'
 {
 
 	public String function toJson(config.Entity out)

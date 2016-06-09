@@ -8,10 +8,10 @@ security:
         - { ROLE_ADMIN: ROLE_ADMIN, balance: 2 }
         - { ROLE_SUPER_ADMIN: ROLE_SUPER_ADMIN, balance: 3 }
 
-    providers:
-        cf_userbundle:
-            id: CFUserBundle
-            alias: user
+    # providers:
+    #     cf_userbundle:
+    #         id: CFUserBundle
+    #         alias: user
 
     firewalls:
         anonymous:    false
@@ -27,6 +27,6 @@ security:
 
         ## Bundle CFUserBundle - define routes to credential of user
         - { bundle: user, event: credential,  action: login,    role: [IS_AUTHENTICATED_ANONYMOUSLY] }
-        - { bundle: user, event: credential,  action: init,     role: [ROLE_USER] }
-        - { bundle: user, event: credential,  action: edit,     role: [ROLE_USER] }
-        - { bundle: user, event: credential,  action: create,   role: [ROLE_USER] }
+        - { bundle: user, event: credential,  action: create,   role: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { bundle: user, event: credential,  action: init,     role: [ROLE_ADMIN] }
+        - { bundle: user, event: credential,  action: edit,     role: [ROLE_ADMIN] }

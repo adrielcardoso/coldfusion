@@ -23,20 +23,18 @@ component
             /* validate and set query string  */
             setBindRequest(CreateObject("component", 'HTTPRequest').bindRequest());
 
-            /* defination of routing to bundles */
-            setRouting(createObject("component", 'Routing').main(getBindRequest()));
-
             /* set Container */
             setMContainer(getContainer(this));
 
-            /*
-                define controller access in request
-            */
+            /* defination of routing to bundles */
+            setRouting(createObject("component", 'Routing').main(this));
+            getMContainer().setRouting(getRouting());
+
+            /*   define controller access in request */
             getMContainer().getBundle('user').getService('security').autorizationRequest(this);
 
-            /*
-                validate key security
-            */
+            /* validate key security */
+
             // getBindRequest().setBlPermission(true);
             if(getBindRequest().getBlPermission()){
 
@@ -97,7 +95,6 @@ component
     public Container function getContainer(ManifestConfig manifestConfig)
     {
 
-
         if(!isDefined('manifestConfig')){
 
             // writeDump(); abort;
@@ -114,6 +111,7 @@ component
         generateContainer.parseBefore();
 
         return generateContainer.parseContainer(manifestConfig);
+
     }
 
 }

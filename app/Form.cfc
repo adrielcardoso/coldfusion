@@ -6,6 +6,5 @@ component
     extends = 'Entity'
 {
 
-
-
+	// use init upper case
 }

@@ -9,16 +9,6 @@ component
 	property ManifestComponent context;
 	property struct file;
 
-	public app.ManifestConfig function init(ManifestComponent context)
-	{
-
-		/*
-			set it request of will get containers
-		*/
-		setContext(context);
-
-		return this;
-	}
 
 	public struct function getGlobalConfig()
 	{

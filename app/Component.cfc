@@ -1,11 +1,26 @@
+import app.ManifestConfig;
+
 component
 	accessors = true
     displayname = 'Component'
     extends = 'app.ManifestConfig'
 {
 
-	property Component mContext;
+	property Component mContext; // property component request.
+	property ManifestComponent context;
+
 	property name = 'nameComponent' default = FALSE;
+
+
+	public ManifestConfig function init(ManifestComponent context)
+	{
+		/*
+			set it request of will get containers
+		*/
+		setContext(context);
+
+		return this;
+	}
 
 	public Component function getContainer(Component component)
 	{

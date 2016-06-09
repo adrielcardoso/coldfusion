@@ -7,14 +7,6 @@ component
     extends = 'app.Form'
 {
 
-	property ManifestConfig mFormContext;
 
-	public ManifestConfig function init(ManifestConfig context)
-	{
-
-		setMFormContext(context);
-
-		return this;
-	}
 
 }

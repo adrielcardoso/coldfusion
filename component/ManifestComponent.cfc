@@ -12,37 +12,43 @@ component
 
 	public ManifestComponent function init(HTTPRequest req)
     {
-
     	/*
     		definition values to return this object
     	*/
     	setDir('/component');
+
         setReq(req);
 
     	return this;
+
     }
 
     public app.ManifestConfig function component(String nameComponent)
     {
 
-        setComponentName(nameComponent);
+         setComponentName(nameComponent);
 
-        var routingBundle = {};
+         routingBundle = loadComponentYaml('config', ['mapping', 'component']);
 
-        /*
-                Manegement controllers of Bundles
-        */
-
-         // StructInsert(routingBundle, 'user', getDir() & '/user/');
-         // StructInsert(routingBundle, 'model', getDir() & '/model/');
-
-         StructInsert(routingBundle, 'response', getDir() & '/response/');
-         StructInsert(routingBundle, 'yaml', getDir() & '/yaml/');
-
-         /*
-                return of object created in component
-         */
          return CreateObject('component', routingBundle[LCase(nameComponent)] & nameComponent & 'Manifest').init(this);
+
+     }
+
+     public any function loadComponentYaml(required String fileName, required array key)
+     {
+
+        var yaml = CreateObject('component', getDir() & '/yaml/YamlManifest').init(this);
+
+        var components = yaml.load(fileName).getKey(key);
+
+        var parseStruct = {};
+        for(single in components){
+
+            StructInsert(parseStruct, single['alias'], getDir() & '/#single['name']#/');
+        }
+
+        return parseStruct;
+
      }
 
 

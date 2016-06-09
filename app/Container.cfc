@@ -16,8 +16,7 @@ component
 
 	public Container function parseContainer(ManifestConfig mContext)
 	{
-
-		setRouting(CreateObject('component', 'app.Routing').main(mContext.getBindRequest()));
+		// setRouting(CreateObject('component', 'app.Routing').main(mContext));
 
 		setStreamBundleName(false);
 

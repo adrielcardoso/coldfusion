@@ -7,34 +7,40 @@ component
 	property String bundleDefault;
 	property String bundleRequestMain;
     property ManifestConfig bundleManifest;
+    property ManifestConfig context;
 
 
     public struct function bundle()
     {
 
-        /*
-            this is registre of main bundle
-        */
-        setBundleDefault(getDir() & '/CFSiteBundle/');
+        var recurseYaml = getContext().getMContainer().getComponent('yaml');
+        var file = recurseYaml.load('config');
 
-        var routingBundle = {};
+        // ## define mangement default
+        setBundleDefault(getDir() & '/#file.getKey(['mapping', 'bundle_main'])#/');
 
-        /*
-                Manegement controllers of Bundles
-        */
-         StructInsert(routingBundle, 'main', getDir() & '/CFSiteBundle/');
-         StructInsert(routingBundle, 'user', getDir() & '/CFUserBundle/');
+        var parseStruct = {};
+        for(single in (file.getKey(['mapping', 'bundle']))){
 
-         return routingBundle;
+            StructInsert(parseStruct, single['alias'], getDir() & '/#single['name']#/');
+        }
+
+
+        return parseStruct;
+
     }
 
-    public Routing function main(HTTPRequest bindRequest)
+    public Routing function main(ManifestConfig mContext)
     {
 
-    	/*
-    		definition values to return this object
-    	*/
-    	setDir('/src');
+        /* definition thread main */
+        setContext(mContext);
+
+        /*
+            definition values to return this object
+        */
+        setDir('/src');
+
 
     	/*
 			set registrars
@@ -46,8 +52,8 @@ component
 			set bundle in thread main
     	*/
     	setBundleRequestMain(
-                (parseExistAliasBundle(bindRequest.getStBundle(), routingBundle)
-                ? getRoutingBundle()[bindRequest.getStBundle()]
+                (parseExistAliasBundle(mContext.getBindRequest().getStBundle(), routingBundle)
+                ? getRoutingBundle()[mContext.getBindRequest().getStBundle()]
                 : getBundleDefault())
         );
 

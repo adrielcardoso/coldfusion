@@ -4,3 +4,23 @@ app:
 config:
   secrete: 'hashsecrete'
 
+mapping:
+
+    ## define mangement default
+
+    bundle_main: CFSiteBundle
+
+    ## register bundles
+
+    bundle:
+      - { name: CFSiteBundle, alias: main }
+      - { name: CFUserBundle, alias: user }
+
+    ## register components
+
+    component:
+      - { name: response, alias: response }
+      - { name: yaml,     alias: yaml }
+      - { name: form,     alias: form }
+
+
