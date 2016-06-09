@@ -15,8 +15,8 @@ component
 
         var userForm = getContainer().getEntity('user');
 
-        writeDump(userEntity.getForm().validate());
-        abort;
+        // writeDump(userEntity.getForm().validate());
+        // abort;
 
     	if(req.isRequest('POST')){
 
