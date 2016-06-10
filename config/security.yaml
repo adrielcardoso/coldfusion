@@ -14,7 +14,7 @@ security:
     #         alias: user
 
     firewalls:
-        anonymous:    false
+        anonymous:    true
         route_main:   login
 
     ## definition to access of requests

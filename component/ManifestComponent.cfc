@@ -1,4 +1,4 @@
-import app.HTTPRequest;
+import app.ManifestConfig;
 
 component
 	accessors = true
@@ -6,19 +6,21 @@ component
     extends = 'app.Component'
 {
 
-	property dir;
-    property HTTPRequest req;
+    property ManifestConfig mContext;
     property String componentName;
 
-	public ManifestComponent function init(HTTPRequest req)
+	public ManifestComponent function init(ManifestConfig mContext)
     {
-    	/*
-    		definition values to return this object
-    	*/
-    	setDir('/component');
 
-        setReq(req);
+        // definition values to return this object
 
+        setDir('/component');
+
+        // writeDump(mContext);abort;
+
+        setMContext(mContext);
+
+        // writeDump(req); abort;
     	return this;
 
     }

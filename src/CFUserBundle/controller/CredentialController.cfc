@@ -13,7 +13,7 @@ component
 
         var userEntity = container.getBundle('main').getEntity('user');
 
-        var userForm = getContainer().getEntity('user');
+        // var formComponet = getContainer().getComponent('form');
 
         // writeDump(userEntity.getForm().validate());
         // abort;

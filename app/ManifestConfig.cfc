@@ -1,17 +1,19 @@
 component
+	accessors = true
     displayname = 'ManifestConfig'
 {
 
+	// property ManifestConfig mFormContext;
 	/*
 		init application and manegement context
-	*/
-	public ManifestConfig function init(ManifestConfig context)
-	{
+	// */
+	// public ManifestConfig function init(ManifestConfig context)
+	// {
 
-		setMFormContext(context);
+	// 	setMFormContext(context);
 
-		return this;
-	}
+	// 	return this;
+	// }
 
 	public any function parseBefore()
 	{

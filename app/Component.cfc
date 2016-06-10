@@ -7,16 +7,20 @@ component
 {
 
 	property Component mContext; // property component request.
-	property ManifestComponent context;
+	property ManifestConfig context;
 
+	property dir;
 	property name = 'nameComponent' default = FALSE;
 
 
-	public ManifestConfig function init(ManifestComponent context)
+	public ManifestConfig function init(ManifestConfig context)
 	{
-		/*
-			set it request of will get containers
-		*/
+
+		writeDump('context component');
+
+		// set it request of will get containers
+		setDir('/component');
+
 		setContext(context);
 
 		return this;

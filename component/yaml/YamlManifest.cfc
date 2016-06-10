@@ -3,12 +3,19 @@ import component.ManifestComponent;
 component
 	accessors = true
     displayname = 'YamlManifest'
-    extends = 'app.Component'
+    extends = 'component.ManifestComponent'
 {
 
 	property ManifestComponent context;
 	property struct file;
 
+
+	public ManifestComponent function init(ManifestComponent context)
+	{
+		setContext(context);
+
+		return this;
+	}
 
 	public struct function getGlobalConfig()
 	{
@@ -33,6 +40,7 @@ component
 
 	public Component function load(required String nameFile)
 	{
+
 		setFile(getConfig(nameFile));
 
 		return this;

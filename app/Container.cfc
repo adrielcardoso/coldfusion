@@ -16,7 +16,6 @@ component
 
 	public Container function parseContainer(ManifestConfig mContext)
 	{
-		// setRouting(CreateObject('component', 'app.Routing').main(mContext));
 
 		setStreamBundleName(false);
 
@@ -25,6 +24,8 @@ component
 		setRequest(mContext.getBindRequest());
 
 		setContext(mContext);
+
+		setRouting(CreateObject('component', 'app.Routing').main(this));
 
 		return this;
 	}
@@ -68,7 +69,8 @@ component
 
     public ManifestConfig function getComponent(String nameComponent)
     {
-    	var objectComponent = CreateObject('component', 'component/ManifestComponent').init(getRequest()).component(this.parseNameDir(nameComponent));
+
+    	var objectComponent = CreateObject('component', 'component/ManifestComponent').init(this).component(this.parseNameDir(nameComponent));
 
     	return objectComponent;
     }

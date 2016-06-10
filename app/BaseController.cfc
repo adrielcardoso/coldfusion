@@ -27,13 +27,13 @@ component
             setMContainer(getContainer(this));
 
             /* defination of routing to bundles */
-            setRouting(createObject("component", 'Routing').main(this));
-            getMContainer().setRouting(getRouting());
+            setRouting(getMContainer().getRouting());
 
             /*   define controller access in request */
             getMContainer().getBundle('user').getService('security').autorizationRequest(this);
 
-            /* validate key security */
+
+            // parse permission access in route
 
             // getBindRequest().setBlPermission(true);
             if(getBindRequest().getBlPermission()){
@@ -108,8 +108,7 @@ component
         /*
             begin application, context before
         */
-        generateContainer.parseBefore();
-
+        // generateContainer.parseBefore();
         return generateContainer.parseContainer(manifestConfig);
 
     }

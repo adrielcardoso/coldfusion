@@ -13,7 +13,7 @@ component
     public struct function bundle()
     {
 
-        var recurseYaml = getContext().getMContainer().getComponent('yaml');
+        var recurseYaml = getContext().getComponent('yaml');
         var file = recurseYaml.load('config');
 
         // ## define mangement default
@@ -25,13 +25,13 @@ component
             StructInsert(parseStruct, single['alias'], getDir() & '/#single['name']#/');
         }
 
-
         return parseStruct;
 
     }
 
     public Routing function main(ManifestConfig mContext)
     {
+
 
         /* definition thread main */
         setContext(mContext);
@@ -47,13 +47,12 @@ component
     	*/
     	setRoutingBundle(this.bundle());
 
-
     	/*
 			set bundle in thread main
     	*/
     	setBundleRequestMain(
-                (parseExistAliasBundle(mContext.getBindRequest().getStBundle(), routingBundle)
-                ? getRoutingBundle()[mContext.getBindRequest().getStBundle()]
+                (parseExistAliasBundle(mContext.getRequest().getStBundle(), routingBundle)
+                ? getRoutingBundle()[mContext.getRequest().getStBundle()]
                 : getBundleDefault())
         );
 
