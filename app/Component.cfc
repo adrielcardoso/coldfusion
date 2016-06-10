@@ -16,8 +16,6 @@ component
 	public ManifestConfig function init(ManifestConfig context)
 	{
 
-		writeDump('context component');
-
 		// set it request of will get containers
 		setDir('/component');
 

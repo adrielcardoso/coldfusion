@@ -39,6 +39,10 @@ component
      public any function loadComponentYaml(required String fileName, required array key)
      {
 
+        var componentName = getComponentName();
+
+        setComponentName('Yaml');
+
         var yaml = CreateObject('component', getDir() & '/yaml/YamlManifest').init(this);
 
         var components = yaml.load(fileName).getKey(key);
@@ -48,6 +52,8 @@ component
 
             StructInsert(parseStruct, single['alias'], getDir() & '/#single['name']#/');
         }
+
+        setComponentName(componentName);
 
         return parseStruct;
 

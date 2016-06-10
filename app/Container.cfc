@@ -69,7 +69,6 @@ component
 
     public ManifestConfig function getComponent(String nameComponent)
     {
-
     	var objectComponent = CreateObject('component', 'component/ManifestComponent').init(this).component(this.parseNameDir(nameComponent));
 
     	return objectComponent;

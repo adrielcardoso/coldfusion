@@ -9,7 +9,6 @@ component
 	property ManifestComponent context;
 	property struct file;
 
-
 	public ManifestComponent function init(ManifestComponent context)
 	{
 		setContext(context);
