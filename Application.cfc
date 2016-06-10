@@ -20,13 +20,15 @@ component
 	// this.mappings[ "/view" ] = (this.baseDirectory & "src/CFUserBundle/view/");
 	// this.mappings[ "/controller" ] = (this.baseDirectory & "src/CFUserBundle/controller");
 
-	this.ormenabled = true;
+	this.ormenabled = false;
 	this.datasource	= "devdsn";
 
 	function onApplicationStart()
 	{
 		// application.factory = CreateObject( "component", "config.factory" ).init();
-		return( true );
+		application.basedir = 'http://' & CGI.HTTP_HOST & replaceNoCase(cgi.SCRIPT_NAME, listLast(cgi.SCRIPT_NAME, "/"), "");
+
+		return true;
 	}
 
 	function onSessionStart(){}
@@ -50,7 +52,7 @@ component
 		}
 
 		request.viewData = {};
-		return( true );
+		return true ;
 	}
 
 	function onRequest( String scriptName )
@@ -66,6 +68,10 @@ component
 		abort;
 	}
 
+	function onMissingTemplate(String targetPage)
+	{
+		writeDump('okok');
+		writeDump( targetPage );
+		abort;
+	}
 }
-
-

@@ -35,5 +35,11 @@ component
         return uCase(left(parseString,1)) & right(parseString,len(parseString)-1);
     }
 
+    public function onMissingMethod(String missingMethodName, Struct missingMethodArguments)
+    {
+        writeDump( missingMethodName );
+        writeDump( missingMethodArguments );
+        abort;
+    }
 }
 
