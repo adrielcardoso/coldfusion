@@ -55,7 +55,7 @@ component
             }
         }
 
-        location('http://'&CGI.HTTP_HOST&"?bundle=#bundle#&event=#controller#" & (action != false ? '&action=#action#' : '') & args, false);
+        location(application.basedir&"?bundle=#bundle#&event=#controller#" & (action != false ? '&action=#action#' : '') & args, false);
     }
 
 }
