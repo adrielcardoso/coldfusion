@@ -17,22 +17,29 @@ component
 		return this;
 	}
 
-	public void function out(config.Entity entity, String type = 'json')
+	public void function out(app.Entity entity, String type = 'json')
 	{
 
 		// var container = getContainerByName('user');
-		var container = getContainer(this);
-		var controller = container.getController('response');
+		// var container = getContainer(this);
 
-		// var controller = container.getController('user');
-		// var tempObject = container.getEntity('response');
+		writeDump(getContainerName());
 
-		// writeDump(tempObject);
+		abort;
 
-		// writeDump(entity);
+		// // writeDump(container.getService("response")); abort;
 
-		var objectJson = controller.toJson(entity);
-		// writeDump(container.getService('response'));
+		// var controller = container.getController('response');
+
+		// // var controller = container.getController('user');
+		// // var tempObject = container.getEntity('response');
+
+		// // writeDump(tempObject);
+
+		// // writeDump(entity);
+
+		// var objectJson = controller.toJson(entity);
+		// // writeDump(container.getService('response'));
 
 		// out
 		writeOutput(objectJson);

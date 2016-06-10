@@ -9,6 +9,7 @@ mapping:
     ## define mangement default
 
     bundle_main: CFSiteBundle
+    component_yaml: yaml
 
     ## register bundles
 

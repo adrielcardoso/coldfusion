@@ -10,21 +10,18 @@ component
     {
 
         var container = getContainer();
+        var userEntity = container.getEntity('user');
 
-        var userEntity = container.getBundle('main').getEntity('user');
+        var userForm = userEntity.getForm();
 
-        // writeDump(getContainer().getComponent('form').validate());
-
-        // abort;
-
-        // var formComponet = getContainer().getComponent('form');
-
-        // writeDump(userEntity.getForm().validate());
-        // abort;
-
+        // when is method POST is validate in component.
     	if(req.isRequest('POST')){
 
-    		writeDump(FORM);
+            var parseSubmit = getContainer().getComponent('form').validate(userEntity);
+
+            writeDump(parseSubmit);
+
+            abort;
     	}
 
     	res.view('login', {});

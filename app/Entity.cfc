@@ -14,7 +14,7 @@ component
 		return this;
 	}
 
-	public app.Form function getForm()
+	public struct function getForm()
     {
 
     	var entityName = getMContext().getStEntity();

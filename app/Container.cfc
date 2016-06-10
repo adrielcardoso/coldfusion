@@ -74,14 +74,14 @@ component
     	return objectComponent;
     }
 
-    public Form function getForm(required String formName, String label = 'form')
+    public struct function getForm(required String formName, String label = 'form')
     {
 
     	var objectForm = CreateObject("component",  (
 
 			    getStreamBundleName() == false ? getRouting().getBundleRequestMain() : getRouting().getRoutingBundle()[getStreamBundleName()]
 
-			) & 'form.' & this.parseNameDir(formName)  & this.parseNameDir(label)).init(this);
+			) & 'form.' & this.parseNameDir(formName)  & this.parseNameDir(label)).init(this).formConfig();
 
     	return objectForm;
     }

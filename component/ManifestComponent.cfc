@@ -53,6 +53,7 @@ component
             StructInsert(parseStruct, single['alias'], getDir() & '/#single['name']#/');
         }
 
+        // writeDump(componentName);
         setComponentName(componentName);
 
         return parseStruct;

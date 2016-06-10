@@ -55,14 +55,13 @@ component
 		return createObject("component", '/component/#LCase(getContainerName())#/entity/#parseNameDir(nameEntity)#Entity');
 	}
 
+	public Component function getComponent(String nameComponent)
+	{
+		return createObject("component", '/component/#LCase(nameComponent)#/#parseNameDir(nameComponent)#Manifest');
+	}
+
 	public String function getContainerName()
 	{
-
-		if(getNameComponent() != FALSE)
-		{
-			return getNameComponent();
-		}
-
 		return getMContext().getContext().getComponentName();
 	}
 
