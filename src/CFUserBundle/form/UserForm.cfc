@@ -6,23 +6,28 @@ component
     extends = 'app.Form'
 {
 
-	public struct function formConfig()
+	public struct function getRoles()
 	{
+
 		return {
 
-			'stFullName' : {
-				'type': 'text',
-				'required': true
-			},
-			'stEmail' : {
-				'type': 'email',
-				'required': true
-			},
-			'stPassw' : {
-				'type' : 'text',
-				'required' : true
-			}
+
+				'stEmail, stPassw' : {
+					'scenario' : ['login'],
+					'required' : true,
+					'component' : 'validateCpf'
+				},
+
+
+
+				'stPassw' : {
+					'scenario' : ['-login'],
+					'required' : true,
+					'component' : 'validateCpf, validateCpf, validateCpf'
+				}
+
 		};
+
 	}
 
 }

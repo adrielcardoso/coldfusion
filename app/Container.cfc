@@ -1,4 +1,5 @@
 import app.ManifestConfig;
+import app.Form;
 
 component
 	accessors = true
@@ -74,14 +75,14 @@ component
     	return objectComponent;
     }
 
-    public struct function getForm(required String formName, String label = 'form')
+    public Form function getForm(required String formName, String label = 'form')
     {
 
     	var objectForm = CreateObject("component",  (
 
 			    getStreamBundleName() == false ? getRouting().getBundleRequestMain() : getRouting().getRoutingBundle()[getStreamBundleName()]
 
-			) & 'form.' & this.parseNameDir(formName)  & this.parseNameDir(label)).init(this).formConfig();
+			) & 'form.' & this.parseNameDir(formName)  & this.parseNameDir(label)).init(this);
 
     	return objectForm;
     }

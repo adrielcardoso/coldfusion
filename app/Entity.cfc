@@ -5,6 +5,7 @@ component
 {
 
 	property ManifestConfig mContext;
+	property String scenario;
 
 	public ManifestConfig function init(ManifestConfig context)
 	{

@@ -12,7 +12,7 @@ component
         var container = getContainer();
         var userEntity = container.getEntity('user');
 
-        var userForm = userEntity.getForm();
+        userEntity.setScenario('login');
 
         // when is method POST is validate in component.
     	if(req.isRequest('POST')){

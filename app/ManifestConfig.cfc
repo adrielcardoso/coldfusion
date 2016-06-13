@@ -41,5 +41,26 @@ component
         writeDump( missingMethodArguments );
         abort;
     }
+
+    public struct function parseStruct(struct data, String key, any value)
+    {
+
+
+    	if(!StructKeyExists(data, key)){
+
+    		structInsert(data,key,value);
+
+    		return data;
+    	}
+
+
+    	var temp = StructFind(data, key);
+
+    	StructAppend(temp, value);
+
+    	return temp;
+
+    }
+
 }
 

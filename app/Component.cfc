@@ -8,10 +8,8 @@ component
 
 	property Component mContext; // property component request.
 	property ManifestConfig context;
-
 	property dir;
 	property name = 'nameComponent' default = FALSE;
-
 
 	public ManifestConfig function init(ManifestConfig context)
 	{
@@ -62,7 +60,7 @@ component
 
 	public String function getContainerName()
 	{
-		return getMContext().getContext().getComponentName();
+		return (getMContext().getContext().getComponentName() ?: getContext().getComponentName());
 	}
 
 }
