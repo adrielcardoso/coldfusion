@@ -19,6 +19,8 @@ component
     	if(req.isRequest('POST')){
 
             response = getContainer().getComponent('form').validate(userEntity);
+
+            writeDump(response);
     	}
 
     	res.view('login', response);

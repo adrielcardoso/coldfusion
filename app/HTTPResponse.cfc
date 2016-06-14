@@ -23,14 +23,13 @@ component
 
     public void function view(String fileName, struct data)
     {
-    // writeDump('#getRouting().getBundleRequestMain()#view/#getStThreadName()#/#fileName#.cfm');abort;
-    	StructAppend(arguments.data, {
-    		'template' : '#getRouting().getBundleRequestMain()#view/#getStThreadName()#/#fileName#.cfm',
-    		'load' : createObject("component", 'app.TemplateInflate').init(getRouting())
-    	});
 
-        // writeDump(data.template);
-        // abort;
+    // writeDump('#getRouting().getBundleRequestMain()#view/#getStThreadName()#/#fileName#.cfm');abort;
+    	StructAppend(data, {
+    		'template' : '#getRouting().getBundleRequestMain()#view/#getStThreadName()#/#fileName#.cfm',
+    		'load' : createObject("component", 'app.TemplateInflate').init(getRouting()),
+            'form' : createObject("component", 'component.form.FormManifest')
+    	});
 
     	include '/component/template/#getRouting().getBundleManifest().getTemplate()#.cfm';
     }

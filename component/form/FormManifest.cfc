@@ -21,14 +21,39 @@ component
 
 				var temp = statusValidate[single].error;
 
-				structInsert(response, single, temp);
+				structInsert(response, single, {'error' : temp});
 
 			}
 
 		}
 
-
 		return response;
+
+	}
+
+	public String function setError(Any data, String field)
+	{
+
+		if(structKeyExists(data, field)){
+
+			if(structKeyExists(data[field], 'error')){
+
+				if(isArray(data[field].error)){
+
+					var message = '';
+
+					for(single in data[field].error){
+
+						message &= ' <br /> '&single;
+					}
+
+					return message;
+
+				}
+
+		  	}
+
+		}
 
 	}
 

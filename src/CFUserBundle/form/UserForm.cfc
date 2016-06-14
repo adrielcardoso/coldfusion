@@ -11,15 +11,14 @@ component
 
 		return {
 
-				'stEmail, stPassw' : {
+				'stEmail,stPassword' : {
 					'scenario' : ['login'],
 					'required' : true,
 					'component' : ['parseEmail', 'parseSenha']
 				},
 
-
-				'stPassw' : {
-					'scenario' : ['-login'],
+				'stPassword' : {
+					'scenario' : ['-login', '-create'],
 					'required' : true,
 					'component' : ['parseSenha']
 				}

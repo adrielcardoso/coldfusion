@@ -11,16 +11,18 @@
 			      <div class="row">
 			        <div class="input-field col s12">
 						<input id="stEmail" type="text" class="validate" name='stEmail' />
-			          <label for="email">Email</label>
+			          	<label for="email">Email</label>
 			        </div>
+			        #data['form'].setError(data, 'stEmail')#
 			      </div>
 
 			       <div class="row">
 			        <div class="input-field col s12">
-			          <input id="stPassw" type="password" class="validate" name='stPassw'>
+			          <input id="stPassw" type="password" class="validate" name='stPassword'>
 			          <label for="password">Password</label>
 			        </div>
-			      </div>
+			        #data['form'].setError(data, 'stPassword')#
+			       </div>
 
 			    </div>
 
@@ -30,5 +32,4 @@
 		    </form>
 		</div>
 	</div>
-
 </cfoutput>

@@ -7,13 +7,13 @@ component
 
     property String stFullName;
     property String stEmail;
-    property String stPassw;
+    property String stPassword;
 
-    public Entity function userEntity(String stFullName, String stEmail, String stPassw)
+    public Entity function userEntity(String stFullName, String stEmail, String stPassword)
     {
         setStFullName(stFullName);
         setStEmail(stEmail);
-        setStPassw(stPassw);
+        setStPassword(stPassw);
 
         return this;
     }
