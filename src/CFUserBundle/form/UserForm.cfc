@@ -14,7 +14,7 @@ component
 				'stEmail, stPassw' : {
 					'scenario' : ['login'],
 					'required' : true,
-					'component' : ['parseEmail', 'parseEmail']
+					'component' : ['parseEmail', 'parseSenha']
 				},
 
 
@@ -27,8 +27,6 @@ component
 		};
 
 	}
-
-
 
 
 }

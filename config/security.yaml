@@ -26,7 +26,7 @@ security:
 
 
         ## Bundle CFUserBundle - define routes to credential of user
-        - { bundle: user, event: credential,  action: login,    role: [ROLE_ADMIN] }
+        - { bundle: user, event: credential,  action: login,    role: [IS_AUTHENTICATED_ANONYMOUSLY] }
         - { bundle: user, event: credential,  action: create,   role: [IS_AUTHENTICATED_ANONYMOUSLY] }
         - { bundle: user, event: credential,  action: init,     role: [ROLE_ADMIN] }
         - { bundle: user, event: credential,  action: edit,     role: [ROLE_ADMIN] }

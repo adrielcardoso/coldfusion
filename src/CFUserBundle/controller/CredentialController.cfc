@@ -15,16 +15,13 @@ component
         userEntity.setScenario('login');
 
         // when is method POST is validate in component.
+        var response = {};
     	if(req.isRequest('POST')){
 
-            var parseSubmit = getContainer().getComponent('form').validate(userEntity);
-
-            writeDump(parseSubmit);
-
-            abort;
+            response = getContainer().getComponent('form').validate(userEntity);
     	}
 
-    	res.view('login', {});
+    	res.view('login', response);
     }
 
     public void function actionCreate(HTTPRequest req, HTTPResponse res)

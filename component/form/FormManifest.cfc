@@ -5,16 +5,8 @@ component
     extends = 'app.Component'
 {
 
-	// property ManifestConfig context;
 
-	// public ManifestComponent function init(ManifestConfig context)
-	// {
-	// 	setContext(context);
-
-	// 	return this;
-	// }
-
-	public any function validate(Entity entity)
+	public struct function validate(Entity entity)
 	{
 
 		/*
@@ -22,9 +14,21 @@ component
 		*/
 		var statusValidate = getService('form').validateEntityByForm(entity);
 
-		writeDump(statusValidate);
+		var response = {};
+		if(structCount(statusValidate) > 0){
 
-		abort;
+			for(single in statusValidate){
+
+				var temp = statusValidate[single].error;
+
+				structInsert(response, single, temp);
+
+			}
+
+		}
+
+
+		return response;
 
 	}
 

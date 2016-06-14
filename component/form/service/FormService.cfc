@@ -129,7 +129,7 @@ component
 
 						StructInsert(err,inputName,{
 							'component' : component,
-							'message' : ['O Campo está vazio'],
+							'error' : ['O Campo está vazio'],
 							'required' : required
 						});
 					}
@@ -143,7 +143,7 @@ component
 
 				StructInsert(err,inputName,{
 					'component' : component,
-					'message' : ['input nao encontrado'],
+					'error' : ['input nao encontrado'],
 					'required' : required
 				});
 			}
@@ -166,17 +166,12 @@ component
 
 					if(status['status'] == false){
 
-						parseStruct(err, single, {'message' : [status.message]});
+						parseStruct(err, single, {'error' : [status.message]});
 				 	}
-
 				}
-
 			}
-
 		}
 
-		writeDump(err);
-		abort;
 
 		return err;
 
