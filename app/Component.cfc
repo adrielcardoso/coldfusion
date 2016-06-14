@@ -45,7 +45,7 @@ component
 
 	public Component function getService(String nameService)
 	{
-		return createObject("component", '/component/#LCase(getContainerName())#/service/#parseNameDir(nameService)#Service');
+		return createObject("component", '/component/#LCase(getContainerName())#/service/#parseNameDir(nameService)#Service').init(this);
 	}
 
 	public Component function getEntity(String nameEntity)

@@ -119,21 +119,17 @@ component
 			var component = StructKeyExists(scenarioValication[single], 'component') ?
 			                             scenarioValication[inputName]['component'] : false;
 
-			// validation types form
-
 			var found = false;
 			for(unique in GetMetaData(entity).PROPERTIES){
 
-
 				if(Trim(LCase(unique.NAME)) == Trim(lCase(inputName))){
-
 
 					if(required == true and
 							len(evaluate('entity.get#parseNameDir(unique.NAME)#()')) == 0){
 
 						StructInsert(err,inputName,{
 							'component' : component,
-							'message' : 'O Campo está vazio',
+							'message' : ['O Campo está vazio'],
 							'required' : required
 						});
 					}
@@ -147,23 +143,40 @@ component
 
 				StructInsert(err,inputName,{
 					'component' : component,
-					'message' : 'input nao encontrado',
+					'message' : ['input nao encontrado'],
 					'required' : required
 				});
 			}
 
-
 		}
 
+		var serviceCuston = getContext().getService("custonValidation");
 
 		for(single in err){
 
-			writeDump(err[single]); abort;
+			for(nameFunction in err[single].component){
 
-			// writeDump(err[single].component);
+				if(!StructKeyExists(serviceCuston, nameFunction)){
+					throw ('Function #nameFunction# custon not found', 500);
+				}
 
-			abort;
+				if(len(nameFunction.toString()) > 0){
+
+					var status = evaluate('serviceCuston.#nameFunction#(#getObject(entity, single).toString()#)');
+
+					if(status['status'] == false){
+
+						parseStruct(err, single, {'message' : [status.message]});
+				 	}
+
+				}
+
+			}
+
 		}
+
+		writeDump(err);
+		abort;
 
 		return err;
 
@@ -190,6 +203,15 @@ component
 	{
 		try{
 			return objectForm[parseKey];
+		}catch(Any e){
+			return "";
+		}
+	}
+
+	public String function getObject(Entity entity, String attr)
+	{
+		try{
+			return evaluate('entity.get#parseNameDir(attr)#()').toString();
 		}catch(Any e){
 			return "";
 		}

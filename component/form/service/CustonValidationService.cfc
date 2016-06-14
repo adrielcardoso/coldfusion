@@ -1,19 +1,24 @@
 import app.ManifestConfig;
-import app.Component;
 
 component
     displayname = 'CustonValidationService'
-    extends = 'Component'
+    extends = 'app.Component'
 {
 
 
-	public boolean function validateCpf(String stCpf)
+	public struct function validateCpf(String stCpf)
 	{
+		return {'status' : false, 'message' : 'o CPF está incorreto'};
+	}
 
-		writeDump("validando CPF #stCpf#");
+	public struct function parseEmail(String email)
+	{
+		return {'status' : false, 'message' : 'o E-MAIL está incorreto'};
+	}
 
-		abort;
-
+	public struct function parseSenha(String senha)
+	{
+		return {'status' : false, 'message' : 'a SENHA está incorreto'};
 	}
 
 }

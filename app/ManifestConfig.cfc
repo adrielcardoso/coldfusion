@@ -45,20 +45,28 @@ component
     public struct function parseStruct(struct data, String key, any value)
     {
 
-
     	if(!StructKeyExists(data, key)){
 
-    		structInsert(data,key,value);
+    		StructInsert(data,key,value);
 
     		return data;
     	}
 
+    	var temp = data[key][StructKeyList(value)];
 
-    	var temp = StructFind(data, key);
+    	for(message in value[StructKeyList(value)]){
 
-    	StructAppend(temp, value);
+	    	ArrayAppend(temp, message);
+    	}
 
-    	return temp;
+    	var attr = {};
+    	structInsert(attr, StructKeyList(value), temp);
+
+		structAppend(value, attr);
+
+    	structAppend(data[key], value);
+
+    	return data;
 
     }
 
