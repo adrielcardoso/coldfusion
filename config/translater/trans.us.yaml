@@ -1,0 +1,5 @@
+CFUserBundle.UserEntity.stEmail.fieldnotfound: 'Field $+1 is empty'
+CFUserBundle.UserEntity.stPassword.fieldnotfound: 'Field $+1 is empty'
+validateCpf: 'The CPF is invalid'
+validateEmail: 'EMAIL is incorrect'
+validateSenha: 'a SENHA está incorreto'

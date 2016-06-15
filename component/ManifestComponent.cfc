@@ -32,7 +32,8 @@ component
 
          routingBundle = loadComponentYaml('config', ['mapping', 'component']);
 
-         return CreateObject('component', routingBundle[LCase(nameComponent)] & nameComponent & 'Manifest').init(this);
+         return CreateObject('component', routingBundle[LCase(nameComponent)]['dir'] &
+                            parseNameDir(routingBundle[LCase(nameComponent)]['name']) & 'Manifest').init(this);
 
      }
 
@@ -50,7 +51,10 @@ component
         var parseStruct = {};
         for(single in components){
 
-            StructInsert(parseStruct, single['alias'], getDir() & '/#single['name']#/');
+            StructInsert(parseStruct, single['alias'], {
+                'dir' : getDir() & '/#single['name']#/',
+                'name' : single['name']
+            });
         }
 
         // writeDump(componentName);

@@ -133,10 +133,9 @@ component
 	public struct function validateBindRequest(Entity entity, struct scenarioValication)
 	{
 
-		// parseStruct(temp, 'data', {'message' : 'hello'});
-
 		var err = {};
 		var permission = false;
+		var tag = getContext().getComponent('tag').setPath('translater'); // component translater
 
 		if(structCount(scenarioValication) > 0){
 			var objectFormValidation = scenarioValication;
@@ -163,7 +162,7 @@ component
 
 						StructInsert(err,inputName,{
 							'component' : component,
-							'error' : ['O Campo está vazio'],
+							'error' : [tag.translater('CFUserBundle.UserEntity.#inputName#.fieldnotfound', [LCase(inputName)])],
 							'required' : required
 						});
 					}
@@ -177,31 +176,41 @@ component
 
 				StructInsert(err,inputName,{
 					'component' : component,
-					'error' : ['input nao encontrado'],
+					'error' : [tag.translater('CFUserBundle.UserEntity.#inputName#.fieldnotfound', [LCase(inputName)])],
 					'required' : required
 				});
 			}
 
 		}
 
+
+		// validate component extern
+
 		var serviceCuston = getContext().getService("custonValidation");
+		serviceCuston.setTag(tag);
 
-		for(single in err){
+		for(single in objectFormValidation){
 
-			for(nameFunction in err[single].component){
+			if(structKeyExists(objectFormValidation[single],"component")){
 
-				if(!StructKeyExists(serviceCuston, nameFunction)){
-					throw ('Function #nameFunction# custon not found', 500);
-				}
+				for(nameFunction in objectFormValidation[single].component){
 
-				if(len(nameFunction.toString()) > 0){
+					if(!StructKeyExists(serviceCuston, nameFunction)){
+						throw ('Function #nameFunction# custon not found', 500);
+					}
 
-					var status = evaluate('serviceCuston.#nameFunction#(#getObject(entity, single).toString()#)');
+					if(len(nameFunction.toString()) > 0){
 
-					if(status['status'] == false){
+						// if(len(getObject(entity, single).toString()) > 0){
 
-						parseStruct(err, single, {'error' : [status.message]});
-				 	}
+							var status = evaluate('serviceCuston.#nameFunction#("#getObject(entity, single).toString()#")');
+
+							if(status['status'] == false){
+
+								parseStruct(err, single, {'error' : [status.message]});
+						 	}
+						// }
+					}
 				}
 			}
 		}

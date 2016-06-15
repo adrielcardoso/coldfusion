@@ -1,7 +1,7 @@
 component
 	output="false"
 	hint="Aplicaçãp de teste para criação MVC Cold Fusion"
-	{
+{
 
 	// property baseDirectory;
 	this.baseDirectory = getDirectoryFromPath(getCurrentTemplatePath());
@@ -27,6 +27,7 @@ component
 	{
 		// application.factory = CreateObject( "component", "config.factory" ).init();
 		application.basedir = 'http://' & CGI.HTTP_HOST & replaceNoCase(cgi.SCRIPT_NAME, listLast(cgi.SCRIPT_NAME, "/"), "");
+		application.language = 'ptBr';
 
 		return true;
 	}
@@ -74,4 +75,5 @@ component
 		writeDump( targetPage );
 		abort;
 	}
+
 }

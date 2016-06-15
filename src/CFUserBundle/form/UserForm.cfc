@@ -14,7 +14,7 @@ component
 			'stPassword, stEmail' : {
 				'scenario' : ['login'],
 				'required' : true,
-				'component' : ['parseEmail']
+				'component' : ['parseEmail', 'validateCpf']
 			}
 
 		};

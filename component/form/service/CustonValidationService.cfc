@@ -8,27 +8,26 @@ component
 
 	public struct function validateCpf(String value)
 	{
-		return {'status' : false, 'message' : 'o CPF está incorreto'};
+
+		var serviceCuston = getContext().getController("form");
+
+
+		return {'status' : false, 'message' : getTag().translater('validateCpf')};
 	}
 
 	public struct function parseEmail(String value)
 	{
-		return {'status' : false, 'message' : 'o E-MAIL está incorreto'};
+
+		// var parse = IsValid('email', value);
+
+		// writeDump(parse);abort;
+
+		return {'status' : false, 'message' : getTag().translater('validateEmail')};
 	}
 
 	public struct function parseSenha(String value)
 	{
-		return {'status' : false, 'message' : 'a SENHA está incorreto'};
-	}
-
-	public struct function parseCred(String value)
-	{
-		return {'status' : false, 'message' : 'Nada disso'};
-	}
-
-	public struct function parseNads(String value)
-	{
-		return {'status' : false, 'message' : 'Esse campo esta errado nao EXISTE'};
+		return {'status' : false, 'message' : getTag().translater('validateSenha')};
 	}
 
 }

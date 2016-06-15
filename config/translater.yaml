@@ -1,0 +1,38 @@
+CFUserBundle.UserEntity.stEmail.fieldnotfound:
+          - { language: ptBr, label: 'O campo $+1 está vazio'  }
+          - { language: us, label: 'Field $+1 is empty'  }
+
+
+CFUserBundle.UserEntity.stPassword.fieldnotfound:
+          - { language: ptBr, label: 'O campo $+1 está vazio'  }
+          - { language: us, label: 'Field $+1 is empty'  }
+
+
+validateCpf:
+        - { language: ptBr, label: 'O CPF está inválido'  }
+        - { language: us, label: 'The CPF is invalid'  }
+
+
+validateEmail:
+        - { language: ptBr, label: 'o E-MAIL está incorreto'  }
+        - { language: us, label: 'EMAIL is incorrect'  }
+
+
+validateSenha:
+        - { language: ptBr, label: 'o E-MAIL está incorreto'  }
+        - { language: us, label: 'a SENHA está incorreto'  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

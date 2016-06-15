@@ -23,5 +23,6 @@ mapping:
       - { name: response, alias: response }
       - { name: yaml,     alias: yaml }
       - { name: form,     alias: form }
+      - { name: tagTranslater,     alias: tag }
 
 

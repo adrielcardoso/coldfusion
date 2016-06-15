@@ -30,11 +30,19 @@ component
 	public struct function getConfig(required String nameConfig)
 	{
 
-		var container = getContainer(this);
+		try{
 
-		var controller = container.getController('yaml').init(expandPath( '/component/yaml/lib/lib/jyaml-1.3.jar' ));
+			var container = getContainer(this);
 
-		return controller.load(expandPath('config/#nameConfig#.yaml'));
+			var controller = container.getController('yaml').init(expandPath( '/component/yaml/lib/lib/jyaml-1.3.jar' ));
+
+			return controller.load(expandPath('config/#nameConfig#.yaml'));
+
+		}catch(Any e){
+
+			return {};
+		}
+
 	}
 
 	public Component function load(required String nameFile)

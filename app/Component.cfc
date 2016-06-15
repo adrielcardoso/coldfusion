@@ -10,6 +10,7 @@ component
 	property ManifestConfig context;
 	property dir;
 	property name = 'nameComponent' default = FALSE;
+	property tag;
 
 	public ManifestConfig function init(ManifestConfig context)
 	{
@@ -55,7 +56,8 @@ component
 
 	public Component function getComponent(String nameComponent)
 	{
-		return createObject("component", '/component/#LCase(nameComponent)#/#parseNameDir(nameComponent)#Manifest');
+		return getContext().getMContext().getComponent(nameComponent);
+		// return createObject("component", '/component/#LCase(nameComponent)#/#parseNameDir(nameComponent)#Manifest');
 	}
 
 	public String function getContainerName()

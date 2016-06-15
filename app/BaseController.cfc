@@ -20,6 +20,8 @@ component
 
         try{
 
+            parseBefore();
+
             /* validate and set query string  */
             setBindRequest(CreateObject("component", 'HTTPRequest').bindRequest());
 
@@ -108,7 +110,6 @@ component
         /*
             begin application, context before
         */
-        // generateContainer.parseBefore();
         return generateContainer.parseContainer(manifestConfig);
 
     }
