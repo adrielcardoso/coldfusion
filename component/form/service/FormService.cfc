@@ -26,7 +26,13 @@ component
 		/*
 			validated scenario and input values
 		*/
-		var validateErr = validateBindRequest(entity, parseAttrsScenario(form.getRoles(), scenario));
+		var structForm = parseAttrsScenario(form.getRoles(), scenario);
+
+		if(structCount(structForm) < 1){
+			return {};
+		}
+
+		var validateErr = validateBindRequest(entity, structForm);
 
 		var data = {};
 		if(StructCount(validateErr) > 0){
@@ -51,7 +57,10 @@ component
 
 			for(stFil in single.split(',')){ // here equals 1x, when more fields more validation
 
+				stFil = Trim(stFil);
+
 				var scenarioExist = false;
+
 
 				if(StructKeyExists(roles[single], 'scenario') and isArray(roles[single].scenario)){
 
@@ -63,16 +72,20 @@ component
 
 						if(singleScenario == scenario){
 
-							StructInsert(attr, stFil, roles[single]);
+							// StructInsert(attr, stFil, roles[single]);
+							addComponentInStruct(attr, stFil, roles[single]);
+
 							break;
 						}
+
 					}
 
 					scenarioExist = true;
 				}
 
 				if(scenarioExist == false){
-					StructInsert(attr, stFil, roles[single]);
+
+					addComponentInStruct(attr, stFil, roles[single]);
 				}
 
 			}
@@ -80,11 +93,32 @@ component
 		}
 
 		return attr;
+
+	}
+
+	public struct function addComponentInStruct(struct data, string key, any value)
+	{
+
+		if(structKeyExists(data, key)){
+
+			if(structKeyExists(value,"component")){
+
+				parseStruct(data, key, {'component' : value.component});
+			}
+
+		}else{
+
+			StructInsert(data, key, value);
+		}
+
+		return data;
 	}
 
 
 	public boolean function isScapeScenario(array listScenario, String stScenario)
 	{
+
+		// scape scenarios
 
 		for(scenario in listScenario){
 			if(Trim(LCase(scenario)) == Trim(LCase('-#stScenario#'))){

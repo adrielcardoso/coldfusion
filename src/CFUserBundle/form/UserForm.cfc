@@ -11,17 +11,11 @@ component
 
 		return {
 
-				'stEmail,stPassword' : {
-					'scenario' : ['login'],
-					'required' : true,
-					'component' : ['parseEmail', 'parseSenha']
-				},
-
-				'stPassword' : {
-					'scenario' : ['-login', '-create'],
-					'required' : true,
-					'component' : ['parseSenha']
-				}
+			'stPassword, stEmail' : {
+				'scenario' : ['login'],
+				'required' : true,
+				'component' : ['parseEmail']
+			}
 
 		};
 
