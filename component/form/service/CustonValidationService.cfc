@@ -18,16 +18,20 @@ component
 	public struct function parseEmail(String value)
 	{
 
-		// var parse = IsValid('email', value);
+		var parse = IsValid('email', value);
 
-		// writeDump(parse);abort;
-
-		return {'status' : false, 'message' : getTag().translater('validateEmail')};
+		return {'status' : parse, 'message' : getTag().translater('validateEmail')};
 	}
 
 	public struct function parseSenha(String value)
 	{
-		return {'status' : false, 'message' : getTag().translater('validateSenha')};
+
+		var temp = {
+				'status' : (len(value) > 8 or len(value) < 3 ? false : true),
+				'message' : getTag().translater('validateSenhaLen', [3, 8])
+			};
+
+		return temp;
 	}
 
 }

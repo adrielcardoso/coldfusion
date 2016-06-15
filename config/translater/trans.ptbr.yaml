@@ -1,8 +1,9 @@
 CFUserBundle.UserEntity.stEmail.fieldnotfound: 'O campo $+1 está vazio'
 CFUserBundle.UserEntity.stPassword.fieldnotfound: 'O campo $+1 está vazio'
 validateCpf: 'O CPF está inválido'
-validateEmail: 'o E-MAIL está incorreto'
-validateSenha: 'o E-MAIL está incorreto'
+validateEmail: 'o e-mail está incorreto'
+validateSenha: 'a senha está incorreto'
+validateSenhaLen: 'O campo deve conter de $+1  até $+2 digitos'
 
 
 
