@@ -216,16 +216,15 @@ component
 
 								for(singleFunc in metaForm['FUNCTIONS']){
 
-
 									if(Trim(LCase(singleFunc.NAME.toString())) == Trim(LCase(nameFunction.toString()))){
 
 										getEntityForm().setField(single);
 										getEntityForm().setValue(getObject(entity, single).toString());
 
-										var status = evaluate('getEntityForm().#nameFunction#("#single#", "#getObject(entity, single).toString()#")');
-										break;
+										var status = evaluate('getEntityForm().#nameFunction#()');
 
 										validateInForm = true;
+										break;
 									}
 
 								}
@@ -233,7 +232,6 @@ component
 							}
 
 						}
-
 
 						if(validateInForm == false){
 
@@ -256,7 +254,7 @@ component
 
 							}catch(Any e){
 
-								throw('Not found method custon #nameFunction#' & e.getMessage(), 500);
+								throw('Not found method custon #nameFunction#', 500);
 							}
 
 						}

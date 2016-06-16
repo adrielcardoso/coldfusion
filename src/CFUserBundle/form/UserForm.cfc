@@ -13,7 +13,8 @@ component
 
 			'stEmail' : {
 				'scenario' : ['login', 'create'],
-				'required' : true
+				'required' : true,
+				'component' : ['parseEmail']
 			},
 
 			'stPassword' : {
@@ -30,7 +31,6 @@ component
 
 	}
 
-
 	// public struct function cpfValidation()
 	// {
 
@@ -38,5 +38,13 @@ component
 	// 	return {};
 	// }
 
+	public struct function parseEmail()
+	{
+
+		var status = validate("email", getValue());
+
+		return {'status' : status, 'message' : getTag().translater(field, 'validateEmail')};
+
+	}
 
 }

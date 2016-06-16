@@ -11,9 +11,15 @@ component
 	property value;
 	property tag;
 
-	public array function getDataType()
+
+	public any function validate(String str, any value)
 	{
-		return [
+		return IsValid(getDataType(str), value);
+	}
+
+	public string function getDataType(String str)
+	{
+		var objs = [
 			'any',
 			'array',
 			'binary',
@@ -40,6 +46,16 @@ component
 			'zipcode',
 			'maxlength'
 		];
+
+
+		for(single in objs){
+
+			if(trim(LCase(single)) == trim(LCase(str))){
+				return trim(LCase(single));
+			}
+		}
+
+		throw('validate "#str#" not found', 500);
 	}
 
 }
