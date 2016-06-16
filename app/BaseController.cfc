@@ -43,7 +43,6 @@ component
                /* instaced off object  */
                 var mContext = createObjectByName(getBindRequest().getStEvent() , 'controller', getRouting().getBundleRequestMain());
 
-            throw('haha', 500);
                 /*
                     define object container to context invoked
                 */
