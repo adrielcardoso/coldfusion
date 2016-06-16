@@ -21,12 +21,24 @@ component
     public void function error(String message, String status = false)
     {
 
-    	data = {
-    		'template' : '/component/template/error/#(!status ? 'error' : 'error#status#')#.cfm',
-    		'load' : createObject("component", 'app.TemplateInflate').init(getRouting())
-    	};
+        if(getRouting().getContext().getRequest().getResponseType() != ''){
 
-    	include '/component/template/#getRouting().getBundleManifest().getTemplate()#.cfm';
+            var formate = getRouting().getContext().getRequest().getResponseType();
+
+            var responseComponent = getRouting().getContext().getComponent('response');
+
+            responseComponent.out({'data' : message, 'status' : status}, formate);
+
+        }else{
+
+        	data = {
+        		'template' : '/component/template/error/#(!status ? 'error' : 'error#status#')#.cfm',
+        		'load' : createObject("component", 'app.TemplateInflate').init(getRouting())
+        	};
+
+        	include '/component/template/#getRouting().getBundleManifest().getTemplate()#.cfm';
+        }
+
     }
 
 }

@@ -17,12 +17,12 @@ component
 
 	public any function parseBefore()
 	{
-		writeDump('application before');
+		// writeDump('application before');
 	}
 
 	public any function parseAfter()
 	{
-		writeDump('the end of the application');
+		// writeDump('the end of the application');
 	}
 
 	public any function finish(ManifestConfig mContext)

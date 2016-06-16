@@ -6,10 +6,10 @@ component
     extends = 'app.Component'
 {
 
-    property ManifestConfig mContext;
+    property Any mContext;
     property String componentName;
 
-	public ManifestComponent function init(ManifestConfig mContext)
+	public Any function init(Any mContext)
     {
 
         // definition values to return this object

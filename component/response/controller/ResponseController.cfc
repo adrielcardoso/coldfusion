@@ -3,9 +3,9 @@ component
     extends = 'app.Component'
 {
 
-	public String function toJson(config.Entity out)
+	public String function toJson(struct data)
 	{
-		return serializeJSON(out);
+		return serializeJSON(data);
 	}
 
 }

@@ -43,6 +43,7 @@ component
                /* instaced off object  */
                 var mContext = createObjectByName(getBindRequest().getStEvent() , 'controller', getRouting().getBundleRequestMain());
 
+            throw('haha', 500);
                 /*
                     define object container to context invoked
                 */
@@ -51,6 +52,7 @@ component
 
                 /* object of response to request */
                 httpResponse= createObject("component", 'HTTPResponse').init(mContext, LCase(getBindRequest().getStEvent()), getRouting());
+                httpResponse.setHttpRequest(getBindRequest());
 
                 /* default method access */
                 invoke(mContext, (getBindRequest().getStAction() == 'actionInit' ? 'actionInit' : 'action#parseNameDir(getBindRequest().getStAction())#'), {
@@ -77,14 +79,14 @@ component
             getMContainer().parseAfter();
 
 
+
         }catch(Any exception){
 
             /*
 
                     response to controller of error
             */
-            // CreateObject('component', 'ErrorController').init(getRouting()).error(exception.message, 500);
-            rethrow;
+            CreateObject('component', 'ErrorController').init(getRouting()).error(exception.message, 500);
         }
 
     }

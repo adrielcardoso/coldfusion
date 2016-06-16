@@ -14,6 +14,7 @@ component
     property struct args;
     property int statusCode;
     property String message;
+    property String responseType;
 
     public HTTPRequest function bindRequest()
     {
@@ -22,6 +23,7 @@ component
         setStBundle(getKey('bundle') == '' ? 'main' : getKey('bundle'));
         setStEvent((getKey('event') == '' ? 'main' : getKey('event')));
         setStAction((getKey('action') == '' ? 'actionInit' : getKey('action')));
+        setResponseType(LCase(getKey('responsetype')));
 
         // setArgs(URL);
         setMethod(CGI.REQUEST_METHOD);

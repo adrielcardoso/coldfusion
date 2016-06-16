@@ -8,6 +8,7 @@ component
 {
 
 	property HTTPResponse httpResponse;
+    property HTTPRequest httpRequest;
 	property threadMain;
     property stThreadName;
     property Routing routing;
@@ -17,6 +18,7 @@ component
 		setThreadMain(mContext);
 		setStThreadName(stThreadName);
 		setRouting(routing);
+        setHttpResponse(this);
 
 		return this;
 	}
@@ -24,14 +26,26 @@ component
     public void function view(String fileName, struct data)
     {
 
-    // writeDump('#getRouting().getBundleRequestMain()#view/#getStThreadName()#/#fileName#.cfm');abort;
-    	StructAppend(data, {
-    		'template' : '#getRouting().getBundleRequestMain()#view/#getStThreadName()#/#fileName#.cfm',
-    		'load' : createObject("component", 'app.TemplateInflate').init(getRouting()),
-            'form' : createObject("component", 'component.form.FormManifest')
-    	});
+        if(getHttpRequest().getResponseType() != ''){
 
-    	include '/component/template/#getRouting().getBundleManifest().getTemplate()#.cfm';
+            var formate = getHttpRequest().getResponseType();
+
+            var responseComponent = getThreadMain().getContainer().getComponent('response');
+
+            responseComponent.out(data, formate);
+        }else{
+
+            // to be continue to view
+
+            StructAppend(data, {
+                'template' : '#getRouting().getBundleRequestMain()#view/#getStThreadName()#/#fileName#.cfm',
+                'load' : createObject("component", 'app.TemplateInflate').init(getRouting()),
+                'form' : createObject("component", 'component.form.FormManifest')
+            });
+
+        	include '/component/template/#getRouting().getBundleManifest().getTemplate()#.cfm';
+        }
+
     }
 
 }

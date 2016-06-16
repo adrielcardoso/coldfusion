@@ -6,43 +6,40 @@ component
     extends = 'app.Component'
 {
 
-	property ManifestComponent context;
+	property Any context;
 
-	public config.ManifestConfig function init(ManifestComponent context)
+	public Any function init(Any context)
 	{
 		/*
 			set it request of will get containers
 		*/
 		setContext(context);
+
 		return this;
 	}
 
-	public void function out(app.Entity entity, String type = 'json')
+	public void function out(struct entity, String type = 'json')
 	{
 
 		// var container = getContainerByName('user');
-		// var container = getContainer(this);
+		var container = getContainer(this);
 
-		writeDump(getContainerName());
+		if(type != 'json'){
+			throw('Format no suported to serialize', 500);
+		}
 
-		abort;
+		var cfResponse = getpagecontext().getresponse().getResponse();
+		var objectJson = {};
 
-		// // writeDump(container.getService("response")); abort;
+		structInsert(objectJson,"data", container.getController('response').toJson(entity));
 
-		// var controller = container.getController('response');
+		structInsert(objectJson,"status", cfResponse.getStatus());
 
-		// // var controller = container.getController('user');
-		// // var tempObject = container.getEntity('response');
+		cfResponse.setContentType("application/json");
 
-		// // writeDump(tempObject);
+		// writeOutput
+		writeOutput(container.getController('response').toJson(objectJson));
 
-		// // writeDump(entity);
-
-		// var objectJson = controller.toJson(entity);
-		// // writeDump(container.getService('response'));
-
-		// out
-		writeOutput(objectJson);
 	}
 
 }

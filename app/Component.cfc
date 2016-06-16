@@ -62,7 +62,12 @@ component
 
 	public String function getContainerName()
 	{
-		return (getMContext().getContext().getComponentName() ?: getContext().getComponentName());
+
+		// writeDump(getContext().getComponentName());
+
+		// abort;
+		return getContext().getComponentName();
+		// return (getMContext().getContext().getComponentName() ?: getContext().getComponentName());
 	}
 
 }
