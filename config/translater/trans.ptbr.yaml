@@ -1,10 +1,12 @@
+fieldnotfound: 'campo $+1 está incorreto, favor preencher'
+
 CFUserBundle.UserEntity.stEmail.fieldnotfound: 'O campo $+1 está vazio'
 CFUserBundle.UserEntity.stPassword.fieldnotfound: 'O campo $+1 está vazio'
 validateCpf: 'O CPF está inválido'
 validateEmail: 'o e-mail está incorreto'
 validateSenha: 'a senha está incorreto'
 validateSenhaLen: 'O campo deve conter de $+1  até $+2 digitos'
-
+CFUserBundle.user.fullname: 'O Nome não pode ficar em brancoSS'
 
 
 

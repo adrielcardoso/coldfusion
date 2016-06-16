@@ -26,7 +26,25 @@ component
 
     public void function actionCreate(HTTPRequest req, HTTPResponse res)
     {
-    	res.view('create', {});
+
+        var container = getContainer();
+        var userEntity = container.getEntity('user');
+
+        userEntity.setScenario('create');
+
+        // when is method POST is validate in component.
+        var response = {};
+        if(req.isRequest('POST')){
+
+            response = getContainer().getComponent('form').validate(userEntity);
+
+            if(structCount(response) == 0){
+
+                writeDump('TUDO CERTO');
+            }
+        }
+
+    	res.view('create', response);
     }
 
     public void function actionEdit(HTTPRequest req, HTTPResponse res)

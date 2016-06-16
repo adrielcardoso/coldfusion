@@ -2,41 +2,73 @@ import app.Entity;
 
 component
 	accessors = true
-    displayname = 'TagTranslaterManifest'
+    displayname = 'TranslaterManifest'
     extends = 'app.Component'
 {
 
-	property name = 'message' default = 'Invalid value, try again';
+	property name = 'message' default = false;
+	property name = 'messageDefault' default = 'value incorrect of the input';
 	property String filePath;
 	property String stFile;
+	property userRole;
 
-	public TagTranslaterManifest function setPath(String filePath)
+	public TranslaterManifest function setPath(String filePath)
 	{
 		setFilePath(filePath);
 
 		return this;
 	}
 
-	public TagTranslaterManifest function setFile(String stFile)
+	public TranslaterManifest function setFile(String stFile)
 	{
 		setStFile(stFile);
 
 		return this;
 	}
 
-	public String function translater(String tag, array params = [])
+	public String function translater(String field, String tag, array params = [])
 	{
 
 		var yaml = getContainer(this).getComponent('yaml').getConfig(loadFile());
 
-		if(structKeyExists(yaml, tag)){
-
-			return syntacticalAnalysis(parseLanguage(yaml[tag]), params);
+		var stMessage = existKeyInRole(yaml, field, getUserRole(), params);
+		if(stMessage != false){
+			return stMessage;
 		}
 
-		return getMessage();
+		if(structKeyExists(yaml, tag)){
+			setMessage(syntacticalAnalysis(parseLanguage(yaml[tag]), params));
+		}
+
+		if(getMessage() != false){
+			return getMessage();
+		}
+
+		return getMessageDefault();
 
 	}
+
+
+	public String function existKeyInRole(struct yaml, String field, Any role, array params = [])
+	{
+
+		if(structKeyExists(role,field)){
+
+			var temp = role[field];
+
+			if(structKeyExists(temp,"tag") and structKeyExists(yaml, temp['tag'])){
+
+				if(temp['tag'] != '' and yaml[temp['tag']] != ''){
+					return yaml[temp['tag']];
+				}
+			}
+
+		}
+
+		return false;
+
+	}
+
 
 	public any function parseLanguage(any stru)
 	{

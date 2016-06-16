@@ -4,7 +4,12 @@ import app.Entity;
 component
     displayname = 'Form'
     extends = 'Entity'
+	accessors = true
 {
+
+	property field;
+	property value;
+	property tag;
 
 	public array function getDataType()
 	{

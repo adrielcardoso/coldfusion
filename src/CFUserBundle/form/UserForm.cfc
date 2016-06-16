@@ -12,19 +12,31 @@ component
 		return {
 
 			'stEmail' : {
-				'scenario' : ['login'],
-				'required' : true,
-				'component' : ['parseEmail']
+				'scenario' : ['login', 'create'],
+				'required' : true
 			},
 
 			'stPassword' : {
-				'scenario' : ['login'],
 				'required' : true,
-				'component' : ['parseSenha']
+				'scenario' : ['login', 'create'],
+				'component' : ['cpfValidation']
+			},
+
+			'stFullName' : {
+				'tag' : 'CFUserBundle.user.fullname',
+				'required' : true
 			}
 		};
 
 	}
+
+
+	// public struct function cpfValidation()
+	// {
+
+	// 	writeDump('dentro de form cpfValidation');abort;
+	// 	return {};
+	// }
 
 
 }

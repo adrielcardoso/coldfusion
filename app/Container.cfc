@@ -14,6 +14,7 @@ component
 	property Routing routing;
 	property ManifestConfig context;
 	property String stEntity;
+	property String stValidation;
 
 	public Container function parseContainer(ManifestConfig mContext)
 	{
@@ -63,6 +64,20 @@ component
 			    getStreamBundleName() == false ? getRouting().getBundleRequestMain() : getRouting().getRoutingBundle()[getStreamBundleName()]
 
 			) & 'entity.' & this.parseNameDir(entityName)  & this.parseNameDir(label)).init(this);
+
+		return objectEntity;
+	}
+
+	public app.ValidationManifest function getValidation(String validation)
+	{
+
+		setStValidation(validation);
+
+		var objectEntity = CreateObject("component",  (
+
+			    getStreamBundleName() == false ? getRouting().getBundleRequestMain() : getRouting().getRoutingBundle()[getStreamBundleName()]
+
+			) & 'validation.' & this.parseNameDir(validation));
 
 		return objectEntity;
 	}

@@ -1,9 +1,13 @@
 import app.Entity;
 
 component
+	accessors = true
     displayname = 'FormService'
     extends = 'app.Component'
 {
+
+	property role;
+	property entityForm;
 
 	public struct function validateEntityByForm(Entity entity)
 	{
@@ -17,6 +21,7 @@ component
 			form type entity
 		*/
 		var form = entity.getForm();
+		setEntityForm(form);
 
 		/*
 			scenario
@@ -26,7 +31,8 @@ component
 		/*
 			validated scenario and input values
 		*/
-		var structForm = parseAttrsScenario(form.getRoles(), scenario);
+		setRole(form.getRoles());
+		var structForm = parseAttrsScenario(getRole(), scenario);
 
 		if(structCount(structForm) < 1){
 			return {};
@@ -136,6 +142,7 @@ component
 		var err = {};
 		var permission = false;
 		var tag = getContext().getComponent('tag').setPath('translater'); // component translater
+		tag.setUserRole(getRole());
 
 		if(structCount(scenarioValication) > 0){
 			var objectFormValidation = scenarioValication;
@@ -160,9 +167,11 @@ component
 					if(required == true and
 							len(evaluate('entity.get#parseNameDir(unique.NAME)#()')) == 0){
 
+						// when value is not found and input it is required
+
 						StructInsert(err,inputName,{
 							'component' : component,
-							'error' : [tag.translater('CFUserBundle.UserEntity.#inputName#.fieldnotfound', [LCase(inputName)])],
+							'error' : [tag.translater(inputName, 'fieldnotfound', [LCase(inputName)])],
 							'required' : required
 						});
 					}
@@ -171,12 +180,14 @@ component
 				}
 			}
 
-			// input not found
+
+			// input not found in form
+
 			if(found == false and required == true){
 
 				StructInsert(err,inputName,{
 					'component' : component,
-					'error' : [tag.translater('CFUserBundle.UserEntity.#inputName#.fieldnotfound', [LCase(inputName)])],
+					'error' : [tag.translater(inputName, 'fieldnotfound', [LCase(inputName)])],
 					'required' : required
 				});
 			}
@@ -186,33 +197,81 @@ component
 
 		// validate component extern
 
-		var serviceCuston = getContext().getService("custonValidation");
-		serviceCuston.setTag(tag);
-
 		for(single in objectFormValidation){
 
 			if(structKeyExists(objectFormValidation[single],"component")){
 
 				for(nameFunction in objectFormValidation[single].component){
 
-					if(!StructKeyExists(serviceCuston, nameFunction)){
-						throw ('Function #nameFunction# custon not found', 500);
-					}
 
 					if(len(nameFunction.toString()) > 0){
 
-						// if(len(getObject(entity, single).toString()) > 0){
+						var metaForm = GetMetaData(getEntityForm());
+						getEntityForm().setTag(tag);
 
-							var status = evaluate('serviceCuston.#nameFunction#("#getObject(entity, single).toString()#")');
+						var validateInForm = false;
+						if(structKeyExists(metaForm,"FUNCTIONS")){
 
-							if(status['status'] == false){
+							if(isArray(metaForm['FUNCTIONS'])){
 
-								parseStruct(err, single, {'error' : [status.message]});
-						 	}
-						// }
+								for(singleFunc in metaForm['FUNCTIONS']){
+
+
+									if(Trim(LCase(singleFunc.NAME.toString())) == Trim(LCase(nameFunction.toString()))){
+
+										getEntityForm().setField(single);
+										getEntityForm().setValue(getObject(entity, single).toString());
+
+										var status = evaluate('getEntityForm().#nameFunction#("#single#", "#getObject(entity, single).toString()#")');
+										break;
+
+										validateInForm = true;
+									}
+
+								}
+
+							}
+
+						}
+
+
+						if(validateInForm == false){
+
+							try{
+
+								var content = getContext().getContext().getMContext().getValidation(nameFunction);
+								content.setContainer(getContext().getContext().getMContext());
+
+								content.setTag(tag);
+								content.init(single, getObject(entity, single).toString());
+
+
+								if(structKeyExists(content, namefunction)){
+
+									var status = evaluate('content.#namefunction#()');
+								}else{
+
+									throw;
+								}
+
+							}catch(Any e){
+
+								throw('Not found method custon #nameFunction#' & e.getMessage(), 500);
+							}
+
+						}
+
+						if(status['status'] == false){
+
+							parseStruct(err, single, {'error' : [status.message]});
+					 	}
+
 					}
+
 				}
+
 			}
+
 		}
 
 
