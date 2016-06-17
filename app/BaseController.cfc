@@ -70,7 +70,7 @@ component
                 */
 
                 CreateObject('component', 'ErrorController').init(getRouting())
-                            .error(getBindRequest().getMessage(), getBindRequest().getStatusCode());
+                            .error(getBindRequest().getMessage(), getStatusCode());
 
             }
 
@@ -78,11 +78,9 @@ component
             getMContainer().parseAfter();
 
 
-
         }catch(Any exception){
 
             /*
-
                     response to controller of error
             */
             CreateObject('component', 'ErrorController').init(getRouting()).error(exception.message, 500);

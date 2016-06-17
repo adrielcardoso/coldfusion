@@ -70,5 +70,18 @@ component
 
     }
 
+    public String function getStatusCode()
+    {
+    	return getPageContext().getResponse().getResponse().getStatus();
+    }
+
+    public String function setStatusCode(String codeStatus)
+    {
+
+        getPageContext().getResponse().getResponse().setStatus(codeStatus);
+
+        return getStatusCode();
+    }
+
 }
 

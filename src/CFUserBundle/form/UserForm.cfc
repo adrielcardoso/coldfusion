@@ -19,12 +19,10 @@ component
 
 			'stPassword' : {
 				'required' : true,
-				'scenario' : ['login', 'create'],
-				'component' : ['cpfValidation']
+				'scenario' : ['login', 'create']
 			},
 
 			'stFullName' : {
-				'tag' : 'CFUserBundle.user.fullname',
 				'required' : true
 			}
 		};
@@ -43,7 +41,7 @@ component
 
 		var status = validate("email", getValue());
 
-		return {'status' : status, 'message' : getTag().translater(field, 'validateEmail')};
+		return {'status' : status, 'message' : getTag().translater(getField(), 'validateEmail')};
 
 	}
 

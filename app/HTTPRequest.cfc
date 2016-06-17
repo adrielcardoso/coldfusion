@@ -30,7 +30,6 @@ component
 
         /* permission off access to user and set default message to view*/
         setBlPermission(false);
-        setStatusCode(false);
         setMessage('ocorreu algum problema ao tentar acessar essa página, verifique com o administrador do sistema');
 
         return this;

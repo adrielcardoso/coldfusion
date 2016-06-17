@@ -38,7 +38,7 @@ component
 
             response = getContainer().getComponent('form').validate(userEntity);
 
-            if(structCount(response) == 0){
+            if(getStatusCode() == 200){
 
                 writeDump('TUDO CERTO');
             }

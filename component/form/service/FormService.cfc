@@ -15,7 +15,7 @@ component
 		/*
 			create object entity by of form
 		*/
-		bindRequestObject(entity, FORM);
+		bindRequestObject(entity, getDataRequest());
 
 		/*
 			form type entity
@@ -42,6 +42,8 @@ component
 
 		var data = {};
 		if(StructCount(validateErr) > 0){
+
+			setStatusCode(400);
 
 			return validateErr;
 		}
@@ -310,6 +312,11 @@ component
 		}catch(Any e){
 			return "";
 		}
+	}
+
+	public struct function getDataRequest()
+	{
+		return FORM;
 	}
 
 }

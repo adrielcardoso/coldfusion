@@ -19,6 +19,10 @@ component
 
 			for(single in statusValidate){
 
+				if(!structKeyExists(statusValidate[single],"error")){
+					throw('error in find object parsed', 500);
+				}
+
 				var temp = statusValidate[single].error;
 
 				structInsert(response, single, {'error' : temp});
