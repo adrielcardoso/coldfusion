@@ -16,6 +16,7 @@ component
 	this.mappings[ "/app" ] = (this.baseDirectory & "app/");
 	this.mappings[ "/config" ] = (this.baseDirectory & "config/");
 	this.mappings[ "/component" ] = (this.baseDirectory & "component/");
+	this.mappings[ "/web" ] = (this.baseDirectory & "web/");
 
 	// this.mappings[ "/view" ] = (this.baseDirectory & "src/CFUserBundle/view/");
 	// this.mappings[ "/controller" ] = (this.baseDirectory & "src/CFUserBundle/controller");

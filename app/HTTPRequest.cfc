@@ -21,7 +21,7 @@ component
 
         /* set objectos in query string */
         setStBundle(getKey('bundle') == '' ? 'main' : getKey('bundle'));
-        setStEvent((getKey('event') == '' ? 'main' : getKey('event')));
+        setStEvent((getKey('event') == '' ?  'main' : getKey('event')));
         setStAction((getKey('action') == '' ? 'actionInit' : getKey('action')));
         setResponseType(LCase(getKey('responsetype')));
 

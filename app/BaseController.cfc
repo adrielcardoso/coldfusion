@@ -14,6 +14,7 @@ component
     property HTTPResponse httpResponse;
     property Container mContainer;
     property Routing routing;
+    property errorController;
 
     public void function init()
     {
@@ -34,6 +35,8 @@ component
             /*   define controller access in request */
             getMContainer().getBundle('user').getService('security').autorizationRequest(this);
 
+            /*  define controller to parse response when exception  */
+            setErrorController(CreateObject('component', 'ErrorController').init(getRouting()));
 
             // parse permission access in route
 
@@ -65,12 +68,11 @@ component
 
             }else{
 
+
                 /*
                     exception no access permited
                 */
-
-                CreateObject('component', 'ErrorController').init(getRouting())
-                            .error(getBindRequest().getMessage(), getStatusCode());
+                getErrorController().error(getBindRequest().getMessage(), getStatusCode());
 
             }
 
@@ -83,7 +85,8 @@ component
             /*
                     response to controller of error
             */
-            CreateObject('component', 'ErrorController').init(getRouting()).error(exception.message, 500);
+            getErrorController().error(exception.message, 500);
+            // rethrow;
         }
 
     }

@@ -9,13 +9,9 @@ component
 	public void function actionInit(HTTPRequest req, HTTPResponse res)
     {
 
-    	// writeDump(getContainer().getService('user'));
+    	// var container = getContainer();
 
-
-    	// abort;
-
-
-        res.view("index", {});
+    	res.view('default', {'name' : 'hello world'});
     }
 
 }
