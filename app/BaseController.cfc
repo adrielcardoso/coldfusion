@@ -85,8 +85,8 @@ component
             /*
                     response to controller of error
             */
-            getErrorController().error(exception.message, 500);
-            // rethrow;
+            // getErrorController().error(exception.message, 500);
+            rethrow;
         }
 
     }

@@ -7,14 +7,13 @@ component
 {
 
 	property name = 'message' default = false;
-	property name = 'messageDefault' default = 'value incorrect of the input';
-	property String filePath;
+	property name = 'messageDefault' default = 'algum problema encontrado, verifique com o administrador do sistema';
 	property String stFile;
 	property userRole;
 
 	public TranslaterManifest function setPath(String filePath)
 	{
-		setFilePath(filePath);
+		setFilePath('translater');
 
 		return this;
 	}
@@ -24,6 +23,23 @@ component
 		setStFile(stFile);
 
 		return this;
+	}
+
+	public String function tag(String tag, array params = [])
+	{
+
+		var yaml = getContainer(this).getComponent('yaml').getConfig(loadFile());
+
+		if(structKeyExists(yaml, tag)){
+			return yaml[tag];
+		}
+
+		if(getMessage() != false){
+			return getMessage();
+		}
+
+		return getMessageDefault();
+
 	}
 
 	public String function translater(String field, String tag, array params = [])
@@ -112,23 +128,11 @@ component
 
 	public String function loadFile()
 	{
-
-		if(getFilePath() != '' and getStFile() == ''){
-
+		if(getStFile() == ''){
 			return getFilePath() & '/trans.#LCase(application.language)#';
-		}else
-
-			if(getFilePath() != '' and getStFile() != ''){
-
-				return getFilePath() & '/' & getStFile();
-
-			}else if(getFilePath() == '' and getStFile() != ''){
-
-				return 'tranlater/#getStFile()#';
-			}
-
-		return 'translater';
-
+		}else{
+			return getFilePath() & '/' & getStFile();
+		}
 	}
 
 }

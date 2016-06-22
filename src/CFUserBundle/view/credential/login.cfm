@@ -8,6 +8,8 @@
 		 	<form class="col s12" method="post" action="">
 			    <div class="row" style="text-align:left;">
 
+			    #data['form'].formStatus(data, ['status_request_form','message'])#
+
 			      <div class="row">
 			        <div class="input-field col s12">
 						<input id="stEmail" type="text" class="validate" name='stEmail' />

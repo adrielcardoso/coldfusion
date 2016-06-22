@@ -11,12 +11,16 @@ component
 	property dir;
 	property name = 'nameComponent' default = FALSE;
 	property tag;
+	property String filePath;
 
 	public ManifestConfig function init(ManifestConfig context)
 	{
 
 		// set it request of will get containers
 		setDir('/component');
+
+		// add path to translater
+		setFilePath('translater');
 
 		setContext(context);
 

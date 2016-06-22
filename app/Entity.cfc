@@ -10,7 +10,7 @@ component
 	public ManifestConfig function init(ManifestConfig context)
 	{
 
-		setMContext(context);
+		setMContext(isDefined("context") ? context : this);
 
 		return this;
 	}

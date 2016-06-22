@@ -61,5 +61,26 @@ component
 
 	}
 
+	public String function formStatus(struct data, required array dimen)
+	{
+
+		try{
+
+			if(IsStruct(data)){
+
+				var message = '';
+				var structure = data;
+
+				for(single in dimen){
+					var structure = structure[single];
+				}
+
+				return structure;
+			}
+
+		}catch(Any e){
+			return '';
+		}
+	}
 
 }

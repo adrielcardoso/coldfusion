@@ -19,10 +19,11 @@ component
 
 			'stPassword' : {
 				'required' : true,
-				'scenario' : ['login', 'create']
+				'component' : ['passwValidation']
 			},
 
 			'stFullName' : {
+				'scenario' : ['-login', 'create'],
 				'required' : true
 			}
 		};
@@ -42,7 +43,13 @@ component
 		var status = validate("email", getValue());
 
 		return {'status' : status, 'message' : getTag().translater(getField(), 'validateEmail')};
-
 	}
+
+	// public struct function parseFullName()
+	// {
+	// 	return {
+	// 		'status' : false, message : getTag().translater(getField(), 'CFUserBundle.user.fullname')
+	// 	};
+	// }
 
 }

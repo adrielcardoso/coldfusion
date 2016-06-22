@@ -1,23 +1,32 @@
 component
     displayname = 'UserSessionService'
     extends = 'app.Service'
+    accessors = true
 {
 
-	public any function getUser()
+	property name='sessionKeyUser' default='user_session';
+
+	public struct function getUser()
 	{
+		try{
 
-		if(StructKeyExists(Session, "user")){
+			// writeDump(Session.user_session);
+			// abort;
 
-			return StructFindKey(Session, 'user');
+			return Session.user_session;
+		}catch(Any e){
+			return {};
 		}
-
-		return false;
 	}
 
 	public struct function setUser(struct user)
 	{
 
-		StructInsert(Session, 'user', user);
+		if(structKeyExists(Session, getSessionKeyUser())){
+			StructDelete(Session, getSessionKeyUser());
+		}
+
+		StructInsert(Session, getSessionKeyUser(), user);
 
 		return getUser();
 	}

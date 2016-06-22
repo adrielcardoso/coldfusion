@@ -24,5 +24,6 @@ mapping:
       - { name: yaml,     alias: yaml }
       - { name: form,     alias: form }
       - { name: translater,     alias: tag }
+      - { name: orm,     alias: orm }
 
 

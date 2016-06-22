@@ -256,6 +256,8 @@ component
 
 							}catch(Any e){
 
+								rethrow;
+
 								throw('Not found method custon #nameFunction#', 500);
 							}
 

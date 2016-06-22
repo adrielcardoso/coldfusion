@@ -5,6 +5,9 @@
 	<div class="row" style="padding-top:3%; text-align:center;">
 		 <h4>Login user</h4>
 		 <div style='width:50%; background: aqua; margin:auto !important; position:relative; height:none;'>
+
+		 	#data['form'].formStatus(data, ['status_request_form','message'])#
+
 		 	<form class="col s12" method="post" action="">
 			    <div class="row" style="text-align:left;">
 

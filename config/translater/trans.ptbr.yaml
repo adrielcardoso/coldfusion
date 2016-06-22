@@ -1,12 +1,20 @@
+#messages to operation with exceptions
+validateEmail: 'o e-mail está incorreto'
 fieldnotfound: 'campo $+1 está incorreto, favor preencher'
-
+validateCpf: 'O CPF está inválido'
+CFUserBundle.user.fullname: 'O Nome não pode ficar em branco'
+validateSenhaLen: 'O campo deve conter de $+1  até $+2 digitos'
 CFUserBundle.UserEntity.stEmail.fieldnotfound: 'O campo $+1 está vazio'
 CFUserBundle.UserEntity.stPassword.fieldnotfound: 'O campo $+1 está vazio'
-validateCpf: 'O CPF está inválido'
-validateEmail: 'o e-mail está incorreto'
-validateSenha: 'a senha está incorreto'
-validateSenhaLen: 'O campo deve conter de $+1  até $+2 digitos'
-CFUserBundle.user.fullname: 'O Nome não pode ficar em branco'
+validateSenha: 'a senha está incorreta, não pode ficar em branco e até 8 digitos'
+
+
+# messages to operation request form
+cfuserbundle.user.scenario.create.success: Cadastro efetuado com sucesso
+cfuserbundle.user.scenario.create.error: 'Ocorreu algum problema ao cadastrar os dados, tente novamente'
+
+#validate form of the login
+cfuserbundle.user.scenario.login.error : 'E-mail ou senha incorreto, favor verificar.'
 
 
 

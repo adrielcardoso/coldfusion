@@ -8,11 +8,12 @@ component
 {
 
 	property Any security;
+	property name = 'defaultRule' default = 'IS_AUTHENTICATED_ANONYMOUSLY';
 
 	public Any function autorizationRequest(ManifestConfig mContext)
 	{
 
-		var userSession = getContainer().getBundle('user').getService('UserSession').getUser();
+		var userSession = getContainer().getBundle('user').getService('userSession').getUser();
 
 		var routeAccess = validateRouteAccess(mContext.getBindRequest(), userSession);
 
@@ -78,16 +79,22 @@ component
 	public array function parseRuleByUser(any user)
 	{
 
-		if(user == false){
-			return ['IS_AUTHENTICATED_ANONYMOUSLY'];
+		if(!isDefined("user") or structCount(user) == 0){
+			return [getDefaultRule()];
 		}
 
-		// var tempUser = {
-		// 	'name' : 'Adriel Cardos',
-		// 	'rule' : ['IS_AUTHENTICATED_ANONYMOUSLY']
-		// };
+		if(structKeyExists(user,"rule")){
 
-		return user['rule'];
+			var rules = [];
+
+			for(single in user['rule']){
+				arrayAppend(rules, single.getStName());
+			}
+
+			return rules;
+		}
+
+		return [getDefaultRule()];
 	}
 
 	public array function getAccessControlEvent(struct security,String bundle, String event, String action)
@@ -129,6 +136,11 @@ component
 	public struct function load()
 	{
 		return getMContext().getComponent('yaml').getConfig('security');
+	}
+
+	public String function parseTokenPassw(String passw)
+	{
+		return Hash(passw, MD5);
 	}
 
 }
