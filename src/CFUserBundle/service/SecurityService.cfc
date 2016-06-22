@@ -20,8 +20,7 @@ component
 		mContext.getBindRequest().setBlPermission(routeAccess);
 
 		if(routeAccess == false){
-
-			mContext.getBindRequest().redirect(getBundleAlias(security), getBundleController(security), getRoutDefaultRedirect(security));
+			mContext.getBindRequest().redirect(getBundleAlias(security), getBundleController(security), getDefaultLogin(security));
 		}
 
 		return this;
@@ -72,7 +71,13 @@ component
 
 		var action = mRequest.getStAction();
 
-		return getAccessControlEvent(getSecurity(), bundle, controller, action);
+		var permissionRules = getAccessControlEvent(getSecurity(), bundle, controller, action);
+
+		if(ArrayLen(permissionRules) < 1){
+			permissionRules = ['IS_AUTHENTICATED_ANONYMOUSLY'];
+		}
+
+		return permissionRules;
 
 	}
 
@@ -91,6 +96,10 @@ component
 				arrayAppend(rules, single.getStName());
 			}
 
+			if(ArrayLen(rules) == 0){
+				return [getDefaultRule()];
+			}
+
 			return rules;
 		}
 
@@ -102,11 +111,12 @@ component
 
 		for (single in security['security']['access_control_event']){
 
+			if( LCase(single['bundle']) == LCase(bundle) and
+				LCase(single['event'])  == LCase(event)  and
+				LCase(single['action']) == LCase(action)){
 
-			if(single['bundle'] == bundle and single['event'] == event and single['action'] == action){
 				return single['role'];
 			}
-
 		}
 
 		return [];
@@ -130,7 +140,12 @@ component
 
 	public String function getRoutDefaultRedirect(struct security)
 	{
-		return security['security']['firewalls']['route_main'];
+		return security['security']['firewalls']['root_path'];
+	}
+
+	public String function getDefaultLogin(struct security)
+	{
+		return security['security']['firewalls']['path_login'];
 	}
 
 	public struct function load()

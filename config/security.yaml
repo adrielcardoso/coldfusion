@@ -15,16 +15,18 @@ security:
 
     firewalls:
         anonymous:    false
-        route_main:   login
+        root_path:   '?bundle=main'
+        path_login:  login
 
     ## definition to access of requests
 
     access_control_event:
-        - { bundle: main,  event: main,        action: ActionInit,    role: [ROLE_USER] }
-        - { bundle: main,  event: credential,  action: actionLogin,   role: [ROLE_USER] }
+        - { bundle: main,  event: main,        action: init,    role: [ROLE_USER] }
+        - { bundle: main,  event: credential,  action: login,   role: [ROLE_USER] }
 
         ## Bundle CFUserBundle - define routes to credential of user
         - { bundle: user, event: credential,  action: login,    role: [IS_AUTHENTICATED_ANONYMOUSLY] }
         - { bundle: user, event: credential,  action: create,   role: [IS_AUTHENTICATED_ANONYMOUSLY] }
-        - { bundle: user, event: credential,  action: init,     role: [ROLE_ADMIN] }
-        - { bundle: user, event: credential,  action: edit,     role: [ROLE_ADMIN] }
+        - { bundle: user, event: credential,  action: logout,   role: [ROLE_USER] }
+        # - { bundle: user, event: credential,  action: edit,     role: [ROLE_ADMIN] }
+        # - { bundle: user, event: credential,  action: init,     role: [ROLE_ADMIN] }

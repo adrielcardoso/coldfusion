@@ -9,10 +9,6 @@ component
 	public struct function getUser()
 	{
 		try{
-
-			// writeDump(Session.user_session);
-			// abort;
-
 			return Session.user_session;
 		}catch(Any e){
 			return {};

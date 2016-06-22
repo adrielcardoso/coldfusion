@@ -38,6 +38,7 @@ component
     if(this.developmentServer){
 
 		// hibernate remove tables
+		// session.user_session = '';
       	// this.ormsettings.dbcreate = "dropcreate";
       	this.ormsettings.logSQL = true;
     }

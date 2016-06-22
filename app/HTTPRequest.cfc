@@ -22,7 +22,7 @@ component
         /* set objectos in query string */
         setStBundle(getKey('bundle') == '' ? 'main' : getKey('bundle'));
         setStEvent((getKey('event') == '' ?  'main' : getKey('event')));
-        setStAction((getKey('action') == '' ? 'actionInit' : getKey('action')));
+        setStAction((getKey('action') == '' ? 'init' : getKey('action')));
         setResponseType(LCase(getKey('responsetype')));
 
         // setArgs(URL);
@@ -59,9 +59,9 @@ component
         location(application.basedir&"?bundle=#bundle#&event=#controller#" & (action != false ? '&action=#action#' : '') & args, false);
     }
 
-    public void function redirectRoot()
+    public void function redirectRoot(String name)
     {
-        location(application.basedir, false);
+        location(application.basedir & (isDefined('name') and len(name) > 0 ? name : ''), false);
     }
 
 }

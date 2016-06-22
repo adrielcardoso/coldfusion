@@ -6,6 +6,15 @@ component
     extends = 'app.BaseController'
 {
 
+    public void function actionLogout(HTTPRequest req, HTTPResponse res)
+    {
+        var userSession = getContainer().getService('userSession');
+
+        userSession.setUser({});
+
+        req.redirectRoot();
+    }
+
     public void function actionLogin(HTTPRequest req, HTTPResponse res)
     {
 
@@ -33,15 +42,13 @@ component
 
                     var userService = getContainer().getService('user');
                     var userSessionService = getContainer().getService('UserSession');
-
+                    var securityService = getContainer().getService('security');
 
                     // find user by email
                     userEntity = userService.findUserByEmail(userEntity.getStEmail());
 
-
                     // find roles by user id
                     userRule = userService.findRuleByUserId(userEntity.getId());
-
 
                     // writeDump(userEntity);
                     // abort;
@@ -51,9 +58,8 @@ component
                             'rule' : userRule
                         });
 
-
                     if(isStruct(userSession) and StructCount(userSession) > 0){
-                        req.redirectRoot();
+                        req.redirectRoot(securityService.getRoutDefaultRedirect(securityService.load()));
                     }
 
                 }else{
@@ -87,11 +93,28 @@ component
 
                 var translater = container.getComponent('tag');
                 var ormService = getContainer().getComponent('orm');
+                var userService = getContainer().getService('user');
+                var userSessionService = getContainer().getService('UserSession');
+                var securityService = getContainer().getService('security');
 
                 if(ormService.insert(userEntity)){
 
                     structInsert(response,"status_request_post", {
                         'status' : true, 'message' : translater.tag('cfuserbundle.user.scenario.create.success')});
+
+                    // create default rule and return value equals RULE_USER in array
+                    var userRule = userService.createRuleRawUser(userEntity.getId());
+
+                    // set in session the credential of the user
+                     var userSession = userSessionService.setUser({
+                            'user' : userEntity,
+                            'rule' : userRule
+                        });
+
+                    if(isStruct(userSession) and StructCount(userSession) > 0){
+                        req.redirectRoot(securityService.getRoutDefaultRedirect(securityService.load()));
+                    }
+
                 }else{
 
                     structInsert(response,"status_request_post", {
