@@ -59,5 +59,10 @@ component
         location(application.basedir&"?bundle=#bundle#&event=#controller#" & (action != false ? '&action=#action#' : '') & args, false);
     }
 
+    public void function redirectRoot()
+    {
+        location(application.basedir, false);
+    }
+
 }
 

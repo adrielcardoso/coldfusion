@@ -52,9 +52,9 @@ component
                         });
 
 
-                    // writeDump(userSession);
-
-                    abort;
+                    if(isStruct(userSession) and StructCount(userSession) > 0){
+                        req.redirectRoot();
+                    }
 
                 }else{
 
