@@ -72,6 +72,10 @@ component
 
     	}
 
+        // response['action'] = 'create';
+        // response['bundle'] = 'user';
+        // response['controller'] = 'credential';
+
     	res.view('login', response);
     }
 
@@ -124,6 +128,10 @@ component
             }
 
         }
+
+        // response['action'] = 'login';
+        // response['bundle'] = 'user';
+        // response['controller'] = 'credential';
 
     	res.view('create', response);
     }

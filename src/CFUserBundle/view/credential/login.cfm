@@ -1,6 +1,6 @@
 <cfoutput>
 	<!-- add menu to page -->
-	#data['load'].view('default/menu.template')#
+	#data['load'].view('default/menu.template', data)#
 
 	<div class="row" style="padding-top:3%; text-align:center;">
 		 <h4>Login user</h4>
