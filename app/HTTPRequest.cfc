@@ -64,5 +64,10 @@ component
         location(application.basedir & (isDefined('name') and len(name) > 0 ? name : ''), false);
     }
 
+    public String function createUrl(String bundle, String controller, String action, struct args)
+    {
+        return application.basedir&"?bundle=#(isDefined('bundle') ? bundle : 'main')#&event=#(isDefined('controller') ? controller : 'main')#" & (isDefined('action') ? '&action='&#action# : '') & (isDefined('args') ? args : '');
+    }
+
 }
 

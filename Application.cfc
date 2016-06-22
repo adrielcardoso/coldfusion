@@ -48,7 +48,7 @@ component
 	{
 		// application.factory = CreateObject( "component", "config.factory" ).init();
 		application.basedir = 'http://' & CGI.HTTP_HOST & replaceNoCase(cgi.SCRIPT_NAME, listLast(cgi.SCRIPT_NAME, "/"), "");
-		application.language = 'ptBr';
+		application.language = 'ptbr';
 
 		return true;
 	}

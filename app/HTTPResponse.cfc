@@ -40,7 +40,8 @@ component
             StructAppend(data, {
                 'template' : '#getRouting().getBundleRequestMain()#view/#getStThreadName()#/#fileName#.cfm',
                 'load' : createObject("component", 'app.TemplateInflate').init(getRouting()),
-                'form' : createObject("component", 'component.form.FormManifest')
+                'form' : createObject("component", 'component.form.FormManifest'),
+                'req'  : getHttpRequest()
             });
 
         	include '/component/template/#getRouting().getBundleManifest().getTemplate()#.cfm';

@@ -12,7 +12,7 @@ component
         return this;
     }
 
-    public function view(String nameView)
+    public function view(String nameView, any data)
     {
         include '#getRouting().getBundleRequestMain()#view/#nameView#.cfm';
     }
