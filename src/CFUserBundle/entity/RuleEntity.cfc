@@ -7,10 +7,10 @@ component
     persistent="true"
     accessors = "true"
 {
+    property name = 'id' column="id_rule" generator="increment" ormtype="integer";
 
-    property name = 'id'  column="id" generator="increment" ormtype="integer";
-    property name = 'idUser' column="id_user" ormtype="integer";
     property name = 'stName' column="st_name" ormtype="string";
 
+    property name = 'user' type="UserEntity" fieldtype="many-to-one" fkcolumn="userID" cfc="UserEntity";
 }
 

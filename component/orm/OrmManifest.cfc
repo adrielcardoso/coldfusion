@@ -21,13 +21,26 @@ component
 		}
 	}
 
-	public any function findByQuery(required String query, required array params)
+	public any function findByQuery(required String query, any params, any definitions)
 	{
+
 		try{
-			return ORMExecuteQuery(query, params);
+
+			if(!isDefined("params")){
+				params = false;
+			}
+
+			if(!isDefined("definitions")){
+				definitions = false;
+			}
+
+			return ORMExecuteQuery(query, params, definitions);
+
 		}catch(Any e){
+
 			rethrow;
 		}
+
 	}
 
 

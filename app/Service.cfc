@@ -1,5 +1,5 @@
-import component.orm.*;
-import app.*;
+import app.ManifestConfig;
+import app.HTTPRequest;
 
 component
     accessors=true

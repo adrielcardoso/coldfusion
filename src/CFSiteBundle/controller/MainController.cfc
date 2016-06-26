@@ -8,10 +8,13 @@ component
 
 	public void function actionInit(HTTPRequest req, HTTPResponse res)
     {
+    	var response = {};
 
-    	// var container = getContainer();
+    	structInsert(response, 'name', 'hello world');
 
-    	res.view('default', {'name' : 'hello world'});
+        structInsert(response,"assets", {'menu_button' : {'label' : 'Rules', 'bundle' : 'user', 'controller' : 'rule', 'action' : 'list'}});
+
+    	res.view('default', response);
     }
 
 }

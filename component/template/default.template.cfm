@@ -25,6 +25,11 @@
 	  <!-- Compiled and minified JavaScript -->
   	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 
+  	  <!--- angular --->
+  	  <script src='/web/lib/angular/angular.min.js' type="text/javascript"></script>
+
+  	  <!--- angular definitions	 --->
+  	  <script src='/web/js/angular/controller/rule.js' type="text/javascript"></script>
 
   	  <script>
 

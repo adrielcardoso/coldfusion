@@ -3,7 +3,7 @@
 	#data['load'].view('default/menu.template', data)#
 
 	<div class="row" style="padding-top:3%; text-align:center;">
-		 <h4>Login user</h4>
+		 <h4>Create new User</h4>
 		 <div style='width:50%; background: aqua; margin:auto !important; position:relative; height:none;'>
 
 		 	#data['form'].formStatus(data, ['status_request_form','message'])#

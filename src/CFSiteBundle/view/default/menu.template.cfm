@@ -6,7 +6,7 @@
 
 			  <ul id="nav-mobile" class="right hide-on-med-and-down">
 			    <li>
-			    	<a href="collapsible.html"></a>
+			    	<a href="#data['req'].createUrl(data['assets']['menu_button']['bundle'], data['assets']['menu_button']['controller'], data['assets']['menu_button']['action'])#">#data['assets']['menu_button']['label']#</a>
 			    </li>
 			  </ul>
 

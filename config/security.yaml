@@ -14,8 +14,11 @@ security:
     #         alias: user
 
     firewalls:
+        # define access with not validation
         anonymous:    false
+        # when action login
         root_path:   '?bundle=main'
+        # when action logout
         path_login:  login
 
     ## definition to access of requests
@@ -28,5 +31,6 @@ security:
         - { bundle: user, event: credential,  action: login,    role: [IS_AUTHENTICATED_ANONYMOUSLY] }
         - { bundle: user, event: credential,  action: create,   role: [IS_AUTHENTICATED_ANONYMOUSLY] }
         - { bundle: user, event: credential,  action: logout,   role: [ROLE_USER] }
+        - { bundle: user, event: rule,  action: list,   role: [ROLE_ADMIN] }
         # - { bundle: user, event: credential,  action: edit,     role: [ROLE_ADMIN] }
         # - { bundle: user, event: credential,  action: init,     role: [ROLE_ADMIN] }

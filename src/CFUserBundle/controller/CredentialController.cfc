@@ -47,11 +47,7 @@ component
                     // find user by email
                     userEntity = userService.findUserByEmail(userEntity.getStEmail());
 
-                    // find roles by user id
-                    userRule = userService.findRuleByUserId(userEntity.getId());
-
-                    // writeDump(userEntity);
-                    // abort;
+                    userRule = userService.findRuleByUserId(userEntity);
 
                     var userSession = userSessionService.setUser({
                             'user' : userEntity,
@@ -72,9 +68,8 @@ component
 
     	}
 
-        // response['action'] = 'create';
-        // response['bundle'] = 'user';
-        // response['controller'] = 'credential';
+        // define access in menu when, go to.
+        structInsert(response,"assets", {'menu_button' : {'label' : 'Create', 'bundle' : 'user', 'controller' : 'credential', 'action' : 'create'}});
 
     	res.view('login', response);
     }
@@ -107,7 +102,7 @@ component
                         'status' : true, 'message' : translater.tag('cfuserbundle.user.scenario.create.success')});
 
                     // create default rule and return value equals RULE_USER in array
-                    var userRule = userService.createRuleRawUser(userEntity.getId());
+                    var userRule = userService.createRuleRawUser(userEntity);
 
                     // set in session the credential of the user
                      var userSession = userSessionService.setUser({
@@ -129,9 +124,8 @@ component
 
         }
 
-        // response['action'] = 'login';
-        // response['bundle'] = 'user';
-        // response['controller'] = 'credential';
+        // define access in menu when, go to.
+        structInsert(response,"assets", {'menu_button' : {'label' : 'Login', 'bundle' : 'user', 'controller' : 'credential', 'action' : 'login'}});
 
     	res.view('create', response);
     }

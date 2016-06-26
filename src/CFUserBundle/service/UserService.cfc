@@ -13,23 +13,29 @@ component
 
 	}
 
-	public any function findRuleByUserId(numeric idUser)
+	public any function findRuleByUserId(app.Entity userEntity)
 	{
 
-		var ormService = getContainer().getComponent('orm');
+		var response = [];
 
-        // return rules of the user by e-mail
-        return ormService.findByQuery('from RuleEntity where idUser = ?', [idUser]);
+		if(isArray(userEntity.getRules())){
 
+			for(single in userEntity.getRules()){
+				arrayAppend(response, single);
+			}
+		}
+
+		return response;
 	}
 
-	public array function createRuleRawUser(numeric idUser)
+	public array function createRuleRawUser(any userEntity)
 	{
 
 		try{
 
-			var ruleEntity[1] = createRule(idUser, 'IS_AUTHENTICATED_ANONYMOUSLY');
-			var ruleEntity[2] = createRule(idUser, 'ROLE_USER');
+			var ruleEntity[1] = createRule(userEntity, 'IS_AUTHENTICATED_ANONYMOUSLY');
+			var ruleEntity[2] = createRule(userEntity, 'ROLE_USER');
+			// var ruleEntity[3] = createRule(userEntity, 'ROLE_ADMIN');
 
 			return ruleEntity;
 
@@ -39,13 +45,13 @@ component
 
 	}
 
-	public any function createRule(numeric idUser, String namePermission)
+	public any function createRule(any userEntity, String namePermission)
 	{
 
 		var ruleEntity = getContainer().getEntity('rule');
 
-		ruleEntity.setIdUser(idUser);
 		ruleEntity.setStName(namePermission);
+		ruleEntity.setUser(userEntity);
 
 		EntitySave(ruleEntity);
 
