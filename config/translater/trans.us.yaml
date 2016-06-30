@@ -1,0 +1,17 @@
+#messages to operation with exceptions
+validateEmail: 'the e-mail incorrect, please try again'
+fieldnotfound: 'field $+1 is incorrect, please fill'
+validateCpf: 'The CPF is invalid'
+CFUserBundle.user.fullname: 'The name can not be blank'
+validateSenhaLen: 'The field must contain from $+1 to $+2 digits'
+CFUserBundle.UserEntity.stEmail.fieldnotfound: 'Field $+1 is empty'
+CFUserBundle.UserEntity.stPassword.fieldnotfound: 'Field $+1 is empty'
+validateSenha: 'the password is incorrect, you can not be blank and up to 8 digits'
+
+
+# messages to operation request form
+cfuserbundle.user.scenario.create.success: Registration successfully Complete
+cfuserbundle.user.scenario.create.error: 'Were there any problem to record the data, try again'
+
+#validate form of the login
+cfuserbundle.user.scenario.login.error : 'Email or password incorrect, please check.'

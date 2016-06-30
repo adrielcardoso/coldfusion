@@ -1,0 +1,29 @@
+app:
+  name: 'ColdFusion - GrupoW'
+
+config:
+  secrete: 'hashsecrete'
+
+mapping:
+
+    ## define mangement default
+
+    bundle_main: CFSiteBundle
+    component_yaml: yaml
+
+    ## register bundles
+
+    bundle:
+      - { name: CFSiteBundle, alias: main }
+      - { name: CFUserBundle, alias: user }
+
+    ## register components
+
+    component:
+      - { name: response, alias: response }
+      - { name: yaml,     alias: yaml }
+      - { name: form,     alias: form }
+      - { name: translater,     alias: tag }
+      - { name: orm,     alias: orm }
+
+
