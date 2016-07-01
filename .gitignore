@@ -2,3 +2,4 @@ CFIDE/
 WEB-INF/
 crossdomain.xml
 application.cfc
+testbox/
