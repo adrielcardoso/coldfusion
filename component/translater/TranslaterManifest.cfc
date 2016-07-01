@@ -31,7 +31,7 @@ component
 		var yaml = getContainer(this).getComponent('yaml').getConfig(loadFile());
 
 		if(structKeyExists(yaml, tag)){
-			return yaml[tag];
+			return syntacticalAnalysis(parseLanguage(yaml[tag]), params);
 		}
 
 		if(getMessage() != false){

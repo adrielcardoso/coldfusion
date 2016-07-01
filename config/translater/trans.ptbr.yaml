@@ -17,6 +17,10 @@ cfuserbundle.user.scenario.create.error: 'Ocorreu algum problema ao cadastrar os
 cfuserbundle.user.scenario.login.error : 'E-mail ou senha incorreto, favor verificar.'
 
 
+request.validate.error : 'Não encontrado o tipo $+1 definido no ManifestBundle'
+request.validate.notauthorized: 'Permissão de acesso negada'
+
+
 
 
 

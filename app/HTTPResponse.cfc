@@ -28,11 +28,9 @@ component
 
         if(getHttpRequest().getResponseType() != ''){
 
-            var formate = getHttpRequest().getResponseType();
-
             var responseComponent = getThreadMain().getContainer().getComponent('response');
 
-            responseComponent.out(data, formate);
+            responseComponent.out(data, getHttpRequest());
         }else{
 
             // to be continue to view

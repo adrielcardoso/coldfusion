@@ -7,6 +7,7 @@ security:
         - { ROLE_USER: ROLE_USER, balance: 1 }
         - { ROLE_ADMIN: ROLE_ADMIN, balance: 2 }
         - { ROLE_SUPER_ADMIN: ROLE_SUPER_ADMIN, balance: 3 }
+        - { ROLE_OAUTH : OAUTH, balance: 4 }
 
     # providers:
     #     cf_userbundle:
@@ -24,11 +25,14 @@ security:
     ## definition to access of requests
 
     access_control_event:
-        - { bundle: main,  event: main,        action: init,    role: [ROLE_USER] }
-        - { bundle: main,  event: credential,  action: login,   role: [ROLE_USER] }
+
+        # define to front-end
+        - { bundle: main,  event: main,        action: init,    role: [IS_AUTHENTICATED_ANONYMOUSLY] }
+    
+        # management API-REST
 
         ## Bundle CFUserBundle - define routes to credential of user
-        - { bundle: user, event: credential,  action: login,    role: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { bundle: user, event: credential,  action: login,    role: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_OAUTH] }
         - { bundle: user, event: credential,  action: create,   role: [IS_AUTHENTICATED_ANONYMOUSLY] }
         - { bundle: user, event: credential,  action: logout,   role: [ROLE_USER] }
         - { bundle: user, event: rule,  action: list,   role: [ROLE_USER] }

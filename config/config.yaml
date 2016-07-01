@@ -1,5 +1,4 @@
-app:
-  name: 'ColdFusion - GrupoW'
+name: 'ColdFusion - GrupoW'
 
 config:
   secrete: 'hashsecrete'
@@ -25,5 +24,6 @@ mapping:
       - { name: form,     alias: form }
       - { name: translater,     alias: tag }
       - { name: orm,     alias: orm }
+      - { name: restfull,     alias: restfull }
 
 

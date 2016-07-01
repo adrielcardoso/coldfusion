@@ -39,12 +39,15 @@ component
             setErrorController(CreateObject('component', 'ErrorController').init(getRouting()));
 
             // parse permission access in route
-
             // getBindRequest().setBlPermission(true);
             if(getBindRequest().getBlPermission()){
 
                /* instaced off object  */
                 var mContext = createObjectByName(getBindRequest().getStEvent() , 'controller', getRouting().getBundleRequestMain());
+
+                /* parse scenario bundle, if REST or REQUEST Normal */
+                // writeDump(getContainer().getComponent('restfull').parseRequest(this));
+                // abort;
 
                 /*
                     define object container to context invoked
