@@ -69,5 +69,48 @@ component
         return application.basedir&"?bundle=#(isDefined('bundle') ? bundle : 'main')#&event=#(isDefined('controller') ? controller : 'main')#" & (isDefined('action') ? '&action='&#action# : '');
     }
 
+
+    public String function validateMethod(app.BaseController controller, String method)
+    {   
+
+       for(single in getMetaData(controller).FUNCTIONS){
+
+            if(Trim(LCase(single.NAME)) == Trim(LCase(method))){
+
+                if(StructKeyExists(single, 'METHOD')){
+
+                    if(!isRequest(single.METHOD) and validateMethodPermited(single.METHOD)){
+
+                        throw('method #method# defined how ' & ToString(single), 500);
+                    }
+
+                }
+
+            }
+
+        }
+
+        return method;
+    }
+
+    public boolean function validateMethodPermited(String nameMethod)
+    {
+
+        var methods = [
+            'GET', 'POST', 'DELETE', 'PUT'
+        ];
+
+        for(single in methods){
+            
+            if(trim(LCase(single)) == trim(LCase(nameMethod))){
+                return true;
+            }
+
+        }
+
+        throw('Method #nameMethod# no suported in request', 500);
+
+    }
+
 }
 

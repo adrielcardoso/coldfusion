@@ -19,6 +19,8 @@ cfuserbundle.user.scenario.login.error : 'E-mail ou senha incorreto, favor verif
 
 request.validate.error : 'Não encontrado o tipo $+1 definido no ManifestBundle'
 request.validate.notauthorized: 'Permissão de acesso negada'
+request.validate.method: 'Permissão de acesso negado, o verbo do método está incorreto'
+request.validate.contentype: 'O tipo de entrada na requisição não está de acordo, por padrão para esse component deve se requisitar com o Content-Type $+1'
 
 
 

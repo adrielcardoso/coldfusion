@@ -13,31 +13,39 @@ component
 	public Any function autorizationRequest(ManifestConfig mContext)
 	{
 
-		// parse if it request of the type rest
-		var itRequestValidateEqualsRest = (mContext.getRouting().getBundleManifest().getDefineScenario() == 'DEFAULT' ? mContext.getRouting().getBundleManifest().getDefineScenario() : 
-														mContext.getContainer().getComponent('restfull').parseRequest(mContext)); 
+		try{
 
-		if(itRequestValidateEqualsRest == true){
-			setDefaultRule('ROLE_OAUTH');			
-		}
-
-		var userSession = getContainer().getBundle('user').getService('userSession').getUser();
-
-		var routeAccess = validateRouteAccess(mContext.getBindRequest(), userSession);
-
-		mContext.getBindRequest().setBlPermission(routeAccess);
-
-		if(routeAccess == false){
+			// parse if it request of the type rest
+			var itRequestValidateEqualsRest = (mContext.getRouting().getBundleManifest().getDefineScenario() == 'DEFAULT' ? mContext.getRouting().getBundleManifest().getDefineScenario() : 
+															mContext.getContainer().getComponent('restfull').parseRequest(mContext)); 
 
 			if(itRequestValidateEqualsRest == true){
-
-				throw(getContainer().getComponent('tag').tag('request.validate.notauthorized'), 403);
+				setDefaultRule('ROLE_OAUTH');			
 			}
 
-			mContext.getBindRequest().redirect(getBundleAlias(security), getBundleController(security), getDefaultLogin(security));
+			var userSession = getContainer().getBundle('user').getService('userSession').getUser();
+
+			var routeAccess = validateRouteAccess(mContext.getBindRequest(), userSession);
+
+			mContext.getBindRequest().setBlPermission(routeAccess);
+
+			if(routeAccess == false){
+
+				if(itRequestValidateEqualsRest == true){
+
+					throw(getContainer().getComponent('tag').tag('request.validate.notauthorized'), 403);
+				}
+
+				mContext.getBindRequest().redirect(getBundleAlias(security), getBundleController(security), getDefaultLogin(security));
+			}
+
+			return this;
+			
+		}catch(Any e){
+
+			rethrow;
 		}
 
-		return this;
 	}
 
 	public boolean function validateRouteAccess(HTTPRequest mRequest, any userSession)

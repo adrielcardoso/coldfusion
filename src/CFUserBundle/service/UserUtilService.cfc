@@ -4,7 +4,7 @@ component
     extends = 'app.Service'
 {
 
-	struct function parseValidateByForm()
+	public struct function defineParams()
 	{
 
 		var response = {};

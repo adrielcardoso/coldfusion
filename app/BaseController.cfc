@@ -32,11 +32,11 @@ component
             /* defination of routing to bundles */
             setRouting(getMContainer().getRouting());
 
-            /*   define controller access in request */
-            getMContainer().getBundle('user').getService('security').autorizationRequest(this);
-
             /*  define controller to parse response when exception  */
             setErrorController(CreateObject('component', 'ErrorController').init(getRouting()));
+            
+            /*   define controller access in request */
+            getMContainer().getBundle('user').getService('security').autorizationRequest(this);
 
             // parse permission access in route
             // getBindRequest().setBlPermission(true);
@@ -60,7 +60,7 @@ component
                 httpResponse.setHttpRequest(getBindRequest());
 
                 /* default method access */
-                invoke(mContext, (getBindRequest().getStAction() == 'actionInit' ? 'actionInit' : 'action#parseNameDir(getBindRequest().getStAction())#'), {
+                invoke(mContext, getBindRequest().validateMethod(mContext, (getBindRequest().getStAction() == 'actionInit' ? 'actionInit' : 'action#parseNameDir(getBindRequest().getStAction())#')), {
                             'req' = getBindRequest(),
                             'res' = httpResponse
                 });
@@ -75,6 +75,7 @@ component
                 /*
                     exception no access permited
                 */
+
                 getErrorController().error(getBindRequest().getMessage(), getStatusCode());
 
             }
@@ -83,13 +84,13 @@ component
             getMContainer().parseAfter();
 
 
-        }catch(Any exception){
+        }catch(Any e){
 
             /*
                     response to controller of error
             */
-            // getErrorController().error(exception.message, 500);
-            rethrow;
+            getErrorController().error(e.message, 500);
+            // rethrow;
         }
 
     }

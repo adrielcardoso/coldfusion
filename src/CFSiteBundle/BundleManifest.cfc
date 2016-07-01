@@ -6,6 +6,7 @@ component
 
     property String template;
     property String bundleName;
+    property name = 'defineScenario' default = 'DEFAULT';
 
 	public BundleManifest function init(String bundleName)
     {

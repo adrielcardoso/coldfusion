@@ -21,24 +21,26 @@ component
 	public void function out(struct entity, app.HTTPRequest req)
 	{
 
-		// var container = getContainerByName('user');
 		var container = getContainer(this);
 
 		if(req.getResponseType() != 'application/json'){
 			throw('Format no suported to serialize', 500);
 		}
 
-		var cfResponse = getpagecontext().getresponse().getResponse();
-		var objectJson = {};
+		var cfResponse = getpagecontext().getresponse().getResponse().setContentType(req.getResponseType());
 
-		structInsert(objectJson,"data", container.getController('response').toJson(entity));
-
-		structInsert(objectJson,"status", cfResponse.getStatus());
-
-		cfResponse.setContentType(req.getResponseType());
+		if(structKeyExists(entity,"status")){
+			getpagecontext().getresponse().getResponse().setStatus(entity.status);
+		}
 
 		// writeOutput
-		writeOutput(container.getController('response').toJson(objectJson));
+		// "access-control-allow-origin": origin,
+  //       "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+  //       "access-control-allow-headers": "content-type, accept",
+  //       "access-control-max-age": 10, // Seconds.
+  //       "content-length": 0
+
+		writeOutput(container.getController('response').toJson(entity));
 
 	}
 

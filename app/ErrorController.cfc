@@ -23,11 +23,9 @@ component
 
         if(getRouting().getContext().getRequest().getResponseType() != ''){
 
-            var formate = getRouting().getContext().getRequest().getResponseType();
-
             var responseComponent = getRouting().getContext().getComponent('response');
 
-            responseComponent.out({'data' : message, 'status' : status}, formate);
+            responseComponent.out({'message' : message, 'status' : status}, getRouting().getContext().getRequest());
 
         }else{
 

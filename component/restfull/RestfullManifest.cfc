@@ -32,12 +32,14 @@ component
 
 				case 'REST' : return getController('rest').parseRest(context);
 
+				// case 'SOAP' : return getController('soap').parseSoap(context);
+
 				default: 
 					throw(translater.tag('request.validate.error', [scenario]),  500);
 			}
 
 		}catch(Any e){
-
+			
 			rethrow;
 		}
 
