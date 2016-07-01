@@ -1,4 +1,4 @@
-/CFIDE
-/WEB-INF
+CFIDE/
+WEB-INF/
 crossdomain.xml
 application.cfc
