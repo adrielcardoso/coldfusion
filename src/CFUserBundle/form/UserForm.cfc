@@ -16,7 +16,7 @@ component
 		return entity;
 	}
 
-	public struct function getRoles()
+	public struct function getRules()
 	{
 
 		return {

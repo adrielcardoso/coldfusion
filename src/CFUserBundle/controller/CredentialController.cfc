@@ -28,7 +28,6 @@ component
         var responseError = false;
         var userEntity = container.getEntity('user');
 
-
         userEntity.setScenario('login');
 
         dataValidate = getContainer().getComponent('form').validate(userEntity);

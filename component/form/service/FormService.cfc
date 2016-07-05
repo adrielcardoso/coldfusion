@@ -12,10 +12,6 @@ component
 	public struct function validateEntityByForm(Entity entity)
 	{
 
-		/*
-			create object entity by of form
-		*/
-		bindRequestObject(entity, getDataRequest());
 
 		/*
 			form type entity
@@ -31,7 +27,7 @@ component
 		/*
 			validated scenario and input values
 		*/
-		setRole(form.getRoles());
+		setRole(form.getRules());
 		var structForm = parseAttrsScenario(getRole(), scenario);
 
 		if(structCount(structForm) < 1){
@@ -149,7 +145,7 @@ component
 		if(structCount(scenarioValication) > 0){
 			var objectFormValidation = scenarioValication;
 		}else{
-			var objectFormValidation = entity.getForm().getRoles();
+			var objectFormValidation = entity.getForm().getRules();
 		}
 
 		for(single in objectFormValidation){
