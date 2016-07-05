@@ -6,8 +6,17 @@ component
     extends = 'app.BaseController'
 {
 
+    /*
+        all definitions of the request in controller, they are behind of the package alias
+        ex: http://localhost/bundle_alias/  here define end-point to ... "rule/{idRule}"
+
+        add in annotation attr Route with definition - @Route "rule/{idRule}/find"
+    */
+
     /**
     * @method "GET"
+    * @HttpUrl("/do-something/")
+    * 
     */
     public void function actionFindList(HTTPRequest req, HTTPResponse res)
     {
@@ -16,10 +25,6 @@ component
 
          // var translater = container.getComponent('tag');
          var response = container.getComponent('response');
-
-         // if(!req.isRequest('GET')){
-         //    throw(translater.tag('request.validate.method'), 403);
-         // }
 
          var data = {};
          var userEntity = {};
@@ -36,6 +41,18 @@ component
          structInsert(data,"rules", userEntity);
 
          response.out(data, req);
+
+    }
+
+
+     /**
+    * @method "GET"
+    * @HttpUrl("/rule/{idRule}/detail")
+    * 
+    */
+    public void function actionDetailRule(int idRule)
+    {
+
 
     }
 

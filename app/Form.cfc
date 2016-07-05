@@ -47,7 +47,6 @@ component
 			'maxlength'
 		];
 
-
 		for(single in objs){
 
 			if(trim(LCase(single)) == trim(LCase(str))){
@@ -57,5 +56,18 @@ component
 
 		throw('validate "#str#" not found', 500);
 	}
+
+	// generic method to cycle life of the validation, can be rewritten in the form of the entity
+	public app.Entity function parseBefore(app.Entity entity)
+	{
+		return entity;
+	}
+
+	// generic method to cycle life of the validation, can be rewritten in the form of the entity
+	public app.Entity function parseAfter(app.Entity entity)
+	{
+		return entity;
+	}
+
 
 }

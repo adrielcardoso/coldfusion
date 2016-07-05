@@ -6,6 +6,16 @@ component
     extends = 'app.Form'
 {
 
+	public app.Entity function parseBefore(app.Entity entity)
+	{
+		return entity;
+	}
+
+	public app.Entity function parseAfter(app.Entity entity)
+	{
+		return entity;
+	}
+
 	public struct function getRoles()
 	{
 

@@ -33,7 +33,7 @@ security:
 
         ## Bundle CFUserBundle - define routes to credential of user
         - { bundle: user, event: credential,  action: login,    role: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_OAUTH] }
-        - { bundle: user, event: credential,  action: create,   role: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { bundle: user, event: credential,  action: create,   role: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_OAUTH] }
         - { bundle: user, event: credential,  action: logout,   role: [ROLE_USER] }
         
         - { bundle: user, event: rule,  action: findlist,   role: [ROLE_USER, ROLE_OAUTH] }

@@ -1,6 +1,6 @@
 component
 	output="false"
-	hint="Aplicaçãp de teste para criação MVC Cold Fusion"
+	hint="Aplicação de teste para criação MVC Coldfusion"
 {
 
 	// property baseDirectory;

@@ -60,7 +60,17 @@ component
                 httpResponse.setHttpRequest(getBindRequest());
 
                 /* default method access */
-                invoke(mContext, getBindRequest().validateMethod(mContext, (getBindRequest().getStAction() == 'actionInit' ? 'actionInit' : 'action#parseNameDir(getBindRequest().getStAction())#')), {
+
+
+                // parse method accessed, if not found return exception with message 404
+                var involeMethod = getBindRequest().validateMethod(mContext, (getBindRequest().getStAction() == 'actionInit' ? 'actionInit' : 'action#parseNameDir(getBindRequest().getStAction())#'));
+                if(!StructKeyExists(mContext, involeMethod)){
+                    var translater = getContainer().getComponent("tag");
+                    throw(translater.tag('request.method.notfound'), 404);
+                }
+
+                // invoke method in context
+                invoke(mContext, involeMethod, {
                             'req' = getBindRequest(),
                             'res' = httpResponse
                 });
