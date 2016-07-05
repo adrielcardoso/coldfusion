@@ -25,9 +25,9 @@ component
 
 	// definition to ORM hibernate
 
-	this.name = "cfdev";
+	this.name = "oracle";
 	this.ormEnabled = true;
-	this.datasource	= "devdsn";
+	this.datasource	= "oracle";
 	this.ormsettings.cfclocation = "src";
 	// this.ormsettings.dialect = "MySQLwithInnoDB";
 	this.ormSettings.logSQL = true;
@@ -39,8 +39,8 @@ component
 
 		// hibernate remove tables
 		// session.user_session = '';
-      	// this.ormsettings.dbcreate = "dropcreate";
-      	this.ormsettings.logSQL = true;
+      	this.ormsettings.dbcreate = "dropcreate";
+      	// this.ormsettings.logSQL = true;
     }
 
 

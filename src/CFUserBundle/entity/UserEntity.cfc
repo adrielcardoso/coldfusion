@@ -2,7 +2,7 @@
 component
     entityname = 'UserEntity'
     extends = 'app.Entity'
-    table="User"
+    table="cf_user"
     displayname = 'UserEntity'
     persistent="true"
     accessors = "true"

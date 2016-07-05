@@ -2,7 +2,7 @@
 component
     entityname = 'RuleEntity'
     extends = 'app.Entity'
-    table="Rule"
+    table="cf_rule"
     displayname = 'RuleEntity'
     persistent="true"
     accessors = "true"
