@@ -7,8 +7,18 @@ RewriteRule ^(.*)$ - [NC,L]
 RewriteCond %{REQUEST_URI} \.(bmp|gif|jpe?g|png|css|js|txt|xls|ico|swf)$
 RewriteRule ^(.*)$ - [NC,L]
 
-#The ColdBox index.cfm/{path_info} rules.
 RewriteRule ^$ index.cfm [QSA,NS]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.cfm%{REQUEST_URI} [QSA,L,NS]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
+RewriteRule ^([^/]*)$ index.cfm?bundle=$1
+RewriteRule ^([^/]*)/$ index.cfm?bundle=$1
+
+RewriteRule ^([^/]*)/([^/]*)$ index.cfm?bundle=$1&event=$2
+RewriteRule ^([^/]*)/([^/]*)/$ index.cfm?bundle=$1&event=$2
+
+RewriteRule ^([^/]*)/([^/]*)/([^/]*)$ index.cfm?bundle=$1&event=$2&action=$3
+RewriteRule ^([^/]*)/([^/]*)/([^/]*)/$ index.cfm?bundle=$1&event=$2&action=$3
+
+
