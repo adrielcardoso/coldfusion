@@ -52,7 +52,16 @@ component
 	{
 
 		// load file yaml
-		var security = getContainer().getBundle('user').getService('security').load(); setSecurity(security);
+		// var security = getContainer().getBundle('user').getService('security').load(); 
+		var yamlComponent = loadComponentYaml();
+
+		var security = yamlComponent.getConfig('security');  setSecurity(security);
+
+
+		// parse container exist 
+		if(!bundleExist(getBundles(yamlComponent.getConfig('config')), mRequest.getStBundle())){
+			throw('bundle not found', 500);	
+		}
 
 		// if anonymous, permission acepted
 		if(getPermissionAnonymous(security) == true){
@@ -81,6 +90,19 @@ component
 
 		return permission;
 
+	}
+
+	public boolean function bundleExist(array bundles, String bundleAlias)
+	{	
+
+		for(single in bundles){
+
+			if(LCase(Trim(single['alias'])) == LCase(Trim(bundleAlias))){
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public any function parseRuleRoute(any mRequest)
@@ -170,9 +192,19 @@ component
 		return security['security']['firewalls']['path_login'];
 	}
 
+	public Array function getBundles(struct config)
+	{
+		return config['mapping']['bundle'];
+	}
+
 	public struct function load()
 	{
 		return getMContext().getComponent('yaml').getConfig('security');
+	}
+
+	public struct function loadComponentYaml()
+	{
+		return getMContext().getComponent('yaml');	
 	}
 
 	public String function parseTokenPassw(String passw)
