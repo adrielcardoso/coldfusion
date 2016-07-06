@@ -314,7 +314,8 @@ component
 
 	public struct function getDataRequest()
 	{
-		return FORM;
+		return binaryToJson(GetHttpRequestData().content);
+		// return FORM;
 	}
 
 }

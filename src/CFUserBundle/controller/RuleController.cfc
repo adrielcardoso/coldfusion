@@ -15,7 +15,6 @@ component
 
     /**
     * @method "GET"
-    * @HttpUrl("/do-something/")
     * 
     */
     public void function actionFindList(HTTPRequest req, HTTPResponse res)

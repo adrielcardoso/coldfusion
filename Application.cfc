@@ -27,7 +27,7 @@ component
 
 	this.name = "oracle";
 	this.ormEnabled = true;
-	this.datasource	= "oracle";
+	this.datasource	= "brf";
 	this.ormsettings.cfclocation = "src";
 	// this.ormsettings.dialect = "MySQLwithInnoDB";
 	this.ormSettings.logSQL = true;
