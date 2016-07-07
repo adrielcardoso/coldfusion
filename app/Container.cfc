@@ -1,6 +1,29 @@
 import app.ManifestConfig;
 import app.Form;
 
+/**
+* @Comment 
+* 
+* O Container serve para gestão de acesso a todos os recursos do Framework, ou seja 
+* 
+* Quando for solicitado de um contexto de origem o acesso a um determinado serviço que pertence 
+* 
+* ao mesmo Bundle, o developer deve seguir o padrão de solicitar para o Container o contexto do objeto
+* 
+* que está tentando buscar.
+* 
+* 
+* Ex: getContainer().getController('nome_controller'); 
+*     getContainer().getService('nome_serviço');
+* 
+* Caso for necessario buscar por um serviço de um bundle específico deve se fazer a seguinte busca:
+* 
+* Ex: 
+*     getContainer().getBundle('alias_bundle').getComponent('nome_controller');
+*     getContainer().getBundle('alias_bundle').getService('nome_service');
+* 
+* */
+
 component
 	accessors = true
     displayname = 'Container'

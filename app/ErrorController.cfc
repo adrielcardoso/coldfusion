@@ -2,12 +2,24 @@ import app.HTTPRequest;
 import app.HTTPResponse;
 import app.ManifestConfig;
 
+/**
+* @Comment
+* 
+* Componente para tratamento de erro e definição do roteamento de status 
+* 
+* para cada tupo de erro definido no status code da requisição
+* 
+* os layouts utilizados para gestão de erro, fica disponivel em 
+* 
+* component.template.error
+* 
+* */
+
 component
 	accessors = true
     displayname = 'ErrorController'
     extends = 'BaseController'
 {
-
 
 	property Routing routing;
 
@@ -18,6 +30,19 @@ component
 		return this;
 	}
 
+
+    /**
+    * @Comment 
+    * 
+    * metodo do tipo Void, onde os parametros de entrada é apenas mensagem e status do erro,
+    * 
+    * para um entendimento caso o tipo de request for diferente de serializado o controlador tentara achar 
+    * 
+    * uma view em component.template.error com a nomenclatura 'error{statusCode}.cfm', caso for informado por query string 
+    * 
+    * o parametro de responsetype, o retorno sera no formato solicitado.
+    * 
+    * */
     public void function error(String message, String status = false)
     {
 

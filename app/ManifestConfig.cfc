@@ -1,39 +1,59 @@
+/**
+* 
+* @Comment 
+* 
+* Objeto principal, todos os objetos de contextos do framework extendem o ManifestConfig.cfc
+* 
+* Esse contexto fica a baixo somente de Application.cfc, todas as configurações global devem ser 
+* 
+* definidas aqui.
+* 
+* */
+
 component
 	accessors = true
     displayname = 'ManifestConfig'
 {
 
-	// property ManifestConfig mFormContext;
-	/*
-		init application and manegement context
-	// */
-	// public ManifestConfig function init(ManifestConfig context)
-	// {
+    /**
+    * 
+    * Ciclo de vida da aplicação, inicio.
+    * 
+    * */
+	public any function parseBefore() { /*...*/ }
 
-	// 	setMFormContext(context);
 
-	// 	return this;
-	// }
+    /**
+    * 
+    * Ciclo de vida da aplicação, fim.
+    * 
+    * */
+	public any function parseAfter() { /*...*/ }
 
-	public any function parseBefore()
-	{
-		// writeDump('application before');
-	}
 
-	public any function parseAfter()
-	{
-		// writeDump('the end of the application');
-	}
 
+    /**
+    * 
+    * metodo importante para manipulação da arbitragem no contexto principal sobre a referencia 
+    * do bundle sendo aplicado em tempo de execução.
+    * 
+    * para cada processo, eventual fora do bundle principal, o contexto podera receber uma nova referencia 
+    * do alias do bundle, logo quando o processo finalizar a chave é virada para o bundle de origem.
+    * 
+    * esse metodo é responsavel por isso.
+    * 
+    * */
 	public any function finish(ManifestConfig mContext)
 	{
 		mContext.setStreamBundleName(mContext.getRequest().getStBundle());
 	}
 
+
 	public String function parseNameDir(String parseString)
     {
         return uCase(left(parseString,1)) & right(parseString,len(parseString)-1);
     }
+
 
     public function onMissingMethod(String missingMethodName, Struct missingMethodArguments)
     {
@@ -42,6 +62,10 @@ component
         abort;
     }
 
+
+    /**
+    * metodo para implementação em uma estrutura recursiva de objetos struct 
+    * */
     public struct function parseStruct(struct data, String key, any value)
     {
 
@@ -70,23 +94,32 @@ component
 
     }
 
+
+    /**
+    * retorna o status code do request
+    * */
     public String function getStatusCode()
     {
     	return getPageContext().getResponse().getResponse().getStatus();
     }
 
+    /**
+    * define um novo status code
+    * */
     public String function setStatusCode(String codeStatus)
     {
-
         getPageContext().getResponse().getResponse().setStatus(codeStatus);
-
         return getStatusCode();
     }
 
 
-    // convert object 
-
-    function base64ToHex( String base64Value )
+    /**
+    * 
+    * Tipos de serialize, importantes.
+    * 
+    * */
+    
+     function base64ToHex( String base64Value )
     {
         var binaryValue = binaryDecode( base64Value, "base64" );
         var hexValue = binaryEncode( binaryValue, "hex" );
@@ -145,6 +178,8 @@ component
 
         return deserializeJSON(str);
     }
+
+   /*-------------------*/
     
 }
 

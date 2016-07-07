@@ -1,6 +1,16 @@
 import app.ManifestConfig;
 import app.BaseController;
 
+/**
+* 
+* @Comment
+* 
+* HTTPResponse é um recurso para manipulação de objetos para saida, ou seja 
+* Esse controlador permite fazer analise e definir recursos para o controlador conseguir passar os parametros 
+* para a saida de dados.
+* 
+* */
+
 component
 	accessors = true
     displayname = 'HTTPResponse'
@@ -13,6 +23,14 @@ component
     property stThreadName;
     property Routing routing;
 
+    /**
+    * 
+    * @Comment 
+    * 
+    * inicializar parametros de contexto base, para acesso a recursos de origem 
+    * e definição das orienteções de parametros sendo definidas nesse contexto.
+    * 
+    * */
 	public HTTPResponse function init(BaseController mContext, String stThreadName, Routing routing)
 	{
 		setThreadMain(mContext);
@@ -23,6 +41,20 @@ component
 		return this;
 	}
 
+
+    /**
+    * 
+    * @Comment 
+    * 
+    * Responsabilidade de retornar dados orientados a saida, todos os eventos que precisarem acessar esse recurso 
+    * será validado caso seja um parametro para acesso a uma View ou quando o responsetype for passado por query string, os formatos aceitos até o 
+    * momento estão para json 
+    * 
+    * Ex: localhost/?responsetype=json, esse request sera respondido por padrão no formato JSON.
+    * 
+    * Quando não informar o formato de resposta em responsetype, o contexto tentara acessar a view que pertence ao controller de origem 
+    * 
+    * */
     public void function view(String fileName, struct data)
     {
 
@@ -33,8 +65,9 @@ component
             responseComponent.out(data, getHttpRequest());
         }else{
 
-            // to be continue to view
-
+            /**
+            * a variavel DATA está disponivel para acesso em qualquer lugar dentro da View.
+            * */
             StructAppend(data, {
                 'template' : '#getRouting().getBundleRequestMain()#view/#getStThreadName()#/#fileName#.cfm',
                 'load' : createObject("component", 'app.TemplateInflate').init(getRouting()),

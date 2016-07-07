@@ -1,10 +1,8 @@
-
 import app.HTTPRequest;
 import app.HTTPResponse;
 import app.Routing;
 
 /**
-*
 *   @Comment
 * 
 *   BaseController.cfc 
@@ -12,6 +10,7 @@ import app.Routing;
 *   para todas requisições.
 * 
 * */
+
 component
 	accessors = true
     displayname = 'BaseController'

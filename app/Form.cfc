@@ -1,6 +1,17 @@
 import app.ManifestConfig;
 import app.Entity;
 
+/**
+* @Comment 
+* 
+* Esse contexto define a gestão de todos os forms, cada forme pertence a uma entidade e cada entidade pertence a um 
+* 
+* bundle, quando uma entidade precisar definir validação de dados, deve ser criado um form com regras para cada propriedade 
+* 
+* todos os forms deveram extender este contexto.
+* 
+* */
+
 component
     displayname = 'Form'
     extends = 'Entity'
@@ -11,12 +22,14 @@ component
 	property value;
 	property tag;
 
-
 	public any function validate(String str, any value)
 	{
 		return IsValid(getDataType(str), value);
 	}
 
+	/**
+	* mapeamento de tipos de validação nativas pelo Coldfusion 11
+	* */
 	public string function getDataType(String str)
 	{
 		var objs = [
@@ -57,17 +70,14 @@ component
 		throw('validate "#str#" not found', 500);
 	}
 
-	// generic method to cycle life of the validation, can be rewritten in the form of the entity
 	public app.Entity function parseBefore(app.Entity entity)
 	{
 		return entity;
 	}
 
-	// generic method to cycle life of the validation, can be rewritten in the form of the entity
 	public app.Entity function parseAfter(app.Entity entity)
 	{
 		return entity;
 	}
-
 
 }

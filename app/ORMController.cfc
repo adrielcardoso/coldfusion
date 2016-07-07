@@ -1,3 +1,13 @@
+/**
+* 
+* @Comment 
+* 
+* esse contexto define o gerenciamento de componentes que podem extender o ORM
+* 
+* componente responsavel por relação com ORM, está em app.orm
+* 
+* */
+
 component
 	accessors = true
     displayname = 'ORMController'
@@ -8,25 +18,11 @@ component
 
 	public Any function init(Any context)
 	{
-		/*
-			set it request of will get containers
-		*/
-		setContext(context);
 
-		// before();
+		setContext(context);
 
 		return this;
 	}
-
-	// public any function before()
-	// {
-	// 	writeDump('before');
-	// }
-
-	// public any function after()
-	// {
-	// 	writeDump('after');
-	// }
 
 }
 

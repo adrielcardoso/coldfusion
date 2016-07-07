@@ -1,12 +1,27 @@
 import app.ManifestConfig;
 
+/**
+* @Comment 
+* 
+* Todos os recursos registrados no component, serão filhos desse contexto, Component.cfc.
+* 
+* Para que seja definido uma gestão controlada os componentes devem esteder esse contexto, todos os pedidos 
+* 
+* e necessidades que um component precisar esse contexto vai atender com a necessidade, ou seja.
+* 
+* dessa forma definimos que tambem dentro de qualquer component terá a disponibilidade de um MVC, com isso o component 
+* 
+* Tambem pode fazer injeção de dependencia de serviços de Bundles especificos.
+* 
+* */
+
 component
 	accessors = true
     displayname = 'Component'
     extends = 'app.ManifestConfig'
 {
 
-	property Component mContext; // property component request.
+	property Component mContext; 
 	property ManifestConfig context;
 	property dir;
 	property name = 'nameComponent' default = FALSE;
@@ -16,10 +31,8 @@ component
 	public ManifestConfig function init(ManifestConfig context)
 	{
 
-		// set it request of will get containers
 		setDir('/component');
 
-		// add path to translater
 		setFilePath('translater');
 
 		setContext(context);
@@ -29,7 +42,6 @@ component
 
 	public Component function getContainer(Component component)
 	{
-
 		setMContext(component);
 
 		return this;
@@ -37,7 +49,6 @@ component
 
 	public Component function getContainerByName(String nameComponent)
 	{
-
 		setNameComponent(nameComponent);
 
 		return this;
@@ -61,17 +72,11 @@ component
 	public Component function getComponent(String nameComponent)
 	{
 		return getContext().getMContext().getComponent(nameComponent);
-		// return createObject("component", '/component/#LCase(nameComponent)#/#parseNameDir(nameComponent)#Manifest');
 	}
 
 	public String function getContainerName()
 	{
-
-		// writeDump(getContext().getComponentName());
-
-		// abort;
 		return getContext().getComponentName();
-		// return (getMContext().getContext().getComponentName() ?: getContext().getComponentName());
 	}
 
 }

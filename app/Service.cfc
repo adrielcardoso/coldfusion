@@ -1,6 +1,17 @@
 import app.ManifestConfig;
 import app.HTTPRequest;
 
+/**
+* @Comment 
+* 
+* para uma gestão controlada todos os serviços devem extender o app.Service 
+* 
+* Responsavel por inicializar com contexto de origem da requisição, dado suporte para acessos 
+* 
+* a recursos para todos os seus filhos.
+* 
+* */
+
 component
     accessors=true
     displayname = 'Service'
@@ -10,13 +21,8 @@ component
 	property name="model" type="Entity";
 	property ManifestConfig mContext;
 
-
 	public Service function init(ManifestConfig mContext)
 	{
-
-		/*
-			set context defined in container to will searchs
-		*/
 		setMContainer(mContext.getContext().getMContainer());
 
 		setMContext(mContext);
@@ -24,26 +30,9 @@ component
 		return this;
 	}
 
-	/*
-		define return of container it bundle
-	*/
-	// public Container function getContainer(ManifestConfig context)
-	// {
-	// 	return context.getMContainer();
-	// }
-
 	public Service function getService(required String nameService)
 	{
-
-		// writeDump();
-
-		// abort;
-
-		// return CreateObject('component', 'src/CFUserBundle/service/UserSessionService');
-
 		return CreateObject('component', getDirectoryFromPath(getCurrentTemplatePath()) & this.parseNameDir(nameService) & 'Service');
-
-
 	}
 
 }

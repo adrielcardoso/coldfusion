@@ -1,3 +1,16 @@
+/**
+* 
+* @Comment 
+* 
+* Routing.cfc define a restrição na busca de parametros 
+* definos da configuração de mapeamento de bundles e componentes.
+* 
+* Todo novo bundle ou componente deve ser registrado em /config.config.yaml
+* 
+* uma vez registrado, o framework podera acessar seus recursos.
+* 
+* */
+
 component
 	accessors = true
     displayname = 'Routing'
@@ -9,14 +22,12 @@ component
     property ManifestConfig bundleManifest;
     property ManifestConfig context;
 
-
     public struct function bundle()
     {
 
         var recurseYaml = getContext().getComponent('yaml');
         var file = recurseYaml.load('config');
 
-        // ## define mangement default
         setBundleDefault(getDir() & '/#file.getKey(['mapping', 'bundle_main'])#/');
 
         var parseStruct = {};
@@ -32,33 +43,18 @@ component
     public Routing function main(ManifestConfig mContext)
     {
 
-
-        /* definition thread main */
         setContext(mContext);
 
-        /*
-            definition values to return this object
-        */
         setDir('/src');
 
-
-    	/*
-			set registrars
-    	*/
     	setRoutingBundle(this.bundle());
 
-    	/*
-			set bundle in thread main
-    	*/
     	setBundleRequestMain(
                 (parseExistAliasBundle(mContext.getRequest().getStBundle(), routingBundle)
                 ? getRoutingBundle()[mContext.getRequest().getStBundle()]
                 : getBundleDefault())
         );
 
-        /*
-            register of manifest bundle
-        */
         setBundleManifest(this.loadConfigBundle(getBundleRequestMain()));
 
     	return this;
