@@ -5,7 +5,6 @@ component
     extends = 'app.Component'
 {
 
-
 	public struct function validate(Entity entity)
 	{
 

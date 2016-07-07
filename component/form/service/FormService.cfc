@@ -11,8 +11,6 @@ component
 
 	public struct function validateEntityByForm(Entity entity)
 	{
-
-
 		/*
 			form type entity
 		*/
