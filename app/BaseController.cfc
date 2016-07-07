@@ -194,6 +194,8 @@ component
 
     /**    
     * 
+    *    @Comment
+    * 
     *    Method Generico para criação de objectos independente de qual bundle pertence 
     * 
     * */
@@ -204,6 +206,9 @@ component
 
 
     /**
+    * 
+    * 
+    * @Comment
     * 
     * Gestor do retorno do Objecto de Container para auxilio entre outros contexto
     * 
@@ -216,6 +221,9 @@ component
     *   Caso não tiver no mesmo bundle, deve ser aplicado da seguinte forma:
     * 
     *   -- getContainer().getBundle('alias_bundle').getComponent('alias_component')
+    *   
+    * 
+    *  @attributeManifestConfig  referencia de contexto principal, serve para retorno de container, quando existir 
     * 
     * */
     public Container function getContainer(ManifestConfig manifestConfig)
