@@ -3,3 +3,5 @@ WEB-INF/
 crossdomain.xml
 application.cfc
 testbox/
+db_mapping/
+spec/

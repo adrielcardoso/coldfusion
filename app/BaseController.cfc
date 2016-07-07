@@ -2,8 +2,16 @@
 import app.HTTPRequest;
 import app.HTTPResponse;
 import app.Routing;
-// import config.ManifestConfig;
 
+/**
+*
+*   @Comment
+* 
+*   BaseController.cfc 
+*   define a gestão de permissões, validação de roteamento e manipulação de objetos de entrada e saída 
+*   para todas requisições.
+* 
+* */
 component
 	accessors = true
     displayname = 'BaseController'
@@ -16,106 +24,205 @@ component
     property Routing routing;
     property errorController;
 
+    /**
+    * 
+    * @Hint inicializa aplicação 
+    * 
+    * */
     public void function init()
     {
 
         try{
 
+
+            /**
+            * 
+            * chamando metodo para definições antes de qualquer tipo de analise 
+            * 
+            * */
             parseBefore();
+            
 
-            /* validate and set query string  */
+            /**
+            * 
+            * Set objectos com definições de request 
+            * 
+            * */
             setBindRequest(CreateObject("component", 'HTTPRequest').bindRequest());
-
-            /* set Container */
+        
             setMContainer(getContainer(this));
 
-            /* defination of routing to bundles */
             setRouting(getMContainer().getRouting());
 
-            /*  define controller to parse response when exception  */
             setErrorController(CreateObject('component', 'ErrorController').init(getRouting()));
+
+
+            /*---------------------------------*/
+
             
-            /*   define controller access in request */
+            /**                
+            * 
+            *   analise de roteamento, para verificar se usuário tem permissão de acesso para determinado contexto.
+            *   caso não, o object 'getBindRequest().getBlPermission()' retornara como FALSE, logo caindo da condição 
+            *   do gerenciador de erros.
+            * 
+            * */
             getMContainer().getBundle('user').getService('security').autorizationRequest(this);
 
-            // parse permission access in route
-            // getBindRequest().setBlPermission(true);
+
+
+            /**    
+            * 
+            *   se usuario tiver permissão de acesso, a validação de request retornara essa condição como verdadeiro 
+            * 
+            * */
             if(getBindRequest().getBlPermission()){
 
-               /* instaced off object  */
+
+                /**
+                *   
+                * Criando object de controller a partir dos valores definidos no roteamento de request.
+                * 
+                * Os parametros de acesso são definidos por /bundle/controller/action - por query string quando GET pode ser enviado novos parametros 
+                * 
+                * Caso alguma das informações do request não serem validas automaticamente será lançado uma exceção para o gestor de Errors
+                * 
+                * */
                 var mContext = createObjectByName(getBindRequest().getStEvent() , 'controller', getRouting().getBundleRequestMain());
 
-                /* parse scenario bundle, if REST or REQUEST Normal */
-                // writeDump(getContainer().getComponent('restfull').parseRequest(this));
-                // abort;
 
-                /*
-                    define object container to context invoked
-                */
+                /**
+                * 
+                * injetando container para novo contexto de aplicação 
+                * 
+                * */
                 mContext.setMContainer(getMContainer());
 
 
-                /* object of response to request */
-                httpResponse= createObject("component", 'HTTPResponse').init(mContext, LCase(getBindRequest().getStEvent()), getRouting());
+                /**
+                * 
+                *   Para todos os controller, existe uma entrada e saída, logo todo request será validado e também tera um 
+                *   recurso para definições de saída, esse contexto se chama HTTPResponse.
+                * 
+                * */
+                httpResponse = createObject("component", 'HTTPResponse').init(mContext, LCase(getBindRequest().getStEvent()), getRouting());
+
+
+                /**
+                * 
+                *   HTTPResponse necessita do recurso de objetos de request para implementação  
+                * 
+                * */
                 httpResponse.setHttpRequest(getBindRequest());
 
-                /* default method access */
 
-
-                // parse method accessed, if not found return exception with message 404
+                /**    
+                * 
+                *   Analisando se a 'Action' no controller existe, caso não será realializado uma exeção com 404
+                * 
+                * */
                 var involeMethod = getBindRequest().validateMethod(mContext, (getBindRequest().getStAction() == 'actionInit' ? 'actionInit' : 'action#parseNameDir(getBindRequest().getStAction())#'));
                 if(!StructKeyExists(mContext, involeMethod)){
+
+                    /**
+                    *   Buscando componente para orientação de tradução na plataforma 
+                    * */
                     var translater = getContainer().getComponent("tag");
+
+
                     throw(translater.tag('request.method.notfound'), 404);
                 }
 
-                // invoke method in context
+
+
+                /**
+                *   
+                *   Até esse momento todos os parametros de validação estão coerente com todos os requisitos 
+                * 
+                *   então, realizando chamada da 'Action' no contexto da aplicação requisitado 
+                * 
+                *   Para mapeamento de entrada e saída dentro do Controller, todas as chamadas de requisições Obrigatoriamente passara 
+                * 
+                *   por uma Action que pertence a um Controlador.
+                * 
+                *   Essa definição também também exige que toda Ação recebera por parametro um objeto de HTTPRequest e HTTPResponse
+                * 
+                * 
+                * */
                 invoke(mContext, involeMethod, {
                             'req' = getBindRequest(),
                             'res' = httpResponse
                 });
 
-                /*
-                     last application in context life
-                */
 
             }else{
 
 
-                /*
-                    exception no access permited
-                */
+                /**
+                * 
+                *   Gestão controladora de exceção para eventualidades de solicitação invalida 
+                * 
+                * */
 
                 getErrorController().error(getBindRequest().getMessage(), getStatusCode());
 
             }
 
 
+            /**
+            * 
+            *   Chamada do ultimo metodo após processo realizado, finalizado o ciclo de vida da aplicação
+            * 
+            *   OBS: O Ciclo de vida somente será concluido quando não existir exceções 
+            * 
+            * */
             getMContainer().parseAfter();
 
 
         }catch(Any e){
 
-            /*
-                    response to controller of error
-            */
+            /**
+            * 
+            *   definição de mensagem com fatal error para gestor de Erros 
+            * 
+            * */
             getErrorController().error(e.message, 500);
-            // rethrow;
         }
 
     }
 
-	public BaseController function createObjectByName(String stEvent, String stDirObject = 'controller', String bundle)
+
+    /**    
+    * 
+    *    Method Generico para criação de objectos independente de qual bundle pertence 
+    * 
+    * */
+	public BaseController function createObjectByName(required String stEvent, String stDirObject = 'controller', required String bundle)
     {
        return CreateObject("component",  bundle & LCase(stDirObject) &  "." &this.parseNameDir(stEvent)  &  this.parseNameDir(stDirObject)  );
     }
 
+
+    /**
+    * 
+    * Gestor do retorno do Objecto de Container para auxilio entre outros contexto
+    * 
+    * Por padrão, todos os objectos a partir do BaseController.cfc poderá buscar recursos apenas 
+    * 
+    * solicitando para o Container, ou seja, para buscar um Component, Entity, Service ou outros deve ser realizado da seguinte forma 
+    * 
+    *   -- getContainer().getComponent('alias_component'), getContainer().getService('alias_service')
+    * 
+    *   Caso não tiver no mesmo bundle, deve ser aplicado da seguinte forma:
+    * 
+    *   -- getContainer().getBundle('alias_bundle').getComponent('alias_component')
+    * 
+    * */
     public Container function getContainer(ManifestConfig manifestConfig)
     {
 
         if(!isDefined('manifestConfig')){
 
-            // writeDump(); abort;
             finish(getMContainer());
 
             return getMContainer();
@@ -123,9 +230,7 @@ component
 
         var generateContainer = createObject("component", 'app.Container');
 
-        /*
-            begin application, context before
-        */
+
         return generateContainer.parseContainer(manifestConfig);
 
     }

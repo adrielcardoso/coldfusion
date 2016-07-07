@@ -15,7 +15,6 @@ component
 
     /**
     * @method "GET"
-    * 
     */
     public void function actionFindList(HTTPRequest req, HTTPResponse res)
     {
@@ -46,8 +45,6 @@ component
 
      /**
     * @method "GET"
-    * @HttpUrl("/rule/{idRule}/detail")
-    * 
     */
     public void function actionDetailRule(int idRule)
     {

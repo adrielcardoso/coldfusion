@@ -26,4 +26,11 @@ component
 
 	}
 
+	public struct function findToken(String stIdentify)
+	{
+
+
+		
+	}
+
 }

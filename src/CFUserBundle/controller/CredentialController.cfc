@@ -58,6 +58,12 @@ component
                 //     });
                 // structInsert(dataValidate,"message",value)
 
+
+                writeDump('ok');
+
+                abort;
+
+
                 dataValidate = {'data' : {'token' : 'HAHAHAHAHA'}, 'status':200};
 
             }else{
@@ -112,16 +118,6 @@ component
                 // create default rule and return value equals RULE_USER in array
                 var userRule = userService.createRuleRawUser(userEntity);
 
-                // set in session the credential of the user
-                //  var userSession = userSessionService.setUser({
-                //         'user' : userEntity,
-                //         'rule' : userRule
-                //     });
-
-                // if(isStruct(userSession) and StructCount(userSession) > 0){
-                //     req.redirectRoot(securityService.getRoutDefaultRedirect(securityService.load()));
-                // }
-
                 dataValidate = {'data' : {'token' : 'HAHAHAHAHA'}, 'status':200};
 
             }else{
@@ -135,7 +131,12 @@ component
             responseError = true;
         }
 
-        response.out((responseError ? {'data' : dataValidate} : dataValidate), req);
+        response.out((responseError 
+            ? 
+                {'data' : dataValidate} 
+            : 
+            dataValidate), req);
+
     }
 
 
