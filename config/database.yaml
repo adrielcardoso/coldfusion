@@ -1,8 +1,0 @@
-database:
-
-    current: AG # name database default and define in context of the application
-
-    # register mapping of the credencials to access in database
-    conections:
-        - { db_name: AG,     db_port: null, db_user: root, db_passw: null, ormenabled: false, datasource: ORM_DDL },
-        - { db_name: dbTest, db_port: null, db_user: root, db_passw: null, ormenabled: false, datasource: ORM_DDL }
