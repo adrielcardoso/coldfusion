@@ -17,7 +17,10 @@ component
 	this.mappings[ "/config" ] = (this.baseDirectory & "config/");
 	this.mappings[ "/component" ] = (this.baseDirectory & "component/");
 	this.mappings[ "/web" ] = (this.baseDirectory & "web/");
-	this.mappings[ "/testbox" ] = getDirectoryFromPath( getCurrentTemplatePath() ) & 'testbox/';
+	
+	// writeDump(getDirectoryFromPath( getCurrentTemplatePath() ) & 'testbox/');
+
+	// abort;
 	// this.mappings[ "/src/CFUserBundle/entity" ] = (this.baseDirectory & "src/CFUserBundle/entity/");
 
 	// this.mappings[ "/view" ] = (this.baseDirectory & "src/CFUserBundle/view/");
@@ -26,7 +29,6 @@ component
 
 	// definition to ORM hibernate
 
-	this.name = "oracle";
 	this.ormEnabled = true;
 	this.datasource	= "oracle";
 	this.ormsettings.cfclocation = "src";
@@ -58,31 +60,31 @@ component
 
 	function onRequestStart(String scriptName)
 	{
-		request.tempo = getTickCount();
+		// request.tempo = getTickCount();
 
-		if (structKeyExists( url, "init" )){
-			this.onApplicationStart();
-			this.onSessionStart();
-		}
+		// if (structKeyExists( url, "init" )){
+		// 	this.onApplicationStart();
+		// 	this.onSessionStart();
+		// }
 
-		request.event = [];
-		if (
-			!isNull( url.event ) &&
-			len( trim( url.event ) )
-			){
+		// request.event = [];
+		// if (
+		// 	!isNull( url.event ) &&
+		// 	len( trim( url.event ) )
+		// 	){
 
-			request.event = listToArray( trim( url.event ), "." );
-		}
+		// 	request.event = listToArray( trim( url.event ), "." );
+		// }
 
 		ORMReload();
 
-		request.viewData = {};
+		// request.viewData = {};
 		return true ;
 	}
 
 	function onRequest( String scriptName )
 	{
-		request.tempo = getTickCount() - request.tempo;
+		// request.tempo = getTickCount() - request.tempo;
 
 		include "./index.cfm";
 	}
