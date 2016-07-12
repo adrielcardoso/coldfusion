@@ -17,6 +17,7 @@ component
 	this.mappings[ "/config" ] = (this.baseDirectory & "config/");
 	this.mappings[ "/component" ] = (this.baseDirectory & "component/");
 	this.mappings[ "/web" ] = (this.baseDirectory & "web/");
+	this.mappings[ "/testbox" ] = getDirectoryFromPath( getCurrentTemplatePath() ) & 'testbox/';
 	// this.mappings[ "/src/CFUserBundle/entity" ] = (this.baseDirectory & "src/CFUserBundle/entity/");
 
 	// this.mappings[ "/view" ] = (this.baseDirectory & "src/CFUserBundle/view/");
